@@ -10,7 +10,7 @@ npm run check
 npm start
 ```
 
-Build the initial Windows x64 target with `node scripts/package-desktop.mjs win32-x64`. The output is `dist/Toolbox-0.1.0-win32-x64.zip`. `npm run build:mac` builds macOS arm64 and x64 on a Mac; building a target does not certify its runtime compatibility. macOS packages use local ad-hoc signatures, without Developer ID or notarization. Windows packages are unsigned.
+Build the initial Windows x64 target with `node scripts/package-desktop.mjs win32-x64`. The output is `dist/Toolbox-0.1.1-win32-x64.zip`. `npm run build:mac` builds macOS arm64 and x64 on a Mac; building a target does not certify its runtime compatibility. macOS packages use local ad-hoc signatures, without Developer ID or notarization. Windows packages are unsigned.
 
 Run `npm run test:desktop` on a native desktop to exercise Electron isolation, persistent settings and tool hosting with a disposable profile. It supports both configured and offline catalogs; use the remote acceptance command to verify the published assets.
 

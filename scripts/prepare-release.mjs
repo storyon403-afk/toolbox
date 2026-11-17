@@ -5,13 +5,14 @@ import os from 'node:os';
 import { extractFile } from '@electron/asar';
 import { sha256, extractPackage, launchSpec } from '../src/packages.mjs';
 import { assetURL, repositoryName, releaseTag, validateRemoteCatalog } from '../src/remote-catalog.mjs';
-const [tag, revisionText, input, output] = process.argv.slice(2);
-if (process.argv.length !== 6) throw Error('Usage: npm run release:prepare -- v0.1.0 1 INPUT_DIRECTORY OUTPUT_DIRECTORY');
+const [tag, revisionText, input, output, previousFile] = process.argv.slice(2);
+if (![6, 7].includes(process.argv.length)) throw Error('Usage: npm run release:prepare -- v0.1.1 2 INPUT_DIRECTORY OUTPUT_DIRECTORY [PREVIOUS_CATALOG]');
 releaseTag(tag);
 const revision = Number(revisionText);
 if (!Number.isSafeInteger(revision) || revision < 1) throw Error('Revision must be a positive integer');
 const config = JSON.parse(await readFile('catalog/remote.json', 'utf8'));
 const repository = repositoryName(config.repository);
+const previous = previousFile ? validateRemoteCatalog(JSON.parse(await readFile(previousFile, 'utf8')), repository) : null;
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 const spec = JSON.parse(await readFile('release/windows-x64.json', 'utf8'));
 const catalog = JSON.parse(await readFile('catalog/tools.json', 'utf8'));
@@ -36,6 +37,11 @@ try {
         releaseUrl: assetURL(repository, tag, item.file), sha256: await sha256(source), launch,
         evidence: ['docs/INSTALL.md'], checks: Object.fromEntries(['distribution', 'install', 'launch', 'update', 'uninstall', 'isolation', 'recovery'].map(key => [key, true]))
       });
+      const entry = catalog.tools.find(tool => tool.id === item.id).targets[spec.target];
+      const old = previous?.tools.find(tool => tool.id === item.id)?.targets[spec.target];
+      if (old?.status === 'verified' && old.version === entry.version && old.sha256 === entry.sha256 && JSON.stringify(launchSpec(old.launch)) === JSON.stringify(launch)) {
+        entry.releaseTag = old.releaseTag; entry.releaseUrl = old.releaseUrl;
+      }
       delete catalog.tools.find(tool => tool.id === item.id).targets[spec.target].blockers;
     } else {
       const bundled = JSON.parse(extractFile(path.join(folder, 'resources/app.asar'), 'catalog/remote.json').toString());
@@ -44,7 +50,7 @@ try {
     await copyFile(source, path.join(output, item.file));
     artifacts.push({ file: item.file, sha256: await sha256(source), bytes: (await stat(source)).size });
   }
-  validateRemoteCatalog(catalog, repository);
+  validateRemoteCatalog(catalog, repository, previous ? { repository, revision: previous.revision, catalog: previous } : undefined);
   await writeFile(path.join(output, 'catalog.json'), JSON.stringify(catalog, null, 2) + '\n');
   artifacts.push({ file: 'catalog.json', sha256: await sha256(path.join(output, 'catalog.json')), bytes: (await stat(path.join(output, 'catalog.json'))).size });
   await writeFile(path.join(output, 'SHA256SUMS'), artifacts.map(item => `${item.sha256}  ${item.file}`).join('\n') + '\n');

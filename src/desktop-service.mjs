@@ -6,8 +6,8 @@ import { validateCatalog } from './catalog.mjs';
 import { digest, fetchRemoteCatalog, repositoryName, validateRemoteCatalog } from './remote-catalog.mjs';
 const DAY = 86400000;
 export class DesktopService extends EventEmitter {
-  constructor({ root, target, catalogFile, remoteConfigFile, remoteFetch = fetchRemoteCatalog, locale, version, launch, notify = () => {} }) {
-    super(); Object.assign(this, { root, target, catalogFile, remoteConfigFile, remoteFetch, locale, version, launch, notify });
+  constructor({ root, target, catalogFile, remoteConfigFile, remoteFetch = fetchRemoteCatalog, download, locale, version, launch, notify = () => {} }) {
+    super(); Object.assign(this, { root, target, catalogFile, remoteConfigFile, remoteFetch, download, locale, version, launch, notify });
   }
   async init() {
     this.store = await new StateStore(this.root).init();
@@ -25,7 +25,7 @@ export class DesktopService extends EventEmitter {
         this.catalog = catalog; this.remoteCatalog = { ...cached, catalog }; this.catalogSource = 'remote';
       } catch { /* Keep bundled metadata if the local cache is damaged. */ }
     }
-    this.lifecycle = new Lifecycle({ root: this.root, store: this.store, catalog: this.catalog, target: this.target, launch: this.launch });
+    this.lifecycle = new Lifecycle({ root: this.root, store: this.store, catalog: this.catalog, target: this.target, launch: this.launch, download: this.download });
     await this.lifecycle.recover();
     this.lifecycle.on('change', () => this.emit('change', this.snapshot()));
     this.lifecycle.on('stopped', id => {

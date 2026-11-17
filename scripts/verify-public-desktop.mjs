@@ -15,6 +15,7 @@ async function main(action, id) {
     const entry = app.getAppPath() + '/desktop/main.mjs';
     const { service } = process.getBuiltinModule('node:module').createRequire(entry)(entry);
     if (action === 'check') return service.check();
+    if (action === 'diagnose') { try { await service.remoteFetch(service.remoteConfig, service.remoteCatalog); return 'ok'; } catch (error) { return { message: error.message, cause: error.cause?.code }; } }
     if (action === 'snapshot') return service.snapshot();
     if (action === 'stop') { const handle = service.lifecycle.running.get(id); await handle?.stop(); await handle?.closed; return; }
     await service.lifecycle[action](id); return service.snapshot();
@@ -26,7 +27,7 @@ async function launch() {
 }
 try {
   await launch();
-  const checked = await main('check'); assert.equal(checked.lastCheck.result, 'upToDate'); assert.equal(checked.catalogSource, 'remote');
+  const checked = await main('check'); if (checked.lastCheck.result !== 'upToDate') report.catalogError = await main('diagnose'); assert.equal(checked.lastCheck.result, 'upToDate'); assert.equal(checked.catalogSource, 'remote');
   const tools = checked.tools.filter(tool => tool.installable); assert.equal(tools.length, 4);
   for (const tool of tools) {
     await main('install', tool.id); await main('open', tool.id);

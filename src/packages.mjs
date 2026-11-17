@@ -25,7 +25,7 @@ export function launchSpec(value) {
 export async function sha256(file) {
   const hash = createHash('sha256'); for await (const chunk of createReadStream(file)) hash.update(chunk); return hash.digest('hex');
 }
-export async function downloadPackage(url, destination, { signal, onProgress = () => {}, maxBytes = 1024 * 1024 * 1024 } = {}) {
+export async function downloadPackage(url, destination, { signal, onProgress = () => {}, maxBytes = 1024 * 1024 * 1024, fetcher = fetch } = {}) {
   const parsed = new URL(url);
   if (parsed.protocol !== 'https:' || parsed.username || parsed.password || parsed.hash) throw new Error('unsafeSource');
   // GitHub releases can redirect only to GitHub's asset CDN. Other sources are
@@ -33,7 +33,7 @@ export async function downloadPackage(url, destination, { signal, onProgress = (
   const github = parsed.hostname === 'github.com';
   let response, current = parsed;
   for (let hop = 0; hop < 6; hop++) {
-    response = await fetch(current, { redirect: 'manual', signal });
+    response = await fetcher(current.href, { redirect: 'manual', signal });
     if (![301,302,303,307,308].includes(response.status)) break;
     const location = response.headers.get('location'); await response.body?.cancel();
     if (!location) throw new Error('downloadFailed');
