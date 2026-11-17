@@ -53,7 +53,7 @@ async function launch() {
   app = await electron.launch({ executablePath: packaged || require('electron'), args: packaged ? [] : [path.join(root,'build/app')], env, timeout: 45000 });
   page = await app.firstWindow(); await page.waitForFunction(() => !!window.toolboxDesktop);
   page.on('pageerror', error => evidence.errors.push(error.message));
-  if (packaged) await app.evaluate(async ({app}, catalogFile) => { const entry = app.getAppPath() + '/desktop/main.mjs'; const { service } = process.getBuiltinModule('node:module').createRequire(entry)(entry); service.catalogFile = catalogFile; await service.check(); }, catalogFile);
+  if (packaged) await app.evaluate(async ({app}, catalogFile) => { const entry = app.getAppPath() + '/desktop/main.mjs'; const { service } = process.getBuiltinModule('node:module').createRequire(entry)(entry); await service.checking; service.remoteConfig = { schemaVersion: 1, repository: null }; service.remoteCatalog = null; service.catalogFile = catalogFile; await service.check(); }, catalogFile);
 }
 async function main(action, id) {
   return app.evaluate(async ({app}, { entry, action, id }) => {
