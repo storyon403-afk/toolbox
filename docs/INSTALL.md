@@ -12,6 +12,8 @@ Download from [Toolbox Releases](https://github.com/storyon403-afk/toolbox/relea
 | LanguageMap | Extract and run `Install.cmd`. Microsoft WebView2 130+ is required; a bootstrapper is included. Install WebView2 before using the Toolbox-managed copy too. |
 | LinkParse | Extract the entire ZIP and open `LinkParse.exe`. Python, Node and media runtimes are bundled. |
 
+Catalog checks and downloads require access to `api.github.com`, `github.com` and GitHub release storage. If direct connections time out, start your trusted proxy, enable its system-proxy setting, then check again. Toolbox uses the system network configuration and does not change it.
+
 Download packages only from the repository named in the release announcement. Verify `SHA256SUMS` before opening them. An unknown-publisher warning is expected for these unsigned packages; verify the source before choosing to run. Do not disable Windows security globally.
 
 Toolbox installs tools on demand into `%APPDATA%/Toolbox/tools`. Its settings and installation records are under `%APPDATA%/Toolbox`. Standalone tools remain separate. Uninstalling a managed tool preserves its data; reinstalling restores access. Close a running tool before updating or uninstalling it. Back up important tool data using that tool's export function.
