@@ -6,6 +6,7 @@ import { launchTool } from './tool-launcher.mjs';
 import { DesktopService } from '../src/desktop-service.mjs';
 import { fetchRemoteCatalog } from '../src/remote-catalog.mjs';
 import { downloadPackage } from '../src/packages.mjs';
+import { createSystemFetch } from '../src/system-fetch.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const uiRoot = path.join(root, 'ui');
@@ -55,9 +56,10 @@ else app.whenReady().then(async () => {
   });
   session.defaultSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
   session.defaultSession.setPermissionCheckHandler(() => false);
+  const systemFetch = createSystemFetch(options => net.request(options));
   service = await new DesktopService({ root: app.getPath('userData'), target: `${process.platform}-${process.arch}`, catalogFile: path.join(root, 'catalog/tools.json'), remoteConfigFile: path.join(root, 'catalog/remote.json'), locale: app.getLocale(), version: app.getVersion(), launch: launchTool,
-    remoteFetch: (config, previous) => fetchRemoteCatalog(config, previous, { fetcher: (url, options) => net.fetch(url, options) }),
-    download: (url, destination, options) => downloadPackage(url, destination, { ...options, fetcher: (url, init) => net.fetch(url, init) }),
+    remoteFetch: (config, previous) => fetchRemoteCatalog(config, previous, { fetcher: systemFetch }),
+    download: (url, destination, options) => downloadPackage(url, destination, { ...options, fetcher: systemFetch }),
     notify: (count, locale) => { const text = strings[locale] || strings.en; if (Notification.isSupported()) new Notification({ title: 'Toolbox', body: `${count} ${text.updates}` }).show(); }
   }).init();
   handle('toolbox:snapshot', () => service.snapshot());
