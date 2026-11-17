@@ -1,0 +1,11 @@
+Bundled component: cloudflared 2026.10.7
+Copyright Cloudflare, Inc. and contributors.
+License: Apache License, Version 2.0 (see cloudflared-LICENSE.txt).
+Source and release: https://github.com/cloudflare/cloudflared/tree/2026.10.7
+This package redistributes the unmodified official Windows amd64 or native macOS executable.
+The pinned download URL and upstream SHA-256 digest are in cloudflared-release.json.
+Cloudflare did not create or endorse Pangzhu's launcher.
+
+The Windows ARM64 package uses this same amd64 connector through Windows 11 x64
+emulation. The Pangzhu service itself is native ARM64. Cloudflare did not publish a
+Windows ARM64 connector in this release. Native Windows acceptance is still needed.

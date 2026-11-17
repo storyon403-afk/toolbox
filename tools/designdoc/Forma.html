@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202226"><title>Forma — 给想法，一点空间。</title>
+<style>*{box-sizing:border-box} :root{color-scheme:dark;--bg:#191b1e;--panel:#222427;--raised:#2b2e32;--line:#34373c;--muted:#959ba4;--text:#e7e8ea;--accent:#efbda1;--left:242px;--right:274px;--header:64px}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:12px;overflow:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit;border:0;background:transparent;border-radius:6px;padding:8px 11px;transition:background .15s}button:hover{background:#ffffff0b}button:disabled{opacity:.3;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button:disabled:hover{background:transparent}input,textarea,select{color:var(--text);background:var(--raised);border:1px solid var(--line);border-radius:5px;padding:8px;min-width:0}input[type=number]{appearance:textfield}input::-webkit-inner-spin-button{appearance:none}textarea{resize:vertical;line-height:1.6}input::placeholder{color:#828993}kbd{font:10px ui-monospace,monospace;border:1px solid #4a4d53;border-radius:4px;padding:2px 5px;color:var(--muted)}[hidden]{display:none!important}.muted{color:var(--muted)}.topbar{height:var(--header);background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 20px}.brand{font:italic 42px Georgia,serif;color:var(--accent);width:42px;padding:0;line-height:1}.brand span{font-size:24px}.project{flex:1;min-width:100px}.project input{border:1px solid transparent;background:none;padding:2px 0;width:min(320px,100%);font-size:12px;font-weight:550}.project input:hover{border-color:var(--line)}.project small{display:block;color:#8f9992;font-size:9px;letter-spacing:.2px;margin-top:4px}.command-trigger{display:flex;gap:12px;align-items:center;color:#a6aab1;border:1px solid var(--line);font-size:11px;padding:7px 10px}.command-trigger>span{font-size:17px}.top-actions{display:flex;align-items:center;gap:8px}.top-actions>button{font-size:11px}.top-actions>#undo,.top-actions>#redo{font-size:22px;padding:4px 8px}.divider{width:1px;height:20px;background:var(--line);margin:0 8px}.primary{background:var(--accent);color:#30251f;font-weight:600}.primary:hover{background:#ffd0b7}.left{position:absolute;left:0;top:var(--header);bottom:0;width:var(--left);background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column}.workspace-title{padding:24px 18px 14px;display:flex;justify-content:space-between;align-items:center;color:#a3a8af;font-size:10px}.local-badge{font-size:8px;letter-spacing:1px;border:1px solid #4b4840;padding:3px 5px;color:#c0ac96;border-radius:4px}.section-heading{display:flex;align-items:center;justify-content:space-between;padding:0 12px 5px 18px;font-weight:500}.section-heading small{margin-left:8px;font-size:10px;color:#858b93}.section-heading button{font-size:19px;padding:3px 7px}#boardList{max-height:220px;overflow:auto;padding:0 10px}.board-item{width:100%;text-align:left;display:flex;gap:10px;align-items:center;margin:4px 0;padding:10px 8px;color:#9ca1aa}.board-item.active{background:#efb99e10;color:#efc6b1}.board-icon{font-size:17px}.board-info{min-width:0;flex:1}.board-info b{display:block;font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.board-info small{font-size:9px;color:#858c96;display:block;margin-top:5px}.template-link{margin:9px 16px 18px;padding:9px 0;display:flex;justify-content:space-between;color:#b5a48f;font-size:10px;border-top:1px dashed #414348;border-radius:0}.left-tabs,.inspector-tabs{display:flex;gap:20px;border-bottom:1px solid var(--line);padding:0 18px}.left-tabs button,.inspector-tabs button{padding:12px 0;border-radius:0;font-size:11px;color:var(--muted);position:relative}.left-tabs button.active,.inspector-tabs button.active{color:var(--text)}.left-tabs button.active:after,.inspector-tabs button.active:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--accent)}.panel-scroll{flex:1;min-height:0;overflow:auto;padding:14px 10px}.search{width:100%;background:#1d1f22;border-color:transparent;padding:8px 10px;font-size:10px;margin-bottom:10px}.layer-row{display:flex;gap:4px;align-items:center;min-height:34px;border-radius:5px;padding:0 5px;margin-bottom:2px;cursor:pointer}.layer-row:hover{background:#ffffff06}.layer-row.active{background:#efbda114;color:#efc6b1}.layer-row.hidden-layer{opacity:.45}.layer-row.locked-layer .layer-name{font-style:italic}.layer-icon{width:18px;flex-shrink:0;color:#989fab;text-align:center;font-size:13px}.layer-name{flex:1;min-width:0;font-size:10px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.layer-row button{font-size:11px;padding:5px;color:#9ba2ae}.layer-row button:not(.on){opacity:0}.layer-row:hover button,.layer-row:focus-within button{opacity:1}.group-tag{color:var(--accent);font-size:10px}.left-footer{border-top:1px solid var(--line);padding:15px 12px;display:flex;gap:10px;align-items:center}.avatar{background:#3b3b37;color:#c9b9a4;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font:italic 14px Georgia}.left-footer div{flex:1}.left-footer b{font-size:9px;font-weight:500;color:#c3c3c5}.left-footer small{display:block;font-size:8px;color:#838b95;margin-top:4px}.left-footer button{border:1px solid #474b52;padding:1px 5px;border-radius:50%;font-size:9px}.asset-heading{color:var(--muted);font-size:10px;margin:10px 4px 14px;display:flex;justify-content:space-between;align-items:center}.asset-card{border:1px solid var(--line);border-radius:7px;padding:12px;margin:8px 2px;background:#26282c;display:flex;align-items:center;gap:12px}.asset-card>span{font-size:22px;color:#c3b3df}.asset-card div{flex:1;min-width:0}.asset-card b{font-size:10px;font-weight:500;display:block}.asset-card small{font-size:9px;color:var(--muted);display:block;margin-top:6px}.asset-card button{font-size:18px}.token-row{display:flex;align-items:center;gap:8px;margin:8px 3px}.token-row input[type=color]{padding:0;background:transparent;border:0;width:27px;height:27px}.token-row span{flex:1;font-size:10px}.token-row code{color:#848c96;font-size:9px}.right{position:absolute;right:0;top:var(--header);bottom:0;width:var(--right);background:var(--panel);border-left:1px solid var(--line);overflow:auto}.inspector-tabs{position:sticky;top:0;background:var(--panel);z-index:2;gap:26px;padding-top:4px}.prop-section{border-bottom:1px solid var(--line);padding:18px}.prop-section h3{font-size:10px;font-weight:550;margin:0 0 14px;color:#c4c7ce}.prop-section p,.empty-note{font-size:10px;color:#969faa;line-height:1.85}.prop-section input:not([type=color]),.prop-section textarea,.prop-section select{width:100%;font-size:11px}.prop-section textarea{min-height:80px}.prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{min-width:0}.field label{display:block;font-size:9px;color:var(--muted);margin:0 0 7px}.field+.field.single{margin-top:12px}.color-row{display:flex;align-items:center;gap:8px}.color-row input[type=color]{width:30px;height:31px;border:0;padding:0;background:none}.color-row input[type=text]{flex:1;width:80px;font:11px ui-monospace,monospace}.color-row select{width:80px!important}.alignment{display:flex;justify-content:space-between;margin-bottom:16px}.alignment button{border:1px solid #3a3e44;padding:6px 9px;font-size:14px}.action-row{display:flex;gap:5px;flex-wrap:wrap}.action-row button{font-size:10px;background:#2e3136;flex:1;white-space:nowrap}.full-button{width:100%;background:#2e3136;font-size:10px;margin-top:8px}.danger{color:#d8a58f}.inspector-note{padding:20px 18px;color:#828b96;font-size:9px;line-height:1.9}.code-block{font:10px/1.8 ui-monospace,monospace;background:#191b1e;border:1px solid var(--line);padding:12px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;user-select:text}.selection-name{display:flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--accent);font-size:11px}.selection-name span{color:#8b939e;font-size:9px;margin-left:auto}.stack-gap{display:flex;gap:6px;align-items:center;margin-top:12px}.stack-gap input{width:55px!important}.stack-gap button{font-size:10px;border:1px solid var(--line);flex:1}
+#viewport{position:absolute;left:var(--left);right:var(--right);top:var(--header);bottom:0;overflow:hidden;background-color:var(--bg);background-image:radial-gradient(#3e4248 .65px,transparent .65px);background-size:20px 20px;touch-action:none;outline:none}#viewport.hand{cursor:grab}#viewport.hand:active{cursor:grabbing}#world{position:absolute;transform-origin:0 0}.canvas-heading{position:absolute;left:28px;top:25px;color:#8b929d;font-size:9px;letter-spacing:.7px;pointer-events:none;z-index:2;display:flex;gap:12px;align-items:center}.status-dot{width:5px;height:5px;background:#c5ae94;border-radius:50%}.canvas-divider{color:#4d545e}.canvas-heading>span:last-child{font-size:9px;color:#737b86}.board{position:absolute}.board-label{position:absolute;top:-31px;left:0;right:0;height:25px;display:flex;justify-content:space-between;align-items:center;cursor:move;color:#969da8;font-size:12px;white-space:nowrap}.board.selected .board-label{color:#d5b69f}.board-label small{font-size:10px;border:1px solid #444a53;border-radius:3px;padding:2px 5px}.board-content{position:relative;overflow:hidden;box-shadow:0 12px 60px #0003}.board.selected .board-content{outline:1px solid #8c7360}.element{position:absolute;white-space:pre-wrap;line-height:1.45;user-select:none;overflow:hidden;box-sizing:border-box}.element.text{overflow:visible;overflow-wrap:break-word}.element.image img{width:100%;height:100%;object-fit:cover;pointer-events:none}.element.selected{outline:calc(1px / var(--zoom,1)) solid #efbda1;outline-offset:calc(1px / var(--zoom,1))}.element[contenteditable=true]{cursor:text;user-select:text;outline:2px solid #efbda1}.element[data-locked=true]{pointer-events:none}.selection-box{position:absolute;border:calc(1px / var(--zoom,1)) solid var(--accent);pointer-events:none;z-index:5}.resize-handle{position:absolute;width:calc(7px / var(--zoom,1));height:calc(7px / var(--zoom,1));background:#f8e1cf;border:calc(1px / var(--zoom,1)) solid #ae7f62;pointer-events:auto;transform:translate(-50%,-50%)}.resize-handle[data-handle=nw]{left:0;top:0;cursor:nwse-resize}.resize-handle[data-handle=ne]{left:100%;top:0;cursor:nesw-resize}.resize-handle[data-handle=sw]{left:0;top:100%;cursor:nesw-resize}.resize-handle[data-handle=se]{left:100%;top:100%;cursor:nwse-resize}.selection-size{position:absolute;top:calc(100% + 10px / var(--zoom,1));left:50%;transform:translateX(-50%);font-size:calc(9px / var(--zoom,1));white-space:nowrap;color:#e8c2a7;background:#3d332c;padding:calc(3px / var(--zoom,1)) calc(5px / var(--zoom,1));border-radius:calc(3px / var(--zoom,1))}.guide{position:absolute;background:#e9ad98;pointer-events:none;z-index:6}.guide.x{top:0;bottom:0;width:calc(1px / var(--zoom,1))}.guide.y{left:0;right:0;height:calc(1px / var(--zoom,1))}#marquee{position:absolute;pointer-events:none;border:1px solid #efbda1;background:#efbda112;z-index:8}.canvas-bottom{position:absolute;bottom:27px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:13px;pointer-events:none}.toolbar{pointer-events:auto;display:flex;align-items:center;background:#282b2f;border:1px solid #45484e;padding:5px;border-radius:11px;box-shadow:0 8px 30px #0004;gap:2px}.toolbar button{min-width:30px;height:33px;padding:6px 8px;font-size:16px}.toolbar button.active{background:var(--accent);color:#30251f}.toolbar i{height:18px;width:1px;background:#45494f;margin:0 5px}#zoomLabel{font-size:10px;width:46px;padding:0}.hint{color:#858d98;font-size:9px;letter-spacing:.2px}.canvas-status{position:absolute;bottom:0;left:0;right:0;height:23px;background:#1d1f22;display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#7f8994;font-size:8px}.canvas-status button{font-size:8px;padding:3px 5px}.canvas-status button.active{color:#bda68c}.canvas-bottom{bottom:44px}.canvas-status{z-index:2}.empty-note{padding:10px}.prototype-hotspot{position:absolute;background:transparent;border:0;padding:0;border-radius:0;cursor:pointer}.show-hotspots .prototype-hotspot{background:#a395db33;outline:2px solid #a395db}.prototype-hotspot:focus-visible{outline:2px solid #a395db}
+#toast{position:fixed;bottom:122px;left:50%;transform:translateX(-50%);background:#e4cbb7;color:#352a24;padding:12px 20px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;font-size:11px;box-shadow:0 8px 40px #0004;max-width:80vw}#toast.visible{opacity:1}dialog{background:#24272b;color:var(--text);border:1px solid #44494f;border-radius:13px;padding:32px;width:min(500px,92vw);max-height:90vh;overflow:auto;box-shadow:0 30px 120px #0009}dialog::backdrop{background:#090b10a8;backdrop-filter:blur(5px)}dialog p{font-size:11px;line-height:1.9;color:#a6adb7}dialog h2{font-size:23px;font-weight:500;margin:14px 0 12px}.eyebrow{font-size:8px;letter-spacing:1.6px;color:#cbb39d}.close{position:absolute;right:12px;top:10px;font-size:23px}dl{display:grid;grid-template-columns:1fr 1.35fr;gap:14px;font-size:10px;margin:25px 0}dt{color:#dcc2aa}dd{color:#aeb5bf;margin:0}.export-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}.export-options button{text-align:left;border:1px solid #40454c;padding:18px 14px;background:#292c31}.export-options b{font-size:12px;font-weight:500;display:block}.export-options span{display:block;color:#9aa3af;font-size:9px;line-height:1.8;margin-top:10px}.presets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}.presets button{border:1px solid var(--line);background:#2c2f34;font-size:26px;padding:18px}.presets b{display:block;font-size:12px;margin:12px 0 6px;font-weight:500}.presets span{font-size:10px;color:var(--muted);display:block}#commands{padding:0;width:min(560px,92vw);margin-top:18vh}.command-search{display:flex;align-items:center;padding:12px 20px;gap:12px;border-bottom:1px solid #41464e}.command-search>span{font-size:24px;color:#bba996}.command-search input{flex:1;background:none;border:0;outline:none;padding:10px 0;font-size:13px}#commandResults{padding:8px;max-height:350px;overflow:auto}.command-row{display:flex;align-items:center;width:100%;text-align:left;gap:14px;padding:12px;border-radius:7px}.command-row.active{background:#3c3936}.command-row .cmd-icon{color:var(--accent);width:24px;font-size:18px}.command-row div{flex:1}.command-row b{font-size:12px;font-weight:500;display:block}.command-row small{font-size:9px;color:#979fa9;display:block;margin-top:5px}.command-footer{border-top:1px solid #3c4148;padding:12px 20px;color:#949da8;font-size:9px;display:flex;gap:18px}.command-footer span:last-child{margin-left:auto;color:#b7a18c}#preview{max-width:96vw;width:96vw;height:92vh;max-height:92vh;padding:0;overflow:hidden}.preview-header{height:56px;display:flex;gap:15px;align-items:center;padding:0 20px;border-bottom:1px solid var(--line)}.preview-header b{font-size:12px;font-weight:500;flex:1}.preview-header button{font-size:11px}.preview-header span{font-size:10px;color:var(--muted)}#previewViewport{height:calc(100% - 86px);position:relative;overflow:hidden;background:#17191d}#previewBody{position:absolute;transform-origin:0 0}#previewBody .board-content{box-shadow:0 10px 50px #0006}.preview-footer{height:30px;display:flex;justify-content:center;align-items:center;color:#858f9c;font-size:9px}::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#494d53;border-radius:8px}
+@media(max-width:1150px){:root{--left:214px;--right:248px}.command-trigger{width:32px;padding:4px;overflow:hidden;white-space:nowrap;border:0;gap:20px}.topbar{gap:12px}.canvas-heading>span:last-child,.canvas-divider{display:none}.toolbar{gap:0}.toolbar button{min-width:26px;padding:5px 7px}.toolbar i{margin:0 3px}.layer-row button{padding:4px}.left-tabs{gap:16px}.prop-section{padding:16px}.alignment button{padding:6px 8px}}
+@media(max-width:850px){:root{--left:180px;--right:220px}.hint{display:none}.topbar{padding:0 12px}.top-actions{gap:2px}.top-actions .divider{margin:0 4px}.canvas-heading{font-size:8px;left:15px}.toolbar{flex-wrap:wrap;justify-content:center;max-width:240px}.alignment button{padding:6px}.template-link{font-size:9px}.left-footer b{font-size:8px}.left-footer .avatar{display:none}.board-info b{font-size:10px}.workspace-title{padding-top:18px}.left-tabs{padding:0 12px;gap:14px}}
+@media(max-width:650px){:root{--left:0px;--right:195px}.left{display:none}.topbar{gap:6px}.brand{width:30px}.command-trigger{display:none}.top-actions>button{font-size:10px;padding:6px}.top-actions>#undo,.top-actions>#redo{display:none}.project input{font-size:10px}.project small{font-size:8px}.canvas-heading{display:none}.canvas-status{display:none}.toolbar{max-width:190px}.canvas-bottom{bottom:20px}.prop-section{padding:12px}.inspector-tabs{gap:20px;padding-left:12px}.export-options{grid-template-columns:1fr}.preview-header{padding:0 8px;gap:4px}.preview-header b{font-size:10px}.preview-header span{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Glass workspace: content-first layout and shared icon controls. */
+:root{--header:56px;--left:258px;--right:282px;--bg:#191d23;--panel:rgba(36,40,47,.76);--raised:rgba(255,255,255,.045);--line:rgba(226,232,244,.1);--muted:#a0a8b5;--accent:#e9c2ab}
+body{background:radial-gradient(ellipse at 4% 3%,#535b6c55,transparent 48%),radial-gradient(ellipse at 96% 80%,#74625828,transparent 52%),linear-gradient(140deg,#20262e,#1b2027 60%,#24262d)}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.glass,.topbar,dialog{background:rgba(38,43,51,.73);backdrop-filter:blur(28px) saturate(125%);-webkit-backdrop-filter:blur(28px) saturate(125%);border:1px solid rgba(231,237,248,.12);box-shadow:0 8px 32px #080d1824,inset 0 1px 0 #ffffff05}
+.ui-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex-shrink:0;vertical-align:middle;pointer-events:none}.ui-icon svg{width:100%;height:100%;display:block;pointer-events:none}
+.icon-button{display:inline-flex;align-items:center;justify-content:center;padding:0!important;width:32px;min-width:32px;height:32px;border-radius:8px;color:#b5bdca;flex-shrink:0}.icon-button:hover{background:#ffffff0c;color:#f1f3f6}.icon-button.panel-open{background:#ffffff09;color:#e8d2c4}
+.topbar{height:56px;position:relative;z-index:20;border-width:0 0 1px;gap:12px;padding:0 16px;background:rgba(30,35,43,.7);box-shadow:none}.top-actions{gap:6px;flex-shrink:0}.top-actions>#undo,.top-actions>#redo{font-size:12px;padding:0}.top-actions .divider{margin:0 4px;height:18px}.topbar .primary{color:#322a25;background:var(--accent)}.topbar .primary:hover{background:#f7d3bd}
+.project{display:flex;align-items:center;gap:8px;min-width:40px}.project input{width:min(300px,100%);text-overflow:ellipsis;font-size:11px;font-weight:450;color:#ccd1da;padding:5px 6px;min-width:0}.project small{margin:0}.save-dot{width:5px;height:5px;border-radius:100%;background:#a3b8aa;flex-shrink:0}.save-dot.unsaved{background:#f3ae80;box-shadow:0 0 0 3px #f3ae801c}
+.left,.right{position:absolute;top:68px;bottom:16px;border:1px solid var(--line);border-radius:13px;z-index:12;overflow:hidden}.left{left:12px;width:234px;padding:0;display:flex}.right{right:12px;width:258px;overflow:auto}.left-hidden{--left:0px}.right-hidden{--right:0px}
+.section-heading{padding:12px 12px 8px 16px;font-size:11px}.section-heading>div{display:flex;gap:3px}.section-heading .icon-button{height:27px;width:27px;min-width:27px}.section-heading .icon-button .ui-icon{width:15px;height:15px}#boardList{padding:0 8px 12px;max-height:215px}.board-item{padding:10px;gap:10px;margin:2px 0;border-radius:8px}.board-item>.ui-icon{width:15px;color:#949eaf}.board-item.active{background:#e9c2ab0e;color:#ead3c3}.board-info b{font-size:10px;font-weight:450}.board-info small{font-size:8px;margin-top:4px}.left-tabs{padding:0 16px;gap:24px}.left-tabs button{font-size:10px;padding:12px 0}.left-tabs button.active:after{background:#d3c3b9;height:1px}.panel-scroll{padding:12px 8px}.search{background:#161c242b;border:1px solid #ffffff07;font-size:10px;padding:8px 10px;border-radius:6px}.layer-row{min-height:32px}.layer-row .layer-icon{width:15px;height:15px}.layer-row .ui-icon{width:13px;height:13px}.layer-row .layer-name{font-size:10px}.layer-row button{height:25px;width:25px;display:grid;place-items:center;padding:0}.panel-footer{padding:8px 10px;border-top:1px solid var(--line);display:flex;justify-content:space-between}.panel-footer .icon-button{height:28px;width:28px;min-width:28px}.panel-footer .ui-icon{width:15px;height:15px}
+.inspector-header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(41,46,55,.9);backdrop-filter:blur(20px);z-index:2}.inspector-tabs{border:0;position:static;padding:0;gap:5px;background:transparent}.inspector-tabs button{display:grid;place-items:center;width:36px;height:30px;border-radius:6px;padding:0}.inspector-tabs button.active{background:#ffffff0b;color:#ecd5c6}.inspector-tabs button.active:after{display:none}.inspector-tabs .ui-icon{width:16px;height:16px}.inspector-header>.icon-button{width:28px;min-width:28px;height:28px}.inspector-header>.icon-button .ui-icon{width:15px;height:15px}
+.prop-section{padding:16px}.prop-section h3{font-size:10px;margin-bottom:12px;font-weight:500;color:#aeb7c5}.prop-section input:not([type=color]),.prop-section select,.prop-section textarea{background:rgba(224,233,251,.035);border-color:#dee8fa0b;border-radius:6px;font-size:10px;padding:8px}.prop-section input:focus,.prop-section textarea:focus{background:#141a2426}.prop-grid{gap:10px}.field label{font-size:9px;color:#8f99a9}.selection-name{gap:8px;margin-bottom:14px;color:#c6ccd6}.selection-name>.ui-icon{width:14px;height:14px;color:#cbb7aa;margin:0}.selection-name .selected-title{font-size:10px;margin:0;color:#d0d5de;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.alignment{gap:3px}.alignment button{border:0;background:#e6edff04;padding:6px;border-radius:5px}.alignment .ui-icon{width:16px;height:16px}.action-row button,.full-button{background:#e6edff06;font-size:10px;border:1px solid #e6edff05}.color-row input[type=text]{font-size:10px}.asset-card{background:#e6edff04}.asset-heading{margin-top:8px}.code-block{background:#10162240;font-size:9px}.danger{color:#caa58e}
+#viewport{top:56px;left:var(--left);right:var(--right);bottom:0;background-color:transparent;background-image:radial-gradient(#b5bfd11f .6px,transparent .6px);background-size:24px 24px;z-index:1}.board-content{box-shadow:0 18px 70px #090d1630}.board.selected .board-content{outline:1px solid #cbb6a666}.board-label{color:#9ea8b6}.board-label small{border:0;background:#20273180;color:#8e99aa}.canvas-bottom{bottom:22px;gap:0;z-index:9}.toolbar{border-radius:12px;flex-wrap:nowrap;max-width:none;padding:5px;gap:3px}.toolbar .icon-button{width:32px;min-width:32px;height:32px;padding:0;font-size:14px}.toolbar .ui-icon{width:17px;height:17px}.toolbar i{margin:0 3px;background:#e8eef514;height:17px}.toolbar .snap-active{color:#d4baa7}.toolbar button.active{background:#e9c2ab;color:#30251f}
+.view-controls{position:absolute;bottom:22px;right:20px;border-radius:10px;padding:4px;display:flex;align-items:center;gap:1px;z-index:10}.view-controls .icon-button{width:28px;min-width:28px;height:30px}.view-controls .ui-icon{width:15px;height:15px}#zoomLabel{font-size:10px;width:43px;height:30px;color:#d0d7e2;font-variant-numeric:tabular-nums;border-radius:5px}.zoom-menu{position:absolute;bottom:calc(100% + 10px);right:0;width:212px;border-radius:10px;padding:6px}.zoom-menu>button{display:flex;align-items:center;justify-content:space-between;width:100%;font-size:11px;padding:11px 10px}.zoom-presets{display:flex;padding-top:6px;border-top:1px solid var(--line);margin-top:4px;gap:4px}.zoom-presets button{flex:1;font-size:10px;background:#ffffff05}.zoom-menu kbd{border:0;font-size:9px}.view-controls:focus-within{z-index:15}
+#toast{font-size:10px;background:rgba(222,207,193,.95);bottom:136px;backdrop-filter:blur(16px)}dialog{background:rgba(37,43,53,.9)}dialog::backdrop{background:#0e14204d;backdrop-filter:blur(8px)}dialog h2{font-size:20px}.export-options button,.presets button{background:#e4edff05;border-color:#e6edff0c}.command-footer{color:#8e9aac}.command-row.active{background:#e9c2ab0e}
+@media(min-width:901px){.canvas-bottom{bottom:74px}}
+@media(max-width:1150px) and (min-width:901px){:root{--left:234px;--right:258px}.left{width:210px}.right{width:234px}.left-hidden{--left:0px}.right-hidden{--right:0px}.topbar{gap:10px}.prop-section{padding:14px}.view-controls{right:16px}}
+@media(max-width:900px){:root{--left:0px;--right:0px}.left,.right{top:68px;bottom:134px;width:258px;max-width:calc(100vw - 24px);background:rgba(36,42,52,.88);box-shadow:0 16px 70px #070c184d;display:flex}.right{display:block}.left{width:244px}.topbar{padding:0 12px;gap:8px}.top-actions{gap:3px}.view-controls{bottom:78px;right:50%;transform:translateX(50%)}.toolbar{max-width:none}.canvas-bottom{bottom:20px}.zoom-menu{right:50%;transform:translateX(50%)}.project input{width:100%;max-width:240px}.alignment button{padding:6px}.left-tabs{padding:0 16px;gap:24px}}
+@media(max-width:650px){.topbar{gap:5px;padding:0 9px}.topbar .icon-button{width:29px;min-width:29px;height:30px}.topbar .ui-icon{width:17px;height:17px}.top-actions>#undo,.top-actions>#redo{display:none}.top-actions{gap:2px}.top-actions .divider{margin:0 2px}.project{gap:4px}.project input{font-size:10px;padding:4px 2px}.save-dot{width:4px;height:4px}.left,.right{display:flex}.right{display:block}.toolbar{max-width:none;gap:2px}.toolbar .icon-button{width:32px;min-width:32px}.export-options{grid-template-columns:1fr 1fr}.inspector-tabs{gap:5px;padding:0}.prop-section{padding:16px}.preview-header b{font-size:10px}}
+@media(max-width:370px){.topbar #commandBtn{display:none}.toolbar .icon-button{width:29px;min-width:29px}.toolbar{gap:1px}.project input{font-size:9px}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass,.topbar,dialog{background:#272e38}}
+/* Anchor ambient color to the entire workspace, never tile to header height. */
+body{min-height:100vh;min-height:100dvh;background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%}
+.icon-action{display:inline-flex;align-items:center;justify-content:center;padding:8px!important;height:32px;min-width:32px}.icon-action .ui-icon{width:16px;height:16px}.full-button.icon-action{width:calc(50% - 4px);margin-right:4px}.action-row .icon-action{flex:1}.action-row{gap:6px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <button id="homeBtn" class="icon-button" data-icon="layers" title="画板与图层" aria-label="画板与图层" aria-controls="leftPanel" aria-expanded="true"></button>
+  <div class="project"><input id="projectTitle" aria-label="项目名称" maxlength="200"><span class="save-dot" id="saveIndicator" title="已保存到此浏览器"></span><small id="saveState" class="sr-only" role="status">本地工作空间</small></div>
+  <div class="top-actions">
+    <button id="undo" class="icon-button" data-icon="undo" title="撤销 ⌘/Ctrl Z" aria-label="撤销"></button><button id="redo" class="icon-button" data-icon="redo" title="重做 ⌘/Ctrl Shift Z" aria-label="重做"></button>
+    <button id="commandBtn" class="icon-button" data-icon="search" title="搜索操作 ⌘/Ctrl K" aria-label="搜索操作"></button>
+    <button id="importBtn" class="icon-button" data-icon="import" title="导入设计" aria-label="导入设计"></button><button id="exportBtn" class="icon-button" data-icon="export" title="导出设计" aria-label="导出设计"></button>
+    <button class="icon-button primary" id="previewBtn" data-icon="play" title="预览" aria-label="预览"></button>
+    <span class="divider"></span><button id="toggleInspector" class="icon-button" data-icon="inspector" title="属性面板" aria-label="属性面板" aria-controls="rightPanel" aria-expanded="true"></button>
+  </div>
+</header>
+<aside class="left glass" id="leftPanel" aria-label="画板与图层面板">
+  <div class="section-heading"><span>画板 <small id="boardCount"></small></span><div><button id="addBoard" class="icon-button" data-icon="plus" title="新建画板" aria-label="新建画板"></button><button id="collapseLayers" class="icon-button" data-icon="chevronLeft" title="收起图层面板" aria-label="收起图层面板"></button></div></div>
+  <div id="boardList"></div>
+  <div class="left-tabs" role="tablist" aria-label="资源面板"><button id="layersTab" role="tab" aria-selected="true" class="active">图层</button><button id="assetsTab" role="tab" aria-selected="false">组件</button></div>
+  <div class="panel-scroll"><div id="layersPanel"><input id="layerSearch" class="search" placeholder="查找图层" aria-label="查找图层"><div id="layerList"></div></div><div id="assetsPanel" hidden></div></div>
+  <div class="panel-footer"><button id="orbitBtn" class="icon-button" data-icon="component" title="打开 Orbit 设计示例" aria-label="打开 Orbit 设计示例"></button><button id="helpBtn" class="icon-button" data-icon="help" title="使用说明" aria-label="使用说明"></button></div>
+</aside>
+<main id="viewport" tabindex="0" aria-label="设计画布">
+  <div id="world"></div><div id="marquee" hidden></div><span id="selectionStatus" class="sr-only" role="status"></span>
+  <div class="canvas-bottom"><div class="toolbar glass" role="toolbar" aria-label="画布工具">
+    <button id="selectTool" class="active icon-button" data-icon="cursor" title="选择 V" aria-label="选择工具"></button><button id="handTool" class="icon-button" data-icon="hand" title="平移 H / 空格" aria-label="平移工具"></button><i></i><button id="addRect" class="icon-button" data-icon="rect" title="矩形 R" aria-label="添加矩形"></button><button id="addEllipse" class="icon-button" data-icon="ellipse" title="椭圆 O" aria-label="添加椭圆"></button><button id="addText" class="icon-button" data-icon="text" title="文字 T" aria-label="添加文字"></button><button id="addImage" class="icon-button" data-icon="image" title="添加图片" aria-label="添加图片"></button><i></i><button id="snapBtn" class="icon-button snap-active" data-icon="snap" aria-pressed="true" title="智能吸附" aria-label="智能吸附"></button>
+  </div></div>
+  <div class="view-controls glass" role="toolbar" aria-label="视图控制">
+    <button id="focusBtn" class="icon-button" data-icon="focus" title="聚焦当前画板 Shift 2" aria-label="聚焦当前画板"></button><button id="zoomOut" class="icon-button" data-icon="minus" title="缩小" aria-label="缩小"></button><button id="zoomLabel" aria-label="缩放比例" title="缩放比例与适应画板" aria-haspopup="true" aria-expanded="false">100%</button><button id="zoomIn" class="icon-button" data-icon="plus" title="放大" aria-label="放大"></button>
+    <div id="zoomMenu" class="zoom-menu glass" hidden aria-label="缩放选项"><button id="fitBtn">查看全部 <kbd>F</kbd></button><button id="zoomFocus">聚焦当前画板 <kbd>⇧ 2</kbd></button><div class="zoom-presets"><button data-zoom="0.5">50%</button><button data-zoom="1">100%</button><button data-zoom="2">200%</button></div></div>
+  </div>
+</main>
+<aside class="right glass" id="rightPanel" aria-label="属性面板">
+  <div class="inspector-header"><div class="inspector-tabs" role="tablist" aria-label="检查器"><button class="active" data-mode="design" role="tab" aria-selected="true" data-icon="design" aria-label="设计" title="设计"></button><button data-mode="prototype" role="tab" aria-selected="false" data-icon="prototype" aria-label="原型" title="原型"></button><button data-mode="code" role="tab" aria-selected="false" data-icon="code" aria-label="交付" title="交付"></button></div><button id="collapseInspector" class="icon-button" data-icon="chevronRight" title="收起属性面板" aria-label="收起属性面板"></button></div><div id="inspector"></div>
+</aside>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input type="file" id="jsonInput" accept="application/json,.json" hidden>
+<dialog id="commands" aria-label="搜索操作"><div class="command-search"><span>⌕</span><input id="commandSearch" placeholder="想做些什么？搜索操作或画板…" aria-label="搜索操作或画板"><kbd>ESC</kbd></div><div id="commandResults" role="listbox" aria-label="操作结果"></div><div class="command-footer">↑ ↓ 选择 <span>↵ 执行</span></div></dialog>
+<dialog id="exportDialog" aria-labelledby="exportTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="exportTitle">导出</h2><p>保存设计继续编辑，或把原型分享给别人。</p><div class="export-options"><button data-export="json"><b>◈　设计文件</b><span>JSON · 全部画板、组件、颜色与连线</span></button><button data-export="html"><b>↗　交互原型</b><span>HTML · 离线打开，保留页面跳转</span></button><button data-export="svg"><b>◇　矢量画板</b><span>SVG · 当前画板，可用于其他设计工具</span></button><button data-export="png"><b>▧　高清图片</b><span>PNG · 当前画板，最高 2× 分辨率</span></button></div><p class="muted">HTML 为固定画板原型；导出文字使用本机字体。</p></dialog>
+<dialog id="boardDialog" aria-labelledby="newBoardTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="newBoardTitle">新建画板</h2><div class="presets"><button data-preset="1440,900">⌘<b>桌面界面</b><span>1440 × 900</span></button><button data-preset="390,844">▯<b>移动界面</b><span>390 × 844</span></button><button data-preset="768,1024">▭<b>平板界面</b><span>768 × 1024</span></button><button data-preset="800,600">▢<b>自由画板</b><span>800 × 600</span></button></div></dialog>
+<dialog id="help" aria-labelledby="helpTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="helpTitle">使用说明</h2><p>点击图层编辑，双击文字输入。拖动选择框四角调整尺寸；Shift 拖动等比缩放。组件内单层可用 ⌘/Ctrl 点击选择。</p><dl><dt>V / H</dt><dd>选择 / 平移，空格临时平移</dd><dt>T / R / O</dt><dd>添加文字 / 矩形 / 椭圆</dd><dt>Shift + 点击</dt><dd>多选；空白处拖动可框选</dd><dt>⌘ / Ctrl + G</dt><dd>分组；加 Shift 取消分组</dd><dt>⌘ / Ctrl + D</dt><dd>复制图层或画板</dd><dt>⌘ / Ctrl + Z</dt><dd>撤销；加 Shift 重做</dd><dt>方向键 / Shift + 方向键</dt><dd>移动 1 / 10 像素</dd><dt>F / Shift + 2</dt><dd>查看全部 / 聚焦当前画板</dd><dt>⌘ / Ctrl + K</dt><dd>搜索操作与画板</dd></dl><p>原型：选中图层 → 右侧「原型」→ 选择目标画板 → 预览。组件更新会覆盖各实例的外观；顺排为一次性排列。</p><p class="muted">无需网络或账户。暂不支持 .fig、多人协作、钢笔路径或嵌套自动布局。浏览器清理数据会删除本地保存，请定期导出 JSON。</p></dialog>
+<dialog id="preview" aria-label="交互原型预览"><div class="preview-header"><button id="previewBack" title="返回上一画板">← 返回</button><b id="previewTitle"></b><span id="previewPosition"></span><button id="previewLinks" aria-pressed="false">显示热点</button><button data-close>关闭 ×</button></div><div id="previewViewport"><div id="previewBody"></div></div><div class="preview-footer">点击界面中的热点跳转 · Esc 退出预览</div></dialog>
+<script>/* Forma document model. Shared by the browser and Node tests. */
+(function (root) {
+  'use strict';
+  const id = () => globalThis.crypto.randomUUID();
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const color = value => typeof value === 'string' && /^#[\da-f]{6}$/i.test(value);
+  const finite = (v, min = -100000, max = 100000) => Number.isFinite(v) && v >= min && v <= max;
+  const str = (v, max = 10000) => typeof v === 'string' && v.length <= max;
+  const image = value => typeof value === 'string' && /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(value) && value.length < 12000000;
+  function make(type, x, y, w, h, extra = {}) {
+    return { id: id(), type, name: { text: '文字', rect: '矩形', ellipse: '椭圆', image: '图片' }[type], x, y, w, h, fill: '#d5c3b0', radius: 0, size: 16, weight: 400, text: '', opacity: 1, stroke: '#000000', strokeWidth: 0, hidden: false, locked: false, ...extra };
+  }
+  function bounds(elements) {
+    if (!elements.length) return { x: 0, y: 0, w: 0, h: 0 };
+    const x = Math.min(...elements.map(e => e.x)), y = Math.min(...elements.map(e => e.y));
+    return { x, y, w: Math.max(...elements.map(e => e.x + e.w)) - x, h: Math.max(...elements.map(e => e.y + e.h)) - y };
+  }
+  function migrate(input) {
+    const d = clone(input);
+    if (d?.version === 1) {
+      d.version = 2; d.tokens = []; d.components = [];
+      d.boards?.forEach(b => b.elements?.forEach(e => Object.assign(e, { name: e.type === 'text' ? e.text.slice(0, 24) : e.type === 'image' ? '图片' : '矩形', opacity: 1, stroke: '#000000', strokeWidth: 0, hidden: false, locked: false })));
+    }
+    return d;
+  }
+  function validate(d) {
+    if (!d || d.version !== 2 || !str(d.title, 200) || !Array.isArray(d.boards) || !d.boards.length || d.boards.length > 100 || !Array.isArray(d.tokens) || d.tokens.length > 200 || !Array.isArray(d.components) || d.components.length > 200) return false;
+    const ids = new Set(), groups = new Map();
+    const unique = v => str(v, 100) && v.length && !ids.has(v) && (ids.add(v), true);
+    for (const t of d.tokens) if (!t || !unique(t.id) || !str(t.name, 100) || !color(t.value)) return false;
+    const tokens = new Set(d.tokens.map(t => t.id)), boards = new Set(d.boards.map(b => b?.id)), components = new Set(d.components.map(c => c?.id));
+    function validElement(e, owner, template = false) {
+      if (!e || !unique(e.id) || !['text', 'rect', 'ellipse', 'image'].includes(e.type) || !str(e.name, 200) || !str(e.text) || ![e.x, e.y].every(v => finite(v)) || ![e.w, e.h].every(v => finite(v, 1, 10000)) || !finite(e.radius, 0, 5000) || !finite(e.size, 1, 1000) || !finite(e.weight, 100, 900) || !finite(e.opacity, 0, 1) || !finite(e.strokeWidth, 0, 100) || !color(e.fill) || !color(e.stroke) || typeof e.hidden !== 'boolean' || typeof e.locked !== 'boolean') return false;
+      if (e.type === 'image' && !image(e.src)) return false;
+      if (e.fillToken !== undefined && !tokens.has(e.fillToken)) return false;
+      if (e.link !== undefined && !boards.has(e.link)) return false;
+      if (e.groupId !== undefined) {
+        if (!str(e.groupId, 100) || !e.groupId) return false;
+        if (groups.has(e.groupId) && groups.get(e.groupId) !== owner) return false;
+        groups.set(e.groupId, owner);
+      }
+      if (e.componentId !== undefined && (!components.has(e.componentId) || !e.groupId || template)) return false;
+      return true;
+    }
+    for (const b of d.boards) {
+      if (!b || !unique(b.id) || !str(b.name, 200) || !color(b.bg) || ![b.x, b.y].every(v => finite(v)) || ![b.w, b.h].every(v => finite(v, 1, 10000)) || !Array.isArray(b.elements) || b.elements.length > 2000) return false;
+      if (!b.elements.every(e => validElement(e, b.id))) return false;
+    }
+    for (const c of d.components) {
+      if (!c || !unique(c.id) || !str(c.name, 200) || !Array.isArray(c.elements) || !c.elements.length || c.elements.length > 2000 || !c.elements.every(e => validElement(e, c.id, true))) return false;
+    }
+    return true;
+  }
+  function parse(input) {
+    const d = migrate(typeof input === 'string' ? JSON.parse(input) : input);
+    if (!validate(d)) throw new Error('文件结构、图层数据或引用无效');
+    return d;
+  }
+  function duplicate(elements, dx = 24, dy = 24) {
+    const groups = new Map();
+    return elements.map(source => {
+      const e = clone(source); e.id = id(); e.x += dx; e.y += dy;
+      if (e.groupId) { if (!groups.has(e.groupId)) groups.set(e.groupId, id()); e.groupId = groups.get(e.groupId); }
+      return e;
+    });
+  }
+  function align(elements, axis, b) {
+    const box = elements.length === 1 ? { x: 0, y: 0, w: b.w, h: b.h } : bounds(elements);
+    for (const e of elements) {
+      if (axis === 'left') e.x = box.x;
+      if (axis === 'center') e.x = box.x + (box.w - e.w) / 2;
+      if (axis === 'right') e.x = box.x + box.w - e.w;
+      if (axis === 'top') e.y = box.y;
+      if (axis === 'middle') e.y = box.y + (box.h - e.h) / 2;
+      if (axis === 'bottom') e.y = box.y + box.h - e.h;
+    }
+  }
+  function arrange(elements, direction, gap) {
+    const box = bounds(elements), horizontal = direction === 'horizontal';
+    const sorted = [...elements].sort((a, b) => horizontal ? a.x - b.x : a.y - b.y);
+    let cursor = horizontal ? box.x : box.y;
+    for (const e of sorted) { if (horizontal) { e.x = cursor; e.y = box.y; cursor += e.w + gap; } else { e.y = cursor; e.x = box.x; cursor += e.h + gap; } }
+  }
+  function resize(originals, box, target) {
+    const sx = target.w / box.w, sy = target.h / box.h;
+    return originals.map(e => ({ ...e, x: target.x + (e.x - box.x) * sx, y: target.y + (e.y - box.y) * sy, w: Math.max(1, e.w * sx), h: Math.max(1, e.h * sy) }));
+  }
+  function snap(box, others, b, threshold) {
+    const xs = [0, b.w / 2, b.w], ys = [0, b.h / 2, b.h];
+    for (const e of others) { xs.push(e.x, e.x + e.w / 2, e.x + e.w); ys.push(e.y, e.y + e.h / 2, e.y + e.h); }
+    function nearest(points, targets) {
+      let delta = threshold + 1, guide = null;
+      for (const p of points) for (const t of targets) if (Math.abs(t - p) < Math.abs(delta)) { delta = t - p; guide = t; }
+      return Math.abs(delta) <= threshold ? { delta, guide } : { delta: 0, guide: null };
+    }
+    return { x: nearest([box.x, box.x + box.w / 2, box.x + box.w], xs), y: nearest([box.y, box.y + box.h / 2, box.y + box.h], ys) };
+  }
+  function component(d, elements, name) {
+    const box = bounds(elements), c = { id: id(), name, elements: duplicate(elements, -box.x, -box.y) }, groupId = id();
+    c.elements.forEach(e => { delete e.groupId; delete e.componentId; });
+    elements.forEach(e => { e.groupId = groupId; e.componentId = c.id; });
+    d.components.push(c); return c;
+  }
+  function instantiate(c, x = 40, y = 40) {
+    const groupId = id();
+    return duplicate(c.elements, x, y).map(e => ({ ...e, groupId, componentId: c.id, locked: false }));
+  }
+  function updateComponent(d, elements) {
+    const c = d.components.find(c => c.id === elements[0]?.componentId);
+    if (!c || elements.some(e => e.componentId !== c.id || e.groupId !== elements[0].groupId)) return false;
+    const box = bounds(elements);
+    c.elements = duplicate(elements, -box.x, -box.y).map(e => { delete e.groupId; delete e.componentId; return e; });
+    const sourceGroup = elements[0].groupId;
+    for (const b of d.boards) {
+      const instances = new Map();
+      b.elements.forEach(e => { if (e.componentId === c.id && e.groupId !== sourceGroup) { if (!instances.has(e.groupId)) instances.set(e.groupId, []); instances.get(e.groupId).push(e); } });
+      for (const [group, old] of instances) {
+        const box = bounds(old), index = b.elements.findIndex(e => e.groupId === group), next = instantiate(c, box.x, box.y);
+        next.forEach(e => { e.groupId = group; });
+        b.elements = b.elements.filter(e => e.groupId !== group); b.elements.splice(index, 0, ...next);
+      }
+    }
+    return true;
+  }
+  function removeBoard(d, boardId) {
+    if (d.boards.length <= 1) return false;
+    d.boards = d.boards.filter(b => b.id !== boardId);
+    for (const container of [...d.boards, ...d.components]) for (const e of container.elements) if (e.link === boardId) delete e.link;
+    return true;
+  }
+  class History {
+    constructor() { this.past = []; this.future = []; }
+    push(d) { this.past.push(JSON.stringify(d)); if (this.past.length > 60) this.past.shift(); this.future = []; }
+    undo(d) { if (!this.past.length) return d; this.future.push(JSON.stringify(d)); return JSON.parse(this.past.pop()); }
+    redo(d) { if (!this.future.length) return d; this.past.push(JSON.stringify(d)); return JSON.parse(this.future.pop()); }
+  }
+  const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
+  const fill = (e, d) => d.tokens.find(t => t.id === e.fillToken)?.value || e.fill;
+  function wrapText(text, width, measure) {
+    const lines = [];
+    for (const paragraph of text.split('\n')) {
+      let line = '';
+      for (const char of paragraph) {
+        if (line && measure(line + char) > width) {
+          const split = line.lastIndexOf(' ');
+          if (split > 0 && /[a-z0-9]/i.test(char) && /[a-z0-9]$/i.test(line)) {
+            lines.push(line.slice(0, split + 1)); line = line.slice(split + 1);
+          } else { lines.push(line); line = ''; }
+        }
+        line += char;
+      }
+      lines.push(line);
+    }
+    return lines;
+  }
+  function svg(b, d, measure) {
+    const body = b.elements.filter(e => !e.hidden).map((e, index) => {
+      const sw = Math.min(e.strokeWidth, e.w, e.h), x = e.x + sw / 2, y = e.y + sw / 2, w = Math.max(0, e.w - sw), h = Math.max(0, e.h - sw);
+      const border = `stroke="${e.stroke}" stroke-width="${sw}"`;
+      const frame = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${e.radius}" fill="none" ${border}/>`;
+      let shape;
+      if (e.type === 'text') {
+        const lines = measure ? wrapText(e.text, Math.max(1, e.w - 2 * sw), text => measure(text, e)) : e.text.split('\n');
+        shape = (sw ? frame : '') + `<text fill="${fill(e, d)}" font-family="-apple-system,BlinkMacSystemFont,PingFang SC,sans-serif" font-size="${e.size}" font-weight="${e.weight}" xml:space="preserve">${lines.map((line, i) => `<tspan x="${e.x + sw}" y="${e.y + sw + e.size * (1.08 + i * 1.45)}">${escape(line)}</tspan>`).join('')}</text>`;
+      } else if (e.type === 'ellipse') shape = `<ellipse cx="${e.x + e.w / 2}" cy="${e.y + e.h / 2}" rx="${w / 2}" ry="${h / 2}" fill="${fill(e, d)}" ${border}/>`;
+      else if (e.type === 'image') {
+        const clip = 'image-clip-' + index;
+        shape = `<defs><clipPath id="${clip}"><rect x="${e.x}" y="${e.y}" width="${e.w}" height="${e.h}" rx="${e.radius}"/></clipPath></defs><image x="${e.x + sw}" y="${e.y + sw}" width="${Math.max(0, e.w - 2 * sw)}" height="${Math.max(0, e.h - 2 * sw)}" href="${escape(e.src)}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${clip})"/>${sw ? frame : ''}`;
+      } else shape = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${e.radius}" fill="${fill(e, d)}" ${border}/>`;
+      return `<g opacity="${e.opacity}">${shape}</g>`;
+    }).join('');
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${b.w}" height="${b.h}" viewBox="0 0 ${b.w} ${b.h}"><title>${escape(b.name)}</title><defs><clipPath id="board-clip"><rect width="${b.w}" height="${b.h}"/></clipPath></defs><g clip-path="url(#board-clip)"><rect width="${b.w}" height="${b.h}" fill="${b.bg}"/>${body}</g></svg>`;
+  }
+  root.FormaCore = { id, clone, make, bounds, migrate, validate, parse, duplicate, align, arrange, resize, snap, component, instantiate, updateComponent, removeBoard, History, escape, fill, wrapText, svg };
+  if (typeof module !== 'undefined') module.exports = root.FormaCore;
+})(globalThis);
+</script><script>(function(){
+const C=FormaCore,uid=C.id;
+const el=(type,x,y,w,h,extra={})=>({id:uid(),type,x,y,w,h,fill:type==='text'?'#232620':'#e9eae4',radius:0,size:16,weight:400,text:'',...extra});
+const text=(x,y,w,h,value,size=16,fill='#292e28',weight=400)=>el('text',x,y,w,h,{text:value,size,fill,weight});
+const rect=(x,y,w,h,fill,radius=0)=>el('rect',x,y,w,h,{fill,radius});
+function dashboard(name,x,y,variant=false){let b={id:uid(),name,x,y,w:720,h:510,bg:variant?'#f1eee8':'#f7f8f2',elements:[]},a=b.elements,accent=variant?'#a66d51':'#657c57';a.push(rect(0,0,150,510,variant?'#e8e2d9':'#e9ede2'),text(23,24,120,35,'folio.',30,'#2b3529',600),text(23,82,110,20,'PERSONAL SPACE',8,'#818b79',500));['◈   工作概览','▤   我的项目','◷   最近打开','☆   已收藏'].forEach((s,i)=>{if(!i)a.push(rect(14,115,122,35,variant?'#d6cabd':'#d5dfca',6));a.push(text(25,124+i*43,110,25,s,11,i?'#7b8473':'#3e5235',i?400:500))});a.push(text(23,451,120,25,'◉  Storyon',11,'#65705d'),text(182,25,450,20,'工作空间  /  概览',9,'#939a8a'),text(182,68,440,40,variant?'给想法，一点空间。':'让好想法，慢慢发生。',26,'#2c3727',600),text(183,111,460,24,'保持专注，把每一个灵感变成值得期待的作品。',10,'#929886'),rect(182,158,505,106,variant?'#e4d8c9':'#e4e9d8',10),text(203,174,330,20,'THIS WEEK',8,accent,600),text(203,197,360,30,'少一点忙碌，多一点创造。',18,'#3e4d32',500),text(203,232,340,20,'你的 3 个项目，正在向前生长。',9,'#788267'),text(609,179,60,60,'✳',53,accent),text(182,292,300,24,'正在进行',15,'#38452f',600),text(608,296,100,20,'查看全部 ↗',9,'#858f7a'));
+['品牌探索','阅读笔记','个人网站'].forEach((s,i)=>{let xx=182+i*174;a.push(rect(xx,329,158,146,'#ffffff',9),rect(xx+12,341,134,63,['#e5d8c5','#dbe3d5','#dcded8'][i],5),text(xx+25,347,100,55,['Aa','✴','↗'][i],35,['#907455','#788b6c','#707d7a'][i],400),text(xx+14,416,130,20,s,12,'#434d3c',500),text(xx+14,447,130,15,['设计研究 · 12 个文件','知识整理 · 8 个文件','产品设计 · 6 个文件'][i],8,'#939a8d'))});return b}
+function mobile(){return {id:uid(),name:'03 / 移动端探索',x:1610,y:0,w:320,h:620,bg:'#f7f8f2',elements:[text(24,18,270,20,'9:41                                     ▰',11),text(24,65,220,50,'folio.',36,'#2b3529',600),text(24,133,270,80,'把灵感\n装进口袋。',30,'#34412e',600),text(24,233,270,40,'随时记录，慢慢创造。\n属于你的轻量工作空间。',12,'#8a937f'),rect(24,304,272,164,'#e3e9d7',12),text(48,324,220,30,'TODAY’S FOCUS',9,'#778c60',500),text(48,353,230,40,'今天，做一件小事。',19,'#465637',500),text(48,403,200,35,'✳',30,'#8c9d77'),rect(24,499,272,45,'#647b56',9),text(24,511,272,25,'开始我的创作  ↗',12,'#ffffff',500),text(65,571,230,20,'给思考留白，给想法时间。',10,'#9aa28f')]}}
+function folioSeed(){return {version:1,title:'Untitled explorations',boards:[dashboard('01 / 工作概览 · 鼠尾草',0,0),dashboard('02 / 工作概览 · 暖沙',800,0,true),mobile()]}}
+
+const orbitData=[{"name":"Orbit / 快速搜索","x":0,"y":0,"w":1440,"h":1000,"bg":"#10131b","elements":[{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#19283e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":38.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":24.0,"y":4.479999999999997,"w":38.0,"h":27.55,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":19.0,"text":"◈","weight":400,"name":"◈"},{"type":"text","x":59.0,"y":10.959999999999999,"w":50.300000000000004,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit","weight":600,"name":"Orbit"},{"type":"text","x":121.0,"y":12.04,"w":195.28,"h":17.4,"fill":"#9ca3b3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"文件    编辑    显示    窗口","weight":400,"name":"文件    编辑    显示    窗口"},{"type":"text","x":1235.0,"y":12.04,"w":86.08,"h":17.4,"fill":"#b8bfcd","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"周一  21:41","weight":400,"name":"周一  21:41"},{"type":"rect","x":204.0,"y":196.0,"w":1012.0,"h":635.0,"fill":"#141923","opacity":1,"radius":18.0,"stroke":"#354052","strokeWidth":1.0},{"type":"rect","x":204.0,"y":196.0,"w":220.0,"h":635.0,"fill":"#111620","opacity":1,"radius":18.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":222.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#ee746a","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":241.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#edc366","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":260.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#80bc87","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":232.0,"y":267.04,"w":58.0,"h":17.4,"fill":"#6f7b90","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"工作空间","weight":400,"name":"工作空间"},{"type":"rect","x":220.0,"y":300.0,"w":188.0,"h":40.0,"fill":"#273047","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":238.0,"y":310.88,"w":78.03999999999999,"h":20.3,"fill":"#d7e0f5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◈   概览","weight":400,"name":"◈   概览"},{"type":"text","x":238.0,"y":359.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"▤   我的项目","weight":400,"name":"▤   我的项目"},{"type":"text","x":238.0,"y":403.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◷   最近访问","weight":400,"name":"◷   最近访问"},{"type":"text","x":238.0,"y":447.88,"w":92.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"☆   收藏夹","weight":400,"name":"☆   收藏夹"},{"type":"text","x":234.0,"y":771.96,"w":95.54,"h":18.849999999999998,"fill":"#8695af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"●  Storyon","weight":400,"name":"●  Storyon"},{"type":"text","x":456.0,"y":231.32,"w":94.0,"h":30.45,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":21.0,"text":"工作概览","weight":600,"name":"工作概览"},{"type":"text","x":456.0,"y":268.96,"w":153.0,"h":18.849999999999998,"fill":"#7d899e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"让常用工具，触手可及。","weight":400,"name":"让常用工具，触手可及。"},{"type":"rect","x":456.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#234c64","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":476.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"01","weight":400,"name":"01"},{"type":"text","x":476.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"设计文件","weight":400,"name":"设计文件"},{"type":"rect","x":692.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#464264","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":712.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"02","weight":400,"name":"02"},{"type":"text","x":712.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"开发项目","weight":400,"name":"开发项目"},{"type":"rect","x":928.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#375054","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":948.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"03","weight":400,"name":"03"},{"type":"text","x":948.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"灵感笔记","weight":400,"name":"灵感笔记"},{"type":"text","x":456.0,"y":488.96,"w":62.0,"h":18.849999999999998,"fill":"#8c99af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"最近打开","weight":400,"name":"最近打开"},{"type":"rect","x":456.0,"y":526.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":543.96,"w":126.48,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit / 界面探索","weight":400,"name":"Orbit / 界面探索"},{"type":"text","x":1062.0,"y":539.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":592.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":609.96,"w":190.96,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Design system / 基础组件","weight":400,"name":"Design system / 基础组件"},{"type":"text","x":1062.0,"y":605.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":658.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":675.96,"w":158.72,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Workspace / 项目规划","weight":400,"name":"Workspace / 项目规划"},{"type":"text","x":1062.0,"y":671.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":542.0,"y":924.0,"w":356.0,"h":54.0,"fill":"#161d2a","opacity":1,"radius":16.0,"stroke":"#394358","strokeWidth":1.0},{"type":"rect","x":557.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#527baf","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":568.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"F","weight":400,"name":"F"},{"type":"rect","x":611.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#4b6d70","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":622.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"S","weight":400,"name":"S"},{"type":"rect","x":665.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#746098","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":676.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"✦","weight":400,"name":"✦"},{"type":"rect","x":719.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#657aac","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":730.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"⌘","weight":400,"name":"⌘"},{"type":"rect","x":773.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#8b7159","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":784.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"N","weight":400,"name":"N"},{"type":"rect","x":827.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#668262","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":838.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"◈","weight":400,"name":"◈"},{"type":"rect","x":0.0,"y":38.0,"w":1440.0,"h":886.0,"fill":"#0b102a","opacity":0.5019607843137255,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":385.0,"y":272.0,"w":670.0,"h":438.0,"fill":"#080b13","opacity":0.25098039215686274,"radius":16.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":375.0,"y":260.0,"w":670.0,"h":438.0,"fill":"#20242e","opacity":1,"radius":14.0,"stroke":"#454c5e","strokeWidth":1.0},{"type":"text","x":400.0,"y":723.12,"w":287.86,"h":15.95,"fill":"#a0abc2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"↑ ↓ 切换选项        ↵ 打开        Esc 关闭","weight":400,"name":"↑ ↓ 切换选项        ↵ 打开    "},{"type":"rect","x":391.0,"y":276.0,"w":638.0,"h":53.0,"fill":"#2b303b","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":410.0,"y":283.08,"w":48.0,"h":34.8,"fill":"#a4afc2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":24.0,"text":"⌕","weight":400,"name":"⌕"},{"type":"text","x":447.0,"y":290.72,"w":186.0,"h":23.2,"fill":"#8d97aa","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"搜索应用、文件和指令…","weight":400,"name":"搜索应用、文件和指令…"},{"type":"rect","x":974.0,"y":290.0,"w":39.0,"h":24.0,"fill":"#383f4c","opacity":1,"radius":5.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":983.0,"y":296.2,"w":32.4,"h":14.5,"fill":"#b1bdcf","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"⌘ K","weight":400,"name":"⌘ K"},{"type":"rect","x":391.0,"y":346.0,"w":638.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"text","x":405.0,"y":363.12,"w":54.0,"h":15.95,"fill":"#828ea5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"推荐应用","weight":400,"name":"推荐应用"},{"type":"rect","x":391.0,"y":390.0,"w":638.0,"h":54.0,"fill":"#3a4254","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":405.0,"y":400.0,"w":32.0,"h":32.0,"fill":"#3977a2","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":406.96,"w":26.12,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"VS","weight":600,"name":"VS"},{"type":"text","x":452.0,"y":398.88,"w":166.24,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"Visual Studio Code","weight":400,"name":"Visual Studio Code"},{"type":"text","x":452.0,"y":421.2,"w":50.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"开发工具","weight":400,"name":"开发工具"},{"type":"text","x":975.0,"y":409.04,"w":24.0,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"↵","weight":400,"name":"↵"},{"type":"rect","x":405.0,"y":461.0,"w":32.0,"h":32.0,"fill":"#44798f","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":467.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"S","weight":600,"name":"S"},{"type":"text","x":452.0,"y":459.88,"w":62.08,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"Safari","weight":400,"name":"Safari"},{"type":"text","x":452.0,"y":482.2,"w":40.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"浏览器","weight":400,"name":"浏览器"},{"type":"text","x":975.0,"y":470.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 2","weight":400,"name":"⌘ 2"},{"type":"rect","x":405.0,"y":522.0,"w":32.0,"h":32.0,"fill":"#805d94","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":528.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"F","weight":600,"name":"F"},{"type":"text","x":452.0,"y":520.88,"w":53.4,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"Figma","weight":400,"name":"Figma"},{"type":"text","x":452.0,"y":543.2,"w":50.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"设计工具","weight":400,"name":"设计工具"},{"type":"text","x":975.0,"y":531.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 3","weight":400,"name":"⌘ 3"},{"type":"rect","x":405.0,"y":583.0,"w":32.0,"h":32.0,"fill":"#666e7c","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":589.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"N","weight":600,"name":"N"},{"type":"text","x":452.0,"y":581.88,"w":62.08,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"Notion","weight":400,"name":"Notion"},{"type":"text","x":452.0,"y":604.2,"w":60.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"笔记与文档","weight":400,"name":"笔记与文档"},{"type":"text","x":975.0,"y":592.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 4","weight":400,"name":"⌘ 4"},{"type":"rect","x":391.0,"y":648.0,"w":638.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"text","x":405.0,"y":664.12,"w":68.74000000000001,"h":15.95,"fill":"#929db3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"◈  Orbit","weight":400,"name":"◈  Orbit"},{"type":"text","x":875.0,"y":665.2,"w":108.6,"h":14.5,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"快速启动 · 全局搜索","weight":400,"name":"快速启动 · 全局搜索"}]},{"name":"Orbit / 指令菜单","x":1560,"y":0,"w":1440,"h":1000,"bg":"#10131b","elements":[{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#19283e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":38.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":24.0,"y":4.479999999999997,"w":38.0,"h":27.55,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":19.0,"text":"◈","weight":400,"name":"◈"},{"type":"text","x":59.0,"y":10.959999999999999,"w":50.300000000000004,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit","weight":600,"name":"Orbit"},{"type":"text","x":121.0,"y":12.04,"w":195.28,"h":17.4,"fill":"#9ca3b3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"文件    编辑    显示    窗口","weight":400,"name":"文件    编辑    显示    窗口"},{"type":"text","x":1235.0,"y":12.04,"w":86.08,"h":17.4,"fill":"#b8bfcd","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"周一  21:41","weight":400,"name":"周一  21:41"},{"type":"rect","x":204.0,"y":196.0,"w":1012.0,"h":635.0,"fill":"#141923","opacity":1,"radius":18.0,"stroke":"#354052","strokeWidth":1.0},{"type":"rect","x":204.0,"y":196.0,"w":220.0,"h":635.0,"fill":"#111620","opacity":1,"radius":18.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":222.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#ee746a","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":241.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#edc366","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":260.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#80bc87","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":232.0,"y":267.04,"w":58.0,"h":17.4,"fill":"#6f7b90","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"工作空间","weight":400,"name":"工作空间"},{"type":"rect","x":220.0,"y":300.0,"w":188.0,"h":40.0,"fill":"#273047","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":238.0,"y":310.88,"w":78.03999999999999,"h":20.3,"fill":"#d7e0f5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◈   概览","weight":400,"name":"◈   概览"},{"type":"text","x":238.0,"y":359.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"▤   我的项目","weight":400,"name":"▤   我的项目"},{"type":"text","x":238.0,"y":403.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◷   最近访问","weight":400,"name":"◷   最近访问"},{"type":"text","x":238.0,"y":447.88,"w":92.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"☆   收藏夹","weight":400,"name":"☆   收藏夹"},{"type":"text","x":234.0,"y":771.96,"w":95.54,"h":18.849999999999998,"fill":"#8695af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"●  Storyon","weight":400,"name":"●  Storyon"},{"type":"text","x":456.0,"y":231.32,"w":94.0,"h":30.45,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":21.0,"text":"工作概览","weight":600,"name":"工作概览"},{"type":"text","x":456.0,"y":268.96,"w":153.0,"h":18.849999999999998,"fill":"#7d899e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"让常用工具，触手可及。","weight":400,"name":"让常用工具，触手可及。"},{"type":"rect","x":456.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#234c64","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":476.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"01","weight":400,"name":"01"},{"type":"text","x":476.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"设计文件","weight":400,"name":"设计文件"},{"type":"rect","x":692.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#464264","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":712.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"02","weight":400,"name":"02"},{"type":"text","x":712.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"开发项目","weight":400,"name":"开发项目"},{"type":"rect","x":928.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#375054","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":948.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"03","weight":400,"name":"03"},{"type":"text","x":948.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"灵感笔记","weight":400,"name":"灵感笔记"},{"type":"text","x":456.0,"y":488.96,"w":62.0,"h":18.849999999999998,"fill":"#8c99af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"最近打开","weight":400,"name":"最近打开"},{"type":"rect","x":456.0,"y":526.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":543.96,"w":126.48,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit / 界面探索","weight":400,"name":"Orbit / 界面探索"},{"type":"text","x":1062.0,"y":539.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":592.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":609.96,"w":190.96,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Design system / 基础组件","weight":400,"name":"Design system / 基础组件"},{"type":"text","x":1062.0,"y":605.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":658.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":675.96,"w":158.72,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Workspace / 项目规划","weight":400,"name":"Workspace / 项目规划"},{"type":"text","x":1062.0,"y":671.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":542.0,"y":924.0,"w":356.0,"h":54.0,"fill":"#161d2a","opacity":1,"radius":16.0,"stroke":"#394358","strokeWidth":1.0},{"type":"rect","x":557.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#527baf","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":568.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"F","weight":400,"name":"F"},{"type":"rect","x":611.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#4b6d70","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":622.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"S","weight":400,"name":"S"},{"type":"rect","x":665.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#746098","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":676.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"✦","weight":400,"name":"✦"},{"type":"rect","x":719.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#657aac","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":730.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"⌘","weight":400,"name":"⌘"},{"type":"rect","x":773.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#8b7159","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":784.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"N","weight":400,"name":"N"},{"type":"rect","x":827.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#668262","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":838.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"◈","weight":400,"name":"◈"},{"type":"rect","x":0.0,"y":38.0,"w":1440.0,"h":886.0,"fill":"#0b102a","opacity":0.5019607843137255,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":385.0,"y":272.0,"w":670.0,"h":438.0,"fill":"#080b13","opacity":0.25098039215686274,"radius":16.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":375.0,"y":260.0,"w":670.0,"h":438.0,"fill":"#20242e","opacity":1,"radius":14.0,"stroke":"#454c5e","strokeWidth":1.0},{"type":"text","x":400.0,"y":723.12,"w":287.86,"h":15.95,"fill":"#a0abc2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"↑ ↓ 切换选项        ↵ 打开        Esc 关闭","weight":400,"name":"↑ ↓ 切换选项        ↵ 打开    "},{"type":"rect","x":391.0,"y":276.0,"w":638.0,"h":53.0,"fill":"#2b303b","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":410.0,"y":283.08,"w":48.0,"h":34.8,"fill":"#a4afc2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":24.0,"text":"⌕","weight":400,"name":"⌕"},{"type":"text","x":447.0,"y":290.72,"w":74.0,"h":23.2,"fill":"#e6eaf3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"更改外观","weight":400,"name":"更改外观"},{"type":"rect","x":974.0,"y":290.0,"w":39.0,"h":24.0,"fill":"#383f4c","opacity":1,"radius":5.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":983.0,"y":296.2,"w":32.4,"h":14.5,"fill":"#b1bdcf","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"⌘ K","weight":400,"name":"⌘ K"},{"type":"rect","x":391.0,"y":346.0,"w":638.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"text","x":405.0,"y":363.12,"w":76.0,"h":15.95,"fill":"#828ea5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"外观与个性化","weight":400,"name":"外观与个性化"},{"type":"rect","x":391.0,"y":390.0,"w":638.0,"h":54.0,"fill":"#3a4254","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":405.0,"y":400.0,"w":32.0,"h":32.0,"fill":"#667995","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":406.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"◐","weight":600,"name":"◐"},{"type":"text","x":452.0,"y":398.88,"w":94.0,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"切换深色模式","weight":400,"name":"切换深色模式"},{"type":"text","x":452.0,"y":421.2,"w":40.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"已启用","weight":400,"name":"已启用"},{"type":"text","x":975.0,"y":409.04,"w":24.0,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"↵","weight":400,"name":"↵"},{"type":"rect","x":405.0,"y":461.0,"w":32.0,"h":32.0,"fill":"#71618e","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":467.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"◧","weight":600,"name":"◧"},{"type":"text","x":452.0,"y":459.88,"w":80.0,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"更改强调色","weight":400,"name":"更改强调色"},{"type":"text","x":452.0,"y":482.2,"w":40.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"蓝紫色","weight":400,"name":"蓝紫色"},{"type":"text","x":975.0,"y":470.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 2","weight":400,"name":"⌘ 2"},{"type":"rect","x":405.0,"y":522.0,"w":32.0,"h":32.0,"fill":"#667995","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":528.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"T","weight":600,"name":"T"},{"type":"text","x":452.0,"y":520.88,"w":94.0,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"调整字体大小","weight":400,"name":"调整字体大小"},{"type":"text","x":452.0,"y":543.2,"w":30.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"标准","weight":400,"name":"标准"},{"type":"text","x":975.0,"y":531.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 3","weight":400,"name":"⌘ 3"},{"type":"rect","x":405.0,"y":583.0,"w":32.0,"h":32.0,"fill":"#667995","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":414.0,"y":589.96,"w":26.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"▤","weight":600,"name":"▤"},{"type":"text","x":452.0,"y":581.88,"w":94.0,"h":20.3,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"切换紧凑布局","weight":400,"name":"切换紧凑布局"},{"type":"text","x":452.0,"y":604.2,"w":30.0,"h":14.5,"fill":"#929eb3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"关闭","weight":400,"name":"关闭"},{"type":"text","x":975.0,"y":592.04,"w":36.879999999999995,"h":17.4,"fill":"#9ba9c1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"⌘ 4","weight":400,"name":"⌘ 4"},{"type":"rect","x":391.0,"y":648.0,"w":638.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"text","x":405.0,"y":664.12,"w":68.74000000000001,"h":15.95,"fill":"#929db3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"◈  Orbit","weight":400,"name":"◈  Orbit"},{"type":"text","x":875.0,"y":665.2,"w":108.6,"h":14.5,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":10.0,"text":"快速启动 · 全局搜索","weight":400,"name":"快速启动 · 全局搜索"}]},{"name":"Orbit / 外观设置","x":3120,"y":0,"w":1440,"h":1000,"bg":"#10131b","elements":[{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":1000.0,"fill":"#19283e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":0.0,"y":0.0,"w":1440.0,"h":38.0,"fill":"#10131b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":24.0,"y":4.479999999999997,"w":38.0,"h":27.55,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":19.0,"text":"◈","weight":400,"name":"◈"},{"type":"text","x":59.0,"y":10.959999999999999,"w":50.300000000000004,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit","weight":600,"name":"Orbit"},{"type":"text","x":121.0,"y":12.04,"w":195.28,"h":17.4,"fill":"#9ca3b3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"文件    编辑    显示    窗口","weight":400,"name":"文件    编辑    显示    窗口"},{"type":"text","x":1235.0,"y":12.04,"w":86.08,"h":17.4,"fill":"#b8bfcd","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"周一  21:41","weight":400,"name":"周一  21:41"},{"type":"rect","x":204.0,"y":196.0,"w":1012.0,"h":635.0,"fill":"#141923","opacity":1,"radius":18.0,"stroke":"#354052","strokeWidth":1.0},{"type":"rect","x":204.0,"y":196.0,"w":220.0,"h":635.0,"fill":"#111620","opacity":1,"radius":18.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":222.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#ee746a","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":241.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#edc366","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":260.0,"y":215.0,"w":10.0,"h":10.0,"fill":"#80bc87","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":232.0,"y":267.04,"w":58.0,"h":17.4,"fill":"#6f7b90","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"工作空间","weight":400,"name":"工作空间"},{"type":"rect","x":220.0,"y":300.0,"w":188.0,"h":40.0,"fill":"#273047","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":238.0,"y":310.88,"w":78.03999999999999,"h":20.3,"fill":"#d7e0f5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◈   概览","weight":400,"name":"◈   概览"},{"type":"text","x":238.0,"y":359.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"▤   我的项目","weight":400,"name":"▤   我的项目"},{"type":"text","x":238.0,"y":403.88,"w":106.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"◷   最近访问","weight":400,"name":"◷   最近访问"},{"type":"text","x":238.0,"y":447.88,"w":92.03999999999999,"h":20.3,"fill":"#7e8aa1","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":14.0,"text":"☆   收藏夹","weight":400,"name":"☆   收藏夹"},{"type":"text","x":234.0,"y":771.96,"w":95.54,"h":18.849999999999998,"fill":"#8695af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"●  Storyon","weight":400,"name":"●  Storyon"},{"type":"text","x":456.0,"y":231.32,"w":94.0,"h":30.45,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":21.0,"text":"工作概览","weight":600,"name":"工作概览"},{"type":"text","x":456.0,"y":268.96,"w":153.0,"h":18.849999999999998,"fill":"#7d899e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"让常用工具，触手可及。","weight":400,"name":"让常用工具，触手可及。"},{"type":"rect","x":456.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#234c64","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":476.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"01","weight":400,"name":"01"},{"type":"text","x":476.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"设计文件","weight":400,"name":"设计文件"},{"type":"rect","x":692.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#464264","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":712.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"02","weight":400,"name":"02"},{"type":"text","x":712.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"开发项目","weight":400,"name":"开发项目"},{"type":"rect","x":928.0,"y":324.0,"w":214.0,"h":124.0,"fill":"#375054","opacity":1,"radius":10.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":948.0,"y":346.12,"w":23.64,"h":15.95,"fill":"#b1bdd0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"03","weight":400,"name":"03"},{"type":"text","x":948.0,"y":396.56,"w":82.0,"h":26.099999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":18.0,"text":"灵感笔记","weight":400,"name":"灵感笔记"},{"type":"text","x":456.0,"y":488.96,"w":62.0,"h":18.849999999999998,"fill":"#8c99af","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"最近打开","weight":400,"name":"最近打开"},{"type":"rect","x":456.0,"y":526.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":543.96,"w":126.48,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Orbit / 界面探索","weight":400,"name":"Orbit / 界面探索"},{"type":"text","x":1062.0,"y":539.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":592.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":609.96,"w":190.96,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Design system / 基础组件","weight":400,"name":"Design system / 基础组件"},{"type":"text","x":1062.0,"y":605.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":456.0,"y":658.0,"w":686.0,"h":52.0,"fill":"#1b2230","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":475.0,"y":675.96,"w":158.72,"h":18.849999999999998,"fill":"#afbdd2","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"Workspace / 项目规划","weight":400,"name":"Workspace / 项目规划"},{"type":"text","x":1062.0,"y":671.64,"w":34.0,"h":24.65,"fill":"#64748e","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"↗","weight":400,"name":"↗"},{"type":"rect","x":542.0,"y":924.0,"w":356.0,"h":54.0,"fill":"#161d2a","opacity":1,"radius":16.0,"stroke":"#394358","strokeWidth":1.0},{"type":"rect","x":557.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#527baf","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":568.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"F","weight":400,"name":"F"},{"type":"rect","x":611.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#4b6d70","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":622.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"S","weight":400,"name":"S"},{"type":"rect","x":665.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#746098","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":676.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"✦","weight":400,"name":"✦"},{"type":"rect","x":719.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#657aac","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":730.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"⌘","weight":400,"name":"⌘"},{"type":"rect","x":773.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#8b7159","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":784.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"N","weight":400,"name":"N"},{"type":"rect","x":827.0,"y":934.0,"w":36.0,"h":34.0,"fill":"#668262","opacity":1,"radius":8.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":838.0,"y":939.72,"w":32.0,"h":23.2,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":16.0,"text":"◈","weight":400,"name":"◈"},{"type":"rect","x":0.0,"y":38.0,"w":1440.0,"h":886.0,"fill":"#0b102a","opacity":0.5019607843137255,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":360.0,"y":225.0,"w":720.0,"h":552.0,"fill":"#20242e","opacity":1,"radius":14.0,"stroke":"#454c5e","strokeWidth":1.0},{"type":"text","x":388.0,"y":243.48,"w":48.0,"h":27.55,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":19.0,"text":"设置","weight":600,"name":"设置"},{"type":"text","x":1042.0,"y":240.24,"w":44.0,"h":31.9,"fill":"#98a1b3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":22.0,"text":"×","weight":400,"name":"×"},{"type":"rect","x":380.0,"y":286.0,"w":680.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"rect","x":376.0,"y":302.0,"w":154.0,"h":40.0,"fill":"#353c4c","opacity":1,"radius":7.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":395.0,"y":313.96,"w":65.12,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"◐  外观","weight":400,"name":"◐  外观"},{"type":"text","x":395.0,"y":361.96,"w":78.12,"h":18.849999999999998,"fill":"#8893a8","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"⌘  快捷键","weight":400,"name":"⌘  快捷键"},{"type":"text","x":395.0,"y":409.96,"w":65.12,"h":18.849999999999998,"fill":"#8893a8","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"⚙  通用","weight":400,"name":"⚙  通用"},{"type":"rect","x":550.0,"y":304.0,"w":1.0,"h":436.0,"fill":"#363d4b","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":578.0,"y":308.64,"w":95.0,"h":24.65,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":17.0,"text":"外观与显示","weight":600,"name":"外观与显示"},{"type":"text","x":578.0,"y":341.04,"w":142.0,"h":17.4,"fill":"#8d98ad","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"打造适合你的工作环境。","weight":400,"name":"打造适合你的工作环境。"},{"type":"rect","x":578.0,"y":380.0,"w":136.0,"h":88.0,"fill":"#29303c","opacity":1,"radius":8.0,"stroke":"#414a5b","strokeWidth":1.0},{"type":"rect","x":588.0,"y":390.0,"w":116.0,"h":54.0,"fill":"#d8deea","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":588.0,"y":390.0,"w":28.0,"h":54.0,"fill":"#626d83","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":590.0,"y":444.12,"w":32.0,"h":15.95,"fill":"#d0d7e5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"浅色","weight":400,"name":"浅色"},{"type":"rect","x":730.0,"y":380.0,"w":136.0,"h":88.0,"fill":"#29303c","opacity":1,"radius":8.0,"stroke":"#8d9ed8","strokeWidth":1.0},{"type":"rect","x":740.0,"y":390.0,"w":116.0,"h":54.0,"fill":"#111722","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":740.0,"y":390.0,"w":28.0,"h":54.0,"fill":"#626d83","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":742.0,"y":444.12,"w":32.0,"h":15.95,"fill":"#d0d7e5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"深色","weight":400,"name":"深色"},{"type":"rect","x":882.0,"y":380.0,"w":136.0,"h":88.0,"fill":"#29303c","opacity":1,"radius":8.0,"stroke":"#414a5b","strokeWidth":1.0},{"type":"rect","x":892.0,"y":390.0,"w":116.0,"h":54.0,"fill":"#707b91","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":892.0,"y":390.0,"w":28.0,"h":54.0,"fill":"#626d83","opacity":1,"radius":4.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":894.0,"y":444.12,"w":54.0,"h":15.95,"fill":"#d0d7e5","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"跟随系统","weight":400,"name":"跟随系统"},{"type":"text","x":578.0,"y":493.96,"w":49.0,"h":18.849999999999998,"fill":"#c3cada","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"强调色","weight":400,"name":"强调色"},{"type":"ellipse","x":581.0,"y":527.0,"w":26.0,"h":26.0,"fill":"#77a7e9","opacity":1,"radius":0.0,"stroke":"#77a7e9","strokeWidth":2.0},{"type":"ellipse","x":626.0,"y":527.0,"w":26.0,"h":26.0,"fill":"#a395db","opacity":1,"radius":0.0,"stroke":"#e8ecf5","strokeWidth":2.0},{"type":"ellipse","x":671.0,"y":527.0,"w":26.0,"h":26.0,"fill":"#77b8a0","opacity":1,"radius":0.0,"stroke":"#77b8a0","strokeWidth":2.0},{"type":"ellipse","x":716.0,"y":527.0,"w":26.0,"h":26.0,"fill":"#e2ad79","opacity":1,"radius":0.0,"stroke":"#e2ad79","strokeWidth":2.0},{"type":"ellipse","x":761.0,"y":527.0,"w":26.0,"h":26.0,"fill":"#d38a9e","opacity":1,"radius":0.0,"stroke":"#d38a9e","strokeWidth":2.0},{"type":"rect","x":578.0,"y":573.0,"w":462.0,"h":1,"fill":"#303441","opacity":1,"radius":0.0,"stroke":"#303441","strokeWidth":0},{"type":"text","x":578.0,"y":591.96,"w":62.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"界面字号","weight":400,"name":"界面字号"},{"type":"text","x":979.0,"y":593.04,"w":47.199999999999996,"h":17.4,"fill":"#9faac0","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":12.0,"text":"14 px","weight":400,"name":"14 px"},{"type":"rect","x":578.0,"y":627.0,"w":462.0,"h":4.0,"fill":"#414a5d","opacity":1,"radius":2.0,"stroke":"#000000","strokeWidth":0.0},{"type":"rect","x":578.0,"y":627.0,"w":210.0,"h":4.0,"fill":"#a395db","opacity":1,"radius":2.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":781.0,"y":622.0,"w":14.0,"h":14.0,"fill":"#dad5f3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":578.0,"y":669.96,"w":88.0,"h":18.849999999999998,"fill":"#e7e9ef","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":13.0,"text":"减少动态效果","weight":400,"name":"减少动态效果"},{"type":"rect","x":996.0,"y":669.0,"w":44.0,"h":24.0,"fill":"#8f82c6","opacity":1,"radius":12.0,"stroke":"#000000","strokeWidth":0.0},{"type":"ellipse","x":1019.0,"y":673.0,"w":16.0,"h":16.0,"fill":"#ffffff","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0},{"type":"text","x":578.0,"y":723.12,"w":87.0,"h":15.95,"fill":"#7f8ca3","opacity":1,"radius":0.0,"stroke":"#000000","strokeWidth":0.0,"size":11.0,"text":"更改将自动保存","weight":400,"name":"更改将自动保存"}]}];
+
+function orbit(){
+  const bs=orbitData.map(b=>({...C.clone(b),id:C.id(),elements:b.elements.map(e=>C.make(e.type,e.x,e.y,e.w,e.h,e))}));
+  const a=bs[0].elements.find(e=>e.text==='搜索应用、文件和指令…');if(a)a.link=bs[1].id;
+  for(const e of bs[1].elements)if(['切换深色模式','更改强调色','调整字体大小','切换紧凑布局'].includes(e.text))e.link=bs[2].id;
+  const close=bs[2].elements.find(e=>e.text==='×');if(close)close.link=bs[0].id;
+  return bs;
+}
+function seed(){
+  const d=C.migrate(folioSeed());d.title='Folio / 个人工作空间';
+  d.tokens=[{id:C.id(),name:'品牌 / 鼠尾草',value:'#647b56'},{id:C.id(),name:'背景 / 纸白',value:'#f7f8f2'},{id:C.id(),name:'文字 / 墨绿',value:'#2b3529'},{id:C.id(),name:'Orbit / 紫藤',value:'#a395db'}];
+  d.boards.forEach(b=>b.elements.forEach(e=>{const t=d.tokens.find(t=>t.value===e.fill);if(t)e.fillToken=t.id}));
+  const m=d.boards[2];m.elements.find(e=>e.text==='开始我的创作  ↗').link=d.boards[0].id;
+  const button=m.elements.filter(e=>e.y>=499&&e.y<550);C.component(d,button,'按钮 / 品牌主操作');
+  return d;
+}
+globalThis.FormaSeeds={seed,orbit};
+})();
+</script><script>/* Shared icon components: local SVG paths, no fonts or external assets. */
+(() => {
+  const paths = {
+    layers: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M5.5 8h1M5.5 12h1"/>',
+    inspector: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M15 4v16M17.5 8h1M17.5 12h1"/>',
+    chevronLeft: '<path d="m14 6-6 6 6 6"/>', chevronRight: '<path d="m10 6 6 6-6 6"/>',
+    search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+    undo: '<path d="m8 4-5 5 5 5M3 9h11a6 6 0 0 1 0 12"/>', redo: '<path d="m16 4 5 5-5 5m5-5H10a6 6 0 0 0 0 12"/>',
+    import: '<path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>',
+    export: '<path d="M12 15V3m-4 4 4-4 4 4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>',
+    play: '<path d="m8 4 12 8-12 8Z"/>', cursor: '<path d="m5 3 14 10-7 1-3 7Z"/>',
+    hand: '<path d="M8 12V6a2 2 0 0 1 4 0v5-8a2 2 0 0 1 4 0v8-5a2 2 0 0 1 4 0v9c0 4-3 7-7 7-3 0-5-1-7-4l-3-5a2 2 0 0 1 3-2l2 3"/>',
+    rect: '<rect x="4" y="4" width="16" height="16" rx="2"/>', ellipse: '<circle cx="12" cy="12" r="8"/>',
+    text: '<path d="M4 7V4h16v3M12 4v16M8 20h8"/>', image: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m21 15-5-5L4 21"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>', minus: '<path d="M5 12h14"/>',
+    fit: '<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><rect x="8" y="8" width="8" height="8" rx="1"/>',
+    focus: '<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/>',
+    snap: '<path d="M8 3v18M16 3v18M3 8h18M3 16h18"/>',
+    frame: '<path d="M6 3v18M18 3v18M3 6h18M3 18h18"/>',
+    component: '<path d="m12 3 9 9-9 9-9-9Z"/>', group: '<rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="3 3"/><rect x="7" y="7" width="10" height="10" rx="1"/>',
+    close: '<path d="m6 6 12 12M6 18 18 6"/>', more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 8a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16h.01"/>',
+    code: '<path d="m7 6-6 6 6 6m10-12 6 6-6 6M14 3l-4 18"/>', prototype: '<circle cx="5" cy="5" r="2"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M5 7v7a4 4 0 0 0 4 4h6m-4-4 4 4-4 4"/>',
+    design: '<path d="m14 4 6 6M4 20l4-1L21 6a2.8 2.8 0 0 0-4-4L4 15Z"/>',
+    copy: '<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>',
+    trash: '<path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/>',
+    eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+    eyeOff: '<path d="m3 3 18 18M10 5c7-1 12 7 12 7s-1 2-3 4M6 6c-2 2-4 6-4 6s4 7 10 7c2 0 4-1 5-2M10 10a3 3 0 0 0 4 4"/>',
+    lock: '<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4M12 14v3"/>',
+    unlock: '<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0M12 14v3"/>',
+    left: '<path d="M4 3v18M8 7h12v3H8zm0 7h8v3H8z"/>', center: '<path d="M12 3v18M4 7h16v3H4zm3 7h10v3H7z"/>', right: '<path d="M20 3v18M4 7h12v3H4zm4 7h8v3H8z"/>',
+    top: '<path d="M3 4h18M7 8h3v12H7zm7 0h3v8h-3z"/>', middle: '<path d="M3 12h18M7 4h3v16H7zm7 3h3v10h-3z"/>', bottom: '<path d="M3 20h18M7 4h3v12H7zm7 4h3v8h-3z"/>',
+    up: '<path d="M4 4h16M12 20V8m-5 5 5-5 5 5"/>', down: '<path d="M4 20h16M12 4v12m-5-5 5 5 5-5"/>'
+  };
+  function icon(name) {
+    const span = document.createElement('span'); span.className = 'ui-icon'; span.setAttribute('aria-hidden', 'true');
+    span.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.component}</svg>`;
+    return span;
+  }
+  function mount(root = document) { root.querySelectorAll('[data-icon]').forEach(node => node.replaceChildren(icon(node.dataset.icon))); }
+  globalThis.FormaUI = { icon, mount };
+})();
+</script><script>/* Forma UI — local only, no network calls or accounts. */
+(() => {
+  'use strict';
+  const C = FormaCore, $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const KEY = 'forma-design-canvas-v2', OLD_KEY = 'forma-design-canvas-v1';
+  const history = new C.History();
+  const UI = FormaUI; UI.mount();
+  let doc, boardId, selected = new Set(), scale = 1, pan = { x: 40, y: 100 }, tool = 'select', space = false, drag = null;
+  let mode = 'design', assets = false, snapping = true, clipboard = null, previewId, previewHistory = [], hotspots = false;
+  let commandIndex = 0, commandMatches = [], bootMessage = '';
+  const viewport = $('#viewport');
+  const compactQuery = matchMedia('(max-width: 900px)');
+  let panelPrefs = { wide: { left: true, right: true }, compact: { left: false, right: false } };
+  try { const saved = JSON.parse(localStorage.getItem('forma-ui-panels-v1')); for (const view of ['wide', 'compact']) for (const side of ['left', 'right']) if (typeof saved?.[view]?.[side] === 'boolean') panelPrefs[view][side] = saved[view][side]; } catch {}
+  function applyPanels() {
+    const state = panelPrefs[compactQuery.matches ? 'compact' : 'wide'];
+    for (const [side, panel, toggle] of [['left', '#leftPanel', '#homeBtn'], ['right', '#rightPanel', '#toggleInspector']]) {
+      $(panel).hidden = !state[side]; document.body.classList.toggle(side + '-hidden', !state[side]);
+      $(toggle).setAttribute('aria-expanded', state[side]); $(toggle).classList.toggle('panel-open', state[side]);
+    }
+  }
+  function setPanel(side, open) {
+    finishDrag(); const state = panelPrefs[compactQuery.matches ? 'compact' : 'wide'];
+    state[side] = open ?? !state[side]; if (compactQuery.matches && state[side]) state[side === 'left' ? 'right' : 'left'] = false;
+    applyPanels(); try { localStorage.setItem('forma-ui-panels-v1', JSON.stringify(panelPrefs)); } catch {}
+  }
+  applyPanels();
+
+  try {
+    const saved = localStorage.getItem(KEY) || localStorage.getItem(OLD_KEY);
+    doc = saved ? C.parse(saved) : FormaSeeds.seed();
+  } catch {
+    doc = FormaSeeds.seed(); bootMessage = '本地文件暂时无法读取，已打开示例；原存储未覆盖';
+  }
+  boardId = doc.boards[0].id;
+  const board = () => doc.boards.find(b => b.id === boardId);
+  const selection = () => board()?.elements.filter(e => selected.has(e.id)) || [];
+  const editable = () => selection().filter(e => !e.locked && !e.hidden);
+  const nameOf = e => e.name || e.text?.slice(0, 24) || ({ rect: '矩形', ellipse: '椭圆', image: '图片', text: '文字' }[e.type]);
+  const iconOf = e => e.componentId ? '◇' : e.groupId ? '▱' : ({ text: 'T', rect: '▢', ellipse: '○', image: '▧' }[e.type]);
+  function dom(tag, className, text) { const n = document.createElement(tag); if (className) n.className = className; if (text !== undefined) n.textContent = text; return n; }
+  function button(label, fn, className = '', title = label) {
+    const b = dom('button', className, label); b.type = 'button'; b.title = title; if (title) b.setAttribute('aria-label', title); b.onclick = fn;
+    const actionIcon = { '复制': 'copy', '置顶 ↑': 'up', '置底 ↓': 'down', '聚焦画板': 'focus', '分组': 'group', '取消分组': 'rect', '◇ 创建组件': 'component', '删除所选图层': 'trash', '删除当前画板': 'trash' }[label];
+    if (actionIcon) { b.replaceChildren(UI.icon(actionIcon)); b.classList.add('icon-action'); }
+    return b;
+  }
+  function toast(message) { $('#toast').textContent = message; $('#toast').classList.add('visible'); clearTimeout(toast.timer); toast.timer = setTimeout(() => $('#toast').classList.remove('visible'), 3200); }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(doc)); $('#saveState').textContent = '已保存到此浏览器'; $('#saveIndicator').classList.remove('unsaved'); $('#saveIndicator').title = '已保存到此浏览器'; }
+    catch { $('#saveState').textContent = '保存失败，请导出 JSON 备份'; $('#saveIndicator').classList.add('unsaved'); $('#saveIndicator').title = '保存失败，请导出 JSON 备份'; toast('本地存储不可用或已满。请导出 JSON，避免丢失改动。'); }
+    updateHistory();
+  }
+  function updateHistory() { $('#undo').disabled = !history.past.length; $('#redo').disabled = !history.future.length; }
+  function cleanSelection() { if (!board()) boardId = doc.boards[0].id; selected = new Set(selection().map(e => e.id)); }
+  function change(fn, message) {
+    const before = C.clone(doc);
+    try { fn(); if (!C.validate(doc)) throw Error('改动超出文档支持范围'); }
+    catch (err) { doc = before; cleanSelection(); render(); toast(err.message || '修改未完成'); return false; }
+    if (JSON.stringify(before) !== JSON.stringify(doc)) { history.push(before); save(); }
+    cleanSelection(); render(); if (message) toast(message); return true;
+  }
+  function undo() { if (!history.past.length) return; doc = history.undo(doc); selected.clear(); cleanSelection(); save(); render(); toast('已撤销'); }
+  function redo() { if (!history.future.length) return; doc = history.redo(doc); selected.clear(); cleanSelection(); save(); render(); toast('已重做'); }
+  function select(ids, newBoardId = boardId) { boardId = newBoardId; selected = new Set(ids); refreshSelection(); }
+  function transform() { $('#world').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${scale})`; $('#world').style.setProperty('--zoom', scale); $('#zoomLabel').textContent = Math.round(scale * 100) + '%'; }
+  function frameBounds(b, maxScale = 1.2) {
+    const padding = compactQuery.matches ? 36 : 80;
+    scale = Math.max(.03, Math.min(maxScale, Math.max(80, viewport.clientWidth - padding) / b.w, Math.max(80, viewport.clientHeight - 180) / b.h));
+    pan = { x: (viewport.clientWidth - b.w * scale) / 2 - b.x * scale, y: (viewport.clientHeight - 110 - b.h * scale) / 2 + 5 - b.y * scale }; transform();
+  }
+  function fit() { frameBounds(C.bounds(doc.boards), 1); }
+  function focusBoard(b = board()) { frameBounds(b); }
+  function focusCurrent() { if (compactQuery.matches) { setPanel('left', false); setPanel('right', false); } focusBoard(); }
+  function zoomToBoard(value) {
+    if (compactQuery.matches) { setPanel('left', false); setPanel('right', false); }
+    const b = board(); scale = value; pan = { x: viewport.clientWidth / 2 - (b.x + b.w / 2) * scale, y: (viewport.clientHeight - 100) / 2 - (b.y + b.h / 2) * scale }; transform();
+  }
+  function zoom(f, x = viewport.clientWidth / 2, y = viewport.clientHeight / 2) { const next = Math.max(.03, Math.min(5, scale * f)); pan = { x: x - (x - pan.x) * next / scale, y: y - (y - pan.y) * next / scale }; scale = next; transform(); }
+  function node(e, interactive = true) {
+    const n = dom('div', 'element ' + e.type); n.dataset.id = e.id;
+    if (interactive) n.dataset.locked = e.locked;
+    Object.assign(n.style, { left: e.x + 'px', top: e.y + 'px', width: e.w + 'px', height: e.h + 'px', borderRadius: (e.type === 'ellipse' ? '50%' : e.radius + 'px'), fontSize: e.size + 'px', fontWeight: e.weight, color: C.fill(e, doc), opacity: e.opacity, border: e.strokeWidth ? `${e.strokeWidth}px solid ${e.stroke}` : 'none' });
+    if (e.type === 'text') n.textContent = e.text;
+    else if (e.type === 'image') { const img = dom('img'); img.src = e.src; img.alt = e.text || nameOf(e); n.append(img); }
+    else n.style.background = C.fill(e, doc);
+    return n;
+  }
+  function surface(b, interactive = true) {
+    const n = dom('div', 'board-content'); Object.assign(n.style, { width: b.w + 'px', height: b.h + 'px', background: b.bg });
+    b.elements.filter(e => !e.hidden).forEach(e => n.append(node(e, interactive))); return n;
+  }
+  function renderWorld() {
+    const world = $('#world'); world.replaceChildren();
+    for (const b of doc.boards) {
+      const wrap = dom('div', 'board'); wrap.dataset.board = b.id; Object.assign(wrap.style, { left: b.x + 'px', top: b.y + 'px', width: b.w + 'px', height: b.h + 'px' });
+      const label = dom('div', 'board-label'); label.append(dom('span', '', b.name), dom('small', '', `${Math.round(b.w)} × ${Math.round(b.h)}`)); wrap.append(label, surface(b)); world.append(wrap);
+    }
+    transform();
+  }
+  function render() { $('#projectTitle').value = doc.title; renderWorld(); refreshSelection(); updateHistory(); }
+  function refreshSelection() {
+    $$('.board').forEach(n => n.classList.toggle('selected', n.dataset.board === boardId));
+    $$('#world .element').forEach(n => n.classList.toggle('selected', selected.has(n.dataset.id)));
+    renderBox(); renderBoards(); renderLayers(); renderAssets(); renderInspector();
+    $('#selectionStatus').textContent = selected.size ? `${selected.size} 个图层已选中${selection().some(e => e.locked) ? ' · 包含锁定图层' : ''}` : `${doc.boards.length} 张画板 · 所有设计仅保存在本地`;
+  }
+  function renderBox() {
+    $$('.selection-box,.guide').forEach(n => n.remove());
+    const list = editable(); if (!list.length) return;
+    const box = C.bounds(list), n = dom('div', 'selection-box'); Object.assign(n.style, { left: box.x + 'px', top: box.y + 'px', width: box.w + 'px', height: box.h + 'px' });
+    for (const handle of ['nw', 'ne', 'sw', 'se']) { const h = dom('div', 'resize-handle'); h.dataset.handle = handle; n.append(h); }
+    n.append(dom('span', 'selection-size', `${Math.round(box.w)} × ${Math.round(box.h)}`));
+    $$('.board').find(n => n.dataset.board === boardId)?.append(n);
+  }
+  function renderBoards() {
+    $('#boardCount').textContent = String(doc.boards.length).padStart(2, '0'); $('#boardList').replaceChildren();
+    for (const b of doc.boards) {
+      const row = button('', () => { select([], b.id); if (compactQuery.matches) setPanel('left', false); focusBoard(b); }, 'board-item' + (b.id === boardId ? ' active' : ''));
+      row.append(UI.icon('frame')); const info = dom('span', 'board-info'); info.append(dom('b', '', b.name), dom('small', '', `${Math.round(b.w)} × ${Math.round(b.h)} · ${b.elements.length} 图层`)); row.append(info); $('#boardList').append(row);
+    }
+  }
+  function groupIds(e, individual = false) { return e.groupId && !individual ? board().elements.filter(n => n.groupId === e.groupId && !n.hidden).map(n => n.id) : [e.id]; }
+  function toggleSelection(e, additive, individual = false) {
+    const ids = groupIds(e, individual);
+    if (!additive) selected = new Set(ids);
+    else if (ids.every(id => selected.has(id))) ids.forEach(id => selected.delete(id)); else ids.forEach(id => selected.add(id));
+    refreshSelection();
+  }
+  function renderLayers() {
+    const list = $('#layerList'), query = $('#layerSearch').value.trim().toLowerCase(); list.replaceChildren();
+    const elements = [...board().elements].reverse().filter(e => nameOf(e).toLowerCase().includes(query) || e.text.toLowerCase().includes(query));
+    if (!elements.length) list.append(dom('p', 'empty-note', query ? '没有匹配的图层。' : '画板还是空白的。按 T 添加文字，或按 R 添加矩形。'));
+    for (const e of elements) {
+      const row = dom('div', 'layer-row' + (selected.has(e.id) ? ' active' : '') + (e.hidden ? ' hidden-layer' : '') + (e.locked ? ' locked-layer' : '')); row.tabIndex = 0; row.dataset.layerId = e.id; row.setAttribute('aria-label', nameOf(e));
+      const layerIcon = UI.icon(e.componentId ? 'component' : e.groupId ? 'group' : e.type); layerIcon.classList.add('layer-icon'); row.append(layerIcon, dom('span', 'layer-name', nameOf(e)));
+      row.onclick = ev => { if (!ev.target.closest('button')) toggleSelection(e, ev.shiftKey, ev.metaKey || ev.ctrlKey); };
+      row.onkeydown = ev => { if (ev.key === 'Enter') { ev.preventDefault(); toggleSelection(e, ev.shiftKey, true); } };
+      const visible = button(e.hidden ? '◌' : '◉', () => change(() => { e.hidden = !e.hidden; }), e.hidden ? 'on' : '', e.hidden ? '显示图层' : '隐藏图层'); visible.setAttribute('aria-label', e.hidden ? '显示图层' : '隐藏图层');
+      const lock = button(e.locked ? '▣' : '▫', () => change(() => { e.locked = !e.locked; }), e.locked ? 'on' : '', e.locked ? '解锁图层' : '锁定图层'); lock.setAttribute('aria-label', e.locked ? '解锁图层' : '锁定图层');
+      visible.replaceChildren(UI.icon(e.hidden ? 'eyeOff' : 'eye')); lock.replaceChildren(UI.icon(e.locked ? 'lock' : 'unlock')); row.append(visible, lock); list.append(row);
+    }
+  }
+  function showAssets(value) { assets = value; $('#assetsPanel').hidden = !value; $('#layersPanel').hidden = value; for (const [id, on] of [['assetsTab', value], ['layersTab', !value]]) { $('#' + id).classList.toggle('active', on); $('#' + id).setAttribute('aria-selected', on); } }
+  function renderAssets() {
+    const panel = $('#assetsPanel'); panel.replaceChildren();
+    const heading = dom('div', 'asset-heading', '可复用组件'); heading.append(button('＋', createComponent, '', '将选中图层创建为组件')); panel.append(heading);
+    for (const c of doc.components) {
+      const card = dom('div', 'asset-card'), info = dom('div'); info.append(dom('b', '', c.name), dom('small', '', `${c.elements.length} 个图层 · 关联实例`)); card.append(dom('span', '', '◇'), info, button('＋', () => insertComponent(c), '', `插入 ${c.name}`)); panel.append(card);
+    }
+    if (!doc.components.length) panel.append(dom('p', 'empty-note', '选中一组图层，点击「创建组件」，让好的设计反复使用。'));
+    const tokensHeading = dom('div', 'asset-heading', '颜色变量'); tokensHeading.append(button('＋', addToken, '', '从所选颜色创建变量')); panel.append(tokensHeading);
+    for (const t of doc.tokens) {
+      const row = dom('div', 'token-row'), input = dom('input'); input.type = 'color'; input.value = t.value; input.setAttribute('aria-label', t.name); input.onchange = () => change(() => { t.value = input.value; }, '颜色变量及绑定图层已更新'); row.append(input, dom('span', '', t.name), dom('code', '', t.value.slice(1).toUpperCase())); panel.append(row);
+    }
+    panel.append(dom('p', 'empty-note', '在右侧填充中绑定变量。修改这里的颜色，会更新所有绑定图层。'));
+  }
+  function section(title) { const s = dom('section', 'prop-section'); s.append(dom('h3', '', title)); $('#inspector').append(s); return s; }
+  function field(parent, label, value, action, options = {}) {
+    const wrap = dom('div', 'field'), lab = dom('label', '', label), input = dom(options.type === 'textarea' ? 'textarea' : 'input'); const inputId = 'field-' + C.id(); lab.htmlFor = inputId; input.id = inputId;
+    if (options.type !== 'textarea') input.type = options.type || 'number'; input.value = value ?? ''; input.setAttribute('aria-label', label);
+    if (value === undefined) input.placeholder = '混合';
+    if (input.type === 'number') { input.min = options.min ?? -100000; input.max = options.max ?? 100000; input.step = 'any'; }
+    if (options.maxlength) input.maxLength = options.maxlength;
+    input.disabled = !!options.disabled;
+    input.onchange = () => { let v = input.value; if (input.type === 'number') { if (!v.trim() || !Number.isFinite(Number(v))) { input.value = value ?? ''; return; } v = Math.min(Number(input.max), Math.max(Number(input.min), Number(v))); } action(v); };
+    wrap.append(lab, input); parent.append(wrap); return input;
+  }
+  function selectField(parent, label, value, entries, action) {
+    const wrap = dom('div', 'field single'), lab = dom('label', '', label), input = dom('select'); input.setAttribute('aria-label', label); const inputId = C.id(); input.id = inputId; lab.htmlFor = inputId;
+    for (const [v, text] of entries) { const option = dom('option', '', text); option.value = v; input.append(option); }
+    input.value = value || ''; input.onchange = () => action(input.value); wrap.append(lab, input); parent.append(wrap); return input;
+  }
+  function common(list, key) { return list.every(e => e[key] === list[0][key]) ? list[0][key] : undefined; }
+  function setProperties(key, value) { change(() => { editable().forEach(e => { e[key] = value; if (key === 'fill') delete e.fillToken; }); }); }
+  function geometry(key, value) {
+    change(() => {
+      const es = editable(); if (!selected.size) { board()[key] = value; return; } if (!es.length) return;
+      const box = C.bounds(es); if (key === 'x' || key === 'y') es.forEach(e => { e[key] += value - box[key]; });
+      else { const target = { ...box, [key]: value }; const next = C.resize(es, box, target); es.forEach((e, i) => Object.assign(e, next[i])); }
+    });
+  }
+  function colorField(parent, label, value, action) {
+    const wrap = dom('div', 'field single'), lab = dom('label', '', label), row = dom('div', 'color-row'), picker = dom('input'), hex = dom('input'); picker.type = 'color'; picker.value = value || '#000000'; picker.setAttribute('aria-label', label); hex.type = 'text'; hex.value = value?.toUpperCase() || ''; hex.placeholder = '混合颜色'; hex.setAttribute('aria-label', label + ' HEX'); hex.maxLength = 7;
+    picker.onchange = () => action(picker.value); hex.onchange = () => { const v = hex.value.startsWith('#') ? hex.value : '#' + hex.value; if (/^#[a-f\d]{6}$/i.test(v)) action(v); else { toast('请输入六位 HEX 颜色，如 #EFBDA1'); hex.value = value || ''; } };
+    row.append(picker, hex); wrap.append(lab, row); parent.append(wrap);
+  }
+  function renderInspector() {
+    $('#inspector').replaceChildren(); const b = board(), es = selection(), e = es[0], active = editable(), disabled = es.length > 0 && !active.length;
+    if (mode === 'prototype') { renderPrototypeInspector(); return; } if (mode === 'code') { renderCodeInspector(); return; }
+    const identity = section(es.length ? es.length === 1 ? '图层' : `${es.length} 个图层` : '画板');
+    const title = dom('div', 'selection-name'); title.append(UI.icon(es.length ? e.componentId ? 'component' : e.type : 'frame'), dom('span', 'selected-title', es.length ? es.length === 1 ? nameOf(e) : '多选编辑' : b.name)); identity.append(title);
+    if (es.length <= 1) field(identity, es.length ? '图层名称' : '画板名称', e?.name || b.name, value => change(() => { (e || b).name = value; }), { type: 'text', maxlength: 200 });
+    const geo = section('布局'); const alignment = dom('div', 'alignment');
+    for (const [axis, symbol, label] of [['left', '⊢', '左对齐'], ['center', '↔', '水平居中'], ['right', '⊣', '右对齐'], ['top', '⊤', '顶对齐'], ['middle', '↕', '垂直居中'], ['bottom', '⊥', '底对齐']]) { const btn = button(symbol, () => change(() => C.align(editable(), axis, b)), '', label); btn.setAttribute('aria-label', label); btn.replaceChildren(UI.icon(axis)); btn.disabled = !active.length; alignment.append(btn); }
+    geo.append(alignment); const grid = dom('div', 'prop-grid'); geo.append(grid); const box = es.length ? C.bounds(active.length ? active : es) : b;
+    for (const [label, key] of [['X', 'x'], ['Y', 'y'], ['宽度', 'w'], ['高度', 'h']]) field(grid, label, Math.round(box[key] * 100) / 100, v => geometry(key, v), { min: key === 'w' || key === 'h' ? 1 : -100000, max: key === 'w' || key === 'h' ? 10000 : 100000, disabled });
+    if (active.length > 1) {
+      const stack = dom('div', 'stack-gap'), gap = dom('input'); gap.type = 'number'; gap.value = 16; gap.min = 0; gap.max = 1000; gap.setAttribute('aria-label', '排列间距'); stack.append(gap);
+      for (const [axis, label] of [['horizontal', '横向顺排'], ['vertical', '纵向顺排']]) stack.append(button(label, () => change(() => C.arrange(editable(), axis, Math.max(0, Math.min(1000, Number(gap.value) || 0)))))); geo.append(stack);
+    }
+    if (es.length && es.every(e => e.type === 'text')) {
+      const typography = section('文字'); if (es.length === 1) field(typography, '内容', e.text, v => setProperties('text', v), { type: 'textarea', maxlength: 10000, disabled });
+      const g = dom('div', 'prop-grid'); g.style.marginTop = '12px'; typography.append(g); field(g, '字号', common(es, 'size'), v => setProperties('size', v), { min: 1, max: 1000, disabled }); field(g, '字重', common(es, 'weight'), v => setProperties('weight', v), { min: 100, max: 900, disabled });
+    }
+    const appearance = section('外观');
+    colorField(appearance, es.length ? '填充颜色' : '画板背景', es.length ? (es.every(n => C.fill(n, doc) === C.fill(e, doc)) ? C.fill(e, doc) : undefined) : b.bg, v => es.length ? setProperties('fill', v) : change(() => { b.bg = v; }));
+    if (es.length) {
+      selectField(appearance, '颜色变量', common(es, 'fillToken'), [['', '自定义颜色'], ...doc.tokens.map(t => [t.id, t.name])], v => change(() => active.forEach(e => { if (v) e.fillToken = v; else { e.fill = C.fill(e, doc); delete e.fillToken; } })));
+      const g = dom('div', 'prop-grid'); g.style.marginTop = '14px'; appearance.append(g); field(g, '圆角', common(es, 'radius'), v => setProperties('radius', v), { min: 0, max: 5000, disabled }); field(g, '不透明度 %', common(es, 'opacity') === undefined ? undefined : e.opacity * 100, v => setProperties('opacity', v / 100), { min: 0, max: 100, disabled });
+      const stroke = section('描边'); const sg = dom('div', 'prop-grid'); stroke.append(sg); field(sg, '描边宽度', common(es, 'strokeWidth'), v => setProperties('strokeWidth', v), { min: 0, max: 100, disabled }); colorField(sg, '描边颜色', common(es, 'stroke'), v => setProperties('stroke', v));
+    }
+    const actions = section(es.length ? '图层操作' : '画板操作'), row = dom('div', 'action-row');
+    row.append(button('复制', duplicateSelection), button(es.length ? '置顶 ↑' : '聚焦画板', es.length ? () => reorder(true) : () => focusBoard())); actions.append(row);
+    if (es.length) {
+      const r = dom('div', 'action-row'); r.style.marginTop = '8px'; r.append(button('分组', group), button('取消分组', ungroup), button('置底 ↓', () => reorder(false))); actions.append(r);
+      actions.append(button('◇ 创建组件', createComponent, 'full-button'));
+      if (e.componentId && es.every(n => n.componentId === e.componentId && n.groupId === e.groupId)) {
+        actions.append(button('更新组件及全部实例', () => updateComponent(), 'full-button'));
+        actions.append(button('解除组件关联', () => change(() => { es.forEach(n => delete n.componentId); }), 'full-button'));
+      }
+    }
+    actions.append(button(es.length ? '删除所选图层' : '删除当前画板', deleteSelection, 'full-button danger'));
+  }
+  function renderPrototypeInspector() {
+    const es = selection(), s = section('点击交互');
+    s.append(dom('p', '', '为图层添加跳转。预览时点击它，就能到达另一张画板。'));
+    if (!es.length) { s.append(dom('p', '', '先选中一个文字、按钮或其他图层。')); }
+    else {
+      selectField(s, '点击后跳转到', common(es, 'link'), [['', '无交互'], ...doc.boards.map(b => [b.id, b.name])], value => change(() => es.forEach(e => { if (value) e.link = value; else delete e.link; })));
+      s.append(dom('p', '', '触发方式：点击 · 过渡：即时切换')); s.append(button('▷ 从当前画板预览', openPreview, 'full-button'));
+    }
+    const links = section('当前画板的连接'); const targets = board().elements.filter(e => e.link);
+    if (!targets.length) links.append(dom('p', '', '尚未连接页面。可以先在左侧新建另一张画板。'));
+    for (const e of targets) links.append(button(`${nameOf(e)} → ${doc.boards.find(b => b.id === e.link)?.name}`, () => select([e.id]), 'full-button'));
+    links.append(dom('p', '', '可导出离线 HTML，让别人直接打开原型。预览顶部提供返回按钮。'));
+  }
+  function cssFor(e) {
+    return `position: absolute;\nleft: ${Math.round(e.x)}px;\ntop: ${Math.round(e.y)}px;\nwidth: ${Math.round(e.w)}px;\nheight: ${Math.round(e.h)}px;\n${e.type === 'text' ? 'color' : 'background'}: ${e.fillToken ? `var(--color-${e.fillToken})` : C.fill(e, doc)};\nborder-radius: ${e.type === 'ellipse' ? '50%' : e.radius + 'px'};\nopacity: ${e.opacity};${e.type === 'text' ? `\nfont-size: ${e.size}px;\nfont-weight: ${e.weight};\nline-height: 1.45;` : ''}${e.strokeWidth ? `\nborder: ${e.strokeWidth}px solid ${e.stroke};` : ''}`;
+  }
+  async function copyText(value) {
+    try { await navigator.clipboard.writeText(value); toast('已复制到剪贴板'); }
+    catch { const textarea = dom('textarea'); textarea.value = value; textarea.style.position = 'fixed'; textarea.style.opacity = '0'; document.body.append(textarea); textarea.select(); const ok = document.execCommand('copy'); textarea.remove(); toast(ok ? '已复制到剪贴板' : '请从代码区域手动选择复制'); }
+  }
+  function renderCodeInspector() {
+    const s = section('交给开发，也交给 GPT'); s.append(dom('p', '', '导出 JSON 包含可编辑结构、组件和交互。把文件交给 GPT/Codex，并描述想修改的地方，修改后可重新导入。'));
+    s.append(button('导出完整设计 JSON', () => exportFile('json'), 'full-button'));
+    const e = selection()[0]; if (e) { const c = section('所选图层 / CSS'); const css = cssFor(e); c.append(dom('pre', 'code-block', css), button('复制 CSS', () => copyText(css), 'full-button')); }
+    const tokens = section('颜色变量 / CSS'); const css = ':root {\n' + doc.tokens.map(t => `  /* ${t.name.replaceAll('*/', '')} */\n  --color-${t.id}: ${t.value};`).join('\n') + '\n}'; tokens.append(dom('pre', 'code-block', css), button('复制颜色变量', () => copyText(css), 'full-button'));
+    s.append(dom('p', '', '这里输出设计参数与固定坐标样式；产品中的响应式布局仍需开发适配。'));
+  }
+  function insert(elements) {
+    if (!Array.isArray(elements)) elements = [elements];
+    change(() => { board().elements.push(...elements); selected = new Set(elements.map(e => e.id)); }); setTool('select');
+  }
+  function addShape(type) {
+    const b = board(), x = Math.max(0, Math.round((b.w - 200) / 2)), y = Math.max(0, Math.round((b.h - 120) / 2));
+    insert(C.make(type, x, y, type === 'text' ? 280 : 200, type === 'text' ? 48 : 120, type === 'text' ? { name: '写下你的想法', text: '写下你的想法', size: 28, fill: '#30382c' } : { radius: type === 'rect' ? 12 : 0, fill: '#d9dfce' }));
+  }
+  function addBoard(w, h) {
+    change(() => { const x = Math.max(...doc.boards.map(b => b.x + b.w)) + 100; const b = { id: C.id(), name: `${String(doc.boards.length + 1).padStart(2, '0')} / ${w < 500 ? '移动界面' : '空白画板'}`, x, y: 0, w, h, bg: '#f7f8f2', elements: [] }; doc.boards.push(b); boardId = b.id; selected.clear(); }); $('#boardDialog').close(); focusBoard();
+  }
+  function duplicateSelection() {
+    change(() => {
+      if (selected.size) { const next = C.duplicate(selection()); next.forEach(e => e.locked = false); board().elements.push(...next); selected = new Set(next.map(e => e.id)); }
+      else { const source = board(), b = C.clone(source); b.id = C.id(); b.name = (b.name + ' · 副本').slice(0, 200); b.y += b.h + 100; b.elements = C.duplicate(b.elements, 0, 0); b.elements.forEach(e => { if (e.link === source.id) e.link = b.id; }); doc.boards.push(b); boardId = b.id; }
+    }, '已创建副本');
+    if (!selected.size) focusBoard();
+  }
+  function deleteSelection() {
+    if (!selected.size && doc.boards.length <= 1) { toast('至少保留一个画板'); return; }
+    change(() => { if (selected.size) { const ids = new Set(editable().map(e => e.id)); board().elements = board().elements.filter(e => !ids.has(e.id)); selected.clear(); } else { C.removeBoard(doc, boardId); boardId = doc.boards[0].id; } });
+  }
+  function reorder(front) { change(() => { const list = editable(), ids = new Set(list.map(e => e.id)), rest = board().elements.filter(e => !ids.has(e.id)); board().elements = front ? [...rest, ...list] : [...list, ...rest]; }); }
+  function group() {
+    if (editable().length < 2) { toast('请先选择至少两个可编辑图层'); return; }
+    change(() => { const groupId = C.id(); editable().forEach(e => { e.groupId = groupId; delete e.componentId; }); }, '已分组。⌘/Ctrl 点击可选择组内图层');
+  }
+  function ungroup() { change(() => editable().forEach(e => { delete e.groupId; delete e.componentId; }), '已取消分组'); }
+  function createComponent() {
+    if (!editable().length) { toast('请先选中要复用的图层'); return; }
+    change(() => C.component(doc, editable(), (selection()[0].name || '组件') + ' / ' + (doc.components.length + 1)), '组件已加入左侧资源库'); showAssets(true);
+  }
+  function insertComponent(c) { const box = C.bounds(c.elements); insert(C.instantiate(c, Math.max(0, (board().w - box.w) / 2), Math.max(0, (board().h - box.h) / 2))); toast('已插入组件实例'); }
+  function updateComponent() {
+    const es = selection(), first = es[0];
+    if (!first?.groupId || board().elements.filter(e => e.groupId === first.groupId).length !== es.length) { toast('请选中完整组件后更新'); return; }
+    change(() => { if (!C.updateComponent(doc, es)) throw Error('请选择同一组件的完整实例'); }, '组件已更新，全部实例已同步');
+  }
+  function addToken() {
+    const e = selection()[0]; change(() => { const t = { id: C.id(), name: `颜色 / ${doc.tokens.length + 1}`, value: e ? C.fill(e, doc) : '#efbda1' }; doc.tokens.push(t); editable().forEach(e => e.fillToken = t.id); }, '已创建颜色变量');
+  }
+  function addOrbit() {
+    change(() => { const bs = FormaSeeds.orbit(), x = Math.max(...doc.boards.map(b => b.x + b.w)) + 120; bs.forEach(b => b.x += x); doc.boards.push(...bs); boardId = bs[0].id; selected.clear(); }, '已加入 3 张可编辑 Orbit 画板，包含搜索 → 指令 → 设置跳转'); focusBoard();
+  }
+  function setTool(next) { tool = next; viewport.classList.toggle('hand', next === 'hand' || space); $('#selectTool').classList.toggle('active', next === 'select'); $('#handTool').classList.toggle('active', next === 'hand'); }
+  function point(ev) { const r = viewport.getBoundingClientRect(); return { x: ev.clientX - r.left, y: ev.clientY - r.top }; }
+  function docPoint(ev) { const p = point(ev); return { x: (p.x - pan.x) / scale, y: (p.y - pan.y) / scale }; }
+  viewport.addEventListener('pointerdown', ev => {
+    if (ev.target.closest('button,.toolbar,.view-controls') || ev.target.isContentEditable || ![0, 1].includes(ev.button)) return;
+    ev.preventDefault(); viewport.focus({ preventScroll: true }); const p = point(ev), dp = docPoint(ev), wrap = ev.target.closest('.board'), target = ev.target.closest('.element');
+    if (tool === 'hand' || space || ev.button === 1) drag = { type: 'pan', sx: p.x, sy: p.y, pan: { ...pan } };
+    else if (ev.target.dataset.handle) { const es = editable(); drag = { type: 'resize', handle: ev.target.dataset.handle, sx: p.x, sy: p.y, originals: C.clone(es), box: C.bounds(es), before: C.clone(doc), moved: false }; }
+    else if (wrap && ev.target.closest('.board-label')) { boardId = wrap.dataset.board; selected.clear(); const b = board(); drag = { type: 'board', sx: p.x, sy: p.y, x: b.x, y: b.y, before: C.clone(doc), moved: false }; refreshSelection(); }
+    else if (target && wrap) {
+      if (boardId !== wrap.dataset.board) { boardId = wrap.dataset.board; selected.clear(); }
+      const e = board().elements.find(e => e.id === target.dataset.id);
+      if (e.locked) return;
+      if (ev.shiftKey || !selected.has(e.id) || ev.ctrlKey || ev.metaKey) toggleSelection(e, ev.shiftKey, ev.ctrlKey || ev.metaKey);
+      if (selected.has(e.id)) drag = { type: 'move', sx: p.x, sy: p.y, originals: C.clone(editable()), box: C.bounds(editable()), before: C.clone(doc), moved: false };
+    } else {
+      if (wrap && boardId !== wrap.dataset.board) { boardId = wrap.dataset.board; selected.clear(); }
+      const previous = ev.shiftKey ? [...selected] : []; if (!ev.shiftKey) selected.clear();
+      drag = { type: 'marquee', sx: p.x, sy: p.y, dp, previous, moved: false }; refreshSelection();
+    }
+    if (drag && ['pan', 'marquee', 'resize'].includes(drag.type)) viewport.setPointerCapture(ev.pointerId);
+  });
+  viewport.addEventListener('pointermove', ev => {
+    if (!drag) return; const p = point(ev), dx = p.x - drag.sx, dy = p.y - drag.sy;
+    if (drag.type === 'pan') { pan = { x: drag.pan.x + dx, y: drag.pan.y + dy }; transform(); return; }
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 3) return;
+    if (!drag.moved) viewport.setPointerCapture(ev.pointerId);
+    drag.moved = true;
+    if (drag.type === 'marquee') {
+      const m = $('#marquee'); m.hidden = false; Object.assign(m.style, { left: Math.min(p.x, drag.sx) + 'px', top: Math.min(p.y, drag.sy) + 'px', width: Math.abs(dx) + 'px', height: Math.abs(dy) + 'px' });
+      const q = docPoint(ev), b = board(), x = Math.min(q.x, drag.dp.x) - b.x, y = Math.min(q.y, drag.dp.y) - b.y, w = Math.abs(q.x - drag.dp.x), h = Math.abs(q.y - drag.dp.y), ids = new Set(drag.previous);
+      b.elements.filter(e => !e.hidden && !e.locked && e.x < x + w && e.x + e.w > x && e.y < y + h && e.y + e.h > y).forEach(e => groupIds(e).forEach(id => ids.add(id))); selected = ids; renderBox(); return;
+    }
+    if (drag.type === 'board') { board().x = Math.round(drag.x + dx / scale); board().y = Math.round(drag.y + dy / scale); const n = $$('.board').find(n => n.dataset.board === boardId); n.style.left = board().x + 'px'; n.style.top = board().y + 'px'; return; }
+    let next, guides;
+    if (drag.type === 'move') {
+      let x = dx / scale, y = dy / scale;
+      if (ev.shiftKey) { if (Math.abs(x) >= Math.abs(y)) y = 0; else x = 0; }
+      if (snapping && !ev.altKey) { guides = C.snap({ ...drag.box, x: drag.box.x + x, y: drag.box.y + y }, board().elements.filter(e => !selected.has(e.id) && !e.hidden), board(), 5 / scale); x += guides.x.delta; y += guides.y.delta; }
+      next = drag.originals.map(e => ({ ...e, x: Math.round(e.x + x), y: Math.round(e.y + y) }));
+    } else {
+      const box = drag.box, west = drag.handle.includes('w'), north = drag.handle.includes('n'); let w = Math.max(1, box.w + (west ? -dx : dx) / scale), h = Math.max(1, box.h + (north ? -dy : dy) / scale);
+      if (ev.shiftKey) { const ratio = Math.max(w / box.w, h / box.h); w = box.w * ratio; h = box.h * ratio; }
+      w = Math.min(10000, w); h = Math.min(10000, h);
+      next = C.resize(drag.originals, box, { x: west ? box.x + box.w - w : box.x, y: north ? box.y + box.h - h : box.y, w, h });
+    }
+    for (const value of next) {
+      const e = board().elements.find(e => e.id === value.id); Object.assign(e, value); const n = $$('#world .element').find(n => n.dataset.id === e.id);
+      if (n) Object.assign(n.style, { left: e.x + 'px', top: e.y + 'px', width: e.w + 'px', height: e.h + 'px' });
+    }
+    renderBox(); if (guides) { const b = $$('.board').find(n => n.dataset.board === boardId); for (const axis of ['x', 'y']) if (guides[axis].guide !== null) { const g = dom('div', 'guide ' + axis); g.style[axis === 'x' ? 'left' : 'top'] = guides[axis].guide + 'px'; b.append(g); } }
+  });
+  function finishDrag(cancel = false) {
+    if (!drag) return; const current = drag; drag = null; $('#marquee').hidden = true;
+    if (current.before && current.moved) { if (cancel || !C.validate(doc)) { doc = current.before; toast(cancel ? '已取消拖动' : '尺寸超出支持范围，已恢复'); } else { history.push(current.before); save(); } render(); }
+    else if (current.type === 'marquee') refreshSelection();
+    $$('.guide').forEach(n => n.remove());
+  }
+  viewport.addEventListener('pointerup', () => finishDrag()); viewport.addEventListener('pointercancel', () => finishDrag(true)); viewport.addEventListener('lostpointercapture', () => finishDrag());
+  viewport.addEventListener('dblclick', ev => {
+    const wrap = ev.target.closest('.board');
+    if (wrap && (ev.target.closest('.board-label') || scale < .45)) { select([], wrap.dataset.board); focusCurrent(); return; }
+    const n = ev.target.closest('.element.text'); if (!n || tool === 'hand' || space || n.dataset.locked === 'true') return;
+    boardId = n.closest('.board').dataset.board; const e = board().elements.find(e => e.id === n.dataset.id); selected = new Set([e.id]); renderBox(); renderInspector(); n.contentEditable = 'true'; n.focus();
+    const range = document.createRange(); range.selectNodeContents(n); window.getSelection().removeAllRanges(); window.getSelection().addRange(range); const old = e.text;
+    n.onkeydown = ev => { ev.stopPropagation(); if (ev.key === 'Escape') { n.textContent = old; n.blur(); } else if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); n.blur(); } };
+    n.onpaste = ev => { ev.preventDefault(); document.execCommand('insertText', false, ev.clipboardData.getData('text/plain')); };
+    n.onblur = () => { const value = n.innerText; n.contentEditable = 'false'; if (value !== old) change(() => { e.text = value.slice(0, 10000); }); else refreshSelection(); };
+  });
+  viewport.addEventListener('wheel', ev => { if (ev.target.closest('.toolbar')) return; ev.preventDefault(); if (ev.metaKey || ev.ctrlKey) { const p = point(ev); zoom(Math.exp(-ev.deltaY * .008), p.x, p.y); } else { pan.x -= ev.deltaX; pan.y -= ev.deltaY; transform(); } }, { passive: false });
+  async function importImage(file) {
+    if (!file) return;
+    if (!/^image\/(png|jpeg|webp|gif)$/.test(file.type)) { toast('请选择 PNG、JPG、WebP 或 GIF 图片'); return; }
+    if (file.size > 8 * 1024 * 1024) { toast('图片需小于 8 MB'); return; }
+    const targetBoard = boardId;
+    try {
+      const src = await new Promise((resolve, reject) => { const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); });
+      const img = await new Promise((resolve, reject) => { const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = src; });
+      if (!doc.boards.some(b => b.id === targetBoard)) { toast('目标画板已删除，请重新导入图片'); return; }
+      const w = Math.min(480, img.naturalWidth), h = Math.max(1, Math.round(w * img.naturalHeight / img.naturalWidth));
+      boardId = targetBoard; insert(C.make('image', 40, 40, w, Math.min(10000, h), { src, name: file.name.slice(0, 200), text: file.name })); toast('图片已添加');
+    } catch { toast('图片无法解码，请尝试另一张图片'); }
+  }
+  function download(name, contents, type) { const url = URL.createObjectURL(contents instanceof Blob ? contents : new Blob([contents], { type })); const a = dom('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
+  function prototypeSurface(b, callback) {
+    const s = surface(b, false);
+    for (const e of b.elements.filter(e => e.link && !e.hidden)) {
+      const hot = button('', () => callback(e.link), 'prototype-hotspot', `${nameOf(e)} → ${doc.boards.find(b => b.id === e.link)?.name}`); hot.setAttribute('aria-label', hot.title); hot.dataset.target = String(doc.boards.findIndex(b => b.id === e.link)); Object.assign(hot.style, { left: e.x + 'px', top: e.y + 'px', width: e.w + 'px', height: e.h + 'px' }); s.append(hot);
+    }
+    return s;
+  }
+  function renderPreview() {
+    const b = doc.boards.find(b => b.id === previewId); if (!b) return;
+    $('#previewTitle').textContent = b.name; $('#previewPosition').textContent = `${doc.boards.indexOf(b) + 1} / ${doc.boards.length}`; $('#previewBack').disabled = !previewHistory.length;
+    $('#previewBody').replaceChildren(prototypeSurface(b, target => { previewHistory.push(previewId); previewId = target; renderPreview(); })); $('#previewBody').classList.toggle('show-hotspots', hotspots); fitPreview();
+  }
+  function fitPreview() {
+    if (!$('#preview').open) return; const b = doc.boards.find(b => b.id === previewId), v = $('#previewViewport'), s = Math.min((v.clientWidth - 40) / b.w, (v.clientHeight - 40) / b.h, 1.5);
+    $('#previewBody').style.transform = `translate(${(v.clientWidth - b.w * s) / 2}px,${(v.clientHeight - b.h * s) / 2}px) scale(${s})`;
+  }
+  function openPreview() { previewId = boardId; previewHistory = []; hotspots = false; $('#previewLinks').setAttribute('aria-pressed', 'false'); $('#preview').showModal(); renderPreview(); }
+  function exportHTML() {
+    const sections = doc.boards.map((b, i) => { const n = dom('section', 'slide'); n.dataset.index = i; n.dataset.width = b.w; n.dataset.height = b.h; n.dataset.name = b.name; n.append(prototypeSurface(b, () => {})); return n.outerHTML; }).join('\n');
+    return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${C.escape(doc.title)} · Forma 原型</title><style>
+*{box-sizing:border-box}body{margin:0;background:#191b1e;color:#e7e8ea;font:13px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}header{height:56px;display:flex;align-items:center;gap:20px;padding:0 20px;background:#24272b}header b{flex:1;font-weight:500}button{font:inherit;cursor:pointer;background:#35383e;color:inherit;border:0;border-radius:5px;padding:8px 12px}button:disabled{opacity:.3}#stage{position:absolute;inset:56px 0 30px;overflow:hidden}.slide{position:absolute;transform-origin:0 0}.board-content{position:relative;overflow:hidden}.element{position:absolute;box-sizing:border-box;white-space:pre-wrap;line-height:1.45;overflow:hidden}.element.text{overflow:visible;overflow-wrap:break-word}.element.image img{width:100%;height:100%;object-fit:cover}.prototype-hotspot{position:absolute;background:transparent;border:0;padding:0;border-radius:0}.hotspots .prototype-hotspot{outline:2px solid #a395db;background:#a395db33}.prototype-hotspot:focus-visible{outline:2px solid #a395db}footer{position:absolute;bottom:0;height:30px;width:100%;text-align:center;color:#939ba5;font-size:11px;padding:8px}[hidden]{display:none!important}</style></head><body><header><button id="back">← 返回</button><b id="title"></b><span id="count"></span><button id="hints">显示热点</button></header><main id="stage">${sections}</main><footer>由 Forma 导出 · 点击热点跳转 · 固定画板交互原型</footer><script>
+const slides=[...document.querySelectorAll('.slide')],stack=[];let index=${doc.boards.findIndex(b => b.id === boardId)};
+function render(){slides.forEach((s,i)=>s.hidden=i!==index);const s=slides[index],stage=document.getElementById('stage'),w=Number(s.dataset.width),h=Number(s.dataset.height),z=Math.max(.01,Math.min((stage.clientWidth-32)/w,(stage.clientHeight-32)/h,1.5));s.style.transform='translate('+((stage.clientWidth-w*z)/2)+'px,'+((stage.clientHeight-h*z)/2)+'px) scale('+z+')';document.getElementById('title').textContent=s.dataset.name;document.getElementById('count').textContent=(index+1)+' / '+slides.length;document.getElementById('back').disabled=!stack.length;}
+document.querySelectorAll('[data-target]').forEach(b=>b.onclick=()=>{stack.push(index);index=Number(b.dataset.target);render()});document.getElementById('back').onclick=()=>{if(stack.length){index=stack.pop();render()}};document.getElementById('hints').onclick=()=>document.body.classList.toggle('hotspots');window.addEventListener('resize',render);render();
+<\/script></body></html>`;
+  }
+  function exportSVG(b) {
+    const context = document.createElement('canvas').getContext('2d');
+    return C.svg(b, doc, (text, e) => {
+      context.font = `${e.weight} ${e.size}px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif`;
+      return context.measureText(text).width;
+    });
+  }
+  async function exportFile(type) {
+    const filename = (type === 'json' || type === 'html' ? doc.title : board().name).replace(/[^\p{L}\p{N}_-]/gu, '-').slice(0, 70) || 'Forma';
+    try {
+      if (type === 'json') download(filename + '.json', JSON.stringify(doc, null, 2), 'application/json');
+      if (type === 'html') download(filename + '.html', exportHTML(), 'text/html;charset=utf-8');
+      if (type === 'svg') download(filename + '.svg', exportSVG(board()), 'image/svg+xml');
+      if (type === 'png') {
+        const b = C.clone(board()), ratio = Math.min(2, 8192 / b.w, 8192 / b.h, Math.sqrt(16000000 / (b.w * b.h))), svg = exportSVG(b), url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+        try { const img = await new Promise((resolve, reject) => { const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url; }); const canvas = dom('canvas'); canvas.width = Math.max(1, Math.round(b.w * ratio)); canvas.height = Math.max(1, Math.round(b.h * ratio)); canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height); const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png')); if (!blob) throw Error(); download(filename + '.png', blob, 'image/png'); }
+        finally { URL.revokeObjectURL(url); }
+      }
+      $('#exportDialog').close(); toast('已导出 ' + type.toUpperCase());
+    } catch { toast('导出失败，请先导出 JSON 备份，再尝试较小的画板'); }
+  }
+  const commands = () => [
+    { name: '新建画板', hint: '选择桌面、移动或自由画板', icon: '▧', key: '', run: () => $('#boardDialog').showModal() },
+    { name: '添加文字', hint: '在当前画板写下想法', icon: 'T', key: 'T', run: () => addShape('text') },
+    { name: '添加矩形', hint: '卡片、按钮和容器', icon: '▢', key: 'R', run: () => addShape('rect') },
+    { name: '添加椭圆', hint: '圆形图案与头像底板', icon: '○', key: 'O', run: () => addShape('ellipse') },
+    { name: '插入图片', hint: 'PNG、JPG、WebP、GIF', icon: '▧', run: () => $('#imageInput').click() },
+    { name: '查看全部画板', hint: '回到完整设计空间', icon: '⛶', key: 'F', run: fit },
+    { name: '聚焦当前画板', hint: '放大查看细节', icon: '⊙', key: '⇧ 2', run: () => focusBoard() },
+    { name: '预览交互原型', hint: '体验页面跳转', icon: '▷', run: openPreview },
+    { name: '导出设计', hint: 'JSON / HTML / SVG / PNG', icon: '↗', run: () => $('#exportDialog').showModal() },
+    { name: '导入设计 JSON', hint: '支持 Forma v1 和 v2 文件', icon: '↙', run: () => $('#jsonInput').click() },
+    { name: '创建组件', hint: '将所选图层加入组件库', icon: '◇', run: createComponent },
+    { name: '复制所选图层或画板', hint: '保留可编辑结构', icon: '⧉', key: '⌘ D', run: duplicateSelection },
+    { name: '分组', hint: '把所选图层作为整体移动', icon: '▱', key: '⌘ G', run: group },
+    { name: '取消分组', hint: '恢复独立图层', icon: '▱', key: '⌘ ⇧ G', run: ungroup },
+    { name: '撤销', hint: '恢复上一步设计', icon: '↶', key: '⌘ Z', run: undo },
+    { name: '重做', hint: '重新应用撤销的操作', icon: '↷', key: '⌘ ⇧ Z', run: redo },
+    { name: '打开 Orbit 设计示例', hint: '导入本地 Figma 参考稿，包含 3 张画板', icon: '✳', run: addOrbit },
+    { name: '快捷键与使用说明', hint: '了解工作台的全部能力', icon: '?', run: () => $('#help').showModal() },
+    ...doc.boards.map(b => ({ name: b.name, hint: '跳转到画板', icon: '▧', run: () => { select([], b.id); focusBoard(b); } }))
+  ];
+  function renderCommands() {
+    const q = $('#commandSearch').value.toLowerCase(); commandMatches = commands().filter(c => (c.name + c.hint).toLowerCase().includes(q)); commandIndex = Math.max(0, Math.min(commandIndex, commandMatches.length - 1)); $('#commandResults').replaceChildren();
+    commandMatches.forEach((c, i) => { const row = button('', () => executeCommand(i), 'command-row' + (i === commandIndex ? ' active' : '')); row.setAttribute('role', 'option'); row.setAttribute('aria-selected', i === commandIndex); const info = dom('div'); info.append(dom('b', '', c.name), dom('small', '', c.hint)); row.append(dom('span', 'cmd-icon', c.icon), info, dom('kbd', '', c.key || '↵')); $('#commandResults').append(row); });
+    if (!commandMatches.length) $('#commandResults').append(dom('p', 'empty-note', '没有匹配的操作，试试「画板」「导出」或「组件」。'));
+    $('#commandResults .active')?.scrollIntoView({ block: 'nearest' });
+  }
+  function executeCommand(i) { const c = commandMatches[i]; if (!c) return; $('#commands').close(); c.run(); }
+  function openCommands() { $('#commandSearch').value = ''; commandIndex = 0; $('#commands').showModal(); renderCommands(); $('#commandSearch').focus(); }
+  $('#commandSearch').oninput = () => { commandIndex = 0; renderCommands(); };
+  $('#commandSearch').onkeydown = ev => { if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') { ev.preventDefault(); commandIndex = (commandIndex + (ev.key === 'ArrowDown' ? 1 : -1) + commandMatches.length) % Math.max(1, commandMatches.length); renderCommands(); } else if (ev.key === 'Enter') { ev.preventDefault(); executeCommand(commandIndex); } };
+  $('#projectTitle').onchange = ev => change(() => { doc.title = ev.target.value.trim().slice(0, 200) || '未命名设计'; });
+  $('#undo').onclick = undo; $('#redo').onclick = redo; $('#commandBtn').onclick = openCommands;
+  $('#homeBtn').onclick = () => setPanel('left'); $('#collapseLayers').onclick = () => { setPanel('left', false); $('#homeBtn').focus(); };
+  $('#toggleInspector').onclick = () => setPanel('right'); $('#collapseInspector').onclick = () => { setPanel('right', false); $('#toggleInspector').focus(); };
+  function closeZoom() { $('#zoomMenu').hidden = true; $('#zoomLabel').setAttribute('aria-expanded', 'false'); }
+  $('#zoomLabel').onclick = () => { $('#zoomMenu').hidden = !$('#zoomMenu').hidden; $('#zoomLabel').setAttribute('aria-expanded', !$('#zoomMenu').hidden); };
+  $('#fitBtn').onclick = () => { fit(); closeZoom(); }; $('#focusBtn').onclick = focusCurrent; $('#zoomFocus').onclick = () => { focusCurrent(); closeZoom(); };
+  $$('[data-zoom]').forEach(b => b.onclick = () => { zoomToBoard(Number(b.dataset.zoom)); closeZoom(); });
+  document.addEventListener('pointerdown', ev => { if (!ev.target.closest('.view-controls')) closeZoom(); });
+  $('#zoomIn').onclick = () => zoom(1.25); $('#zoomOut').onclick = () => zoom(.8);
+  $('#selectTool').onclick = () => setTool('select'); $('#handTool').onclick = () => setTool('hand');
+  $('#addText').onclick = () => addShape('text'); $('#addRect').onclick = () => addShape('rect'); $('#addEllipse').onclick = () => addShape('ellipse');
+  $('#addBoard').onclick = () => $('#boardDialog').showModal(); $$('[data-preset]').forEach(b => b.onclick = () => addBoard(...b.dataset.preset.split(',').map(Number)));
+  $('#orbitBtn').onclick = addOrbit; $('#layersTab').onclick = () => showAssets(false); $('#assetsTab').onclick = () => showAssets(true); $('#layerSearch').oninput = renderLayers;
+  $('#snapBtn').onclick = () => { snapping = !snapping; $('#snapBtn').classList.toggle('snap-active', snapping); $('#snapBtn').setAttribute('aria-pressed', snapping); };
+  $$('[data-mode]').forEach(b => b.onclick = () => { mode = b.dataset.mode; $$('[data-mode]').forEach(n => { n.classList.toggle('active', n === b); n.setAttribute('aria-selected', n === b); }); renderInspector(); });
+  $('#helpBtn').onclick = () => $('#help').showModal(); $$('[data-close]').forEach(b => b.onclick = () => b.closest('dialog').close());
+  $('#exportBtn').onclick = () => $('#exportDialog').showModal(); $$('[data-export]').forEach(b => b.onclick = () => exportFile(b.dataset.export));
+  $('#previewBtn').onclick = openPreview; $('#previewBack').onclick = () => { if (previewHistory.length) { previewId = previewHistory.pop(); renderPreview(); } }; $('#previewLinks').onclick = () => { hotspots = !hotspots; $('#previewLinks').setAttribute('aria-pressed', hotspots); $('#previewBody').classList.toggle('show-hotspots', hotspots); };
+  $('#addImage').onclick = () => $('#imageInput').click(); $('#imageInput').onchange = ev => { importImage(ev.target.files[0]); ev.target.value = ''; };
+  viewport.ondragover = ev => { ev.preventDefault(); }; viewport.ondrop = ev => { ev.preventDefault(); importImage(ev.dataTransfer.files[0]); };
+  $('#importBtn').onclick = () => $('#jsonInput').click(); $('#jsonInput').onchange = async ev => {
+    const file = ev.target.files[0]; ev.target.value = ''; if (!file) return;
+    try { if (file.size > 20 * 1024 * 1024) throw Error('文件超过 20 MB'); const data = C.parse(await file.text()); change(() => { doc = data; boardId = doc.boards[0].id; selected.clear(); }, '设计已导入，可用撤销恢复原设计'); fit(); }
+    catch (err) { toast('导入失败：' + (err.message || '请选择有效的 Forma JSON 文件')); }
+  };
+  document.addEventListener('keydown', ev => {
+    if (ev.target.closest('input,textarea,select,[contenteditable="true"]') || $('dialog[open]')) return;
+    const mod = ev.metaKey || ev.ctrlKey, key = ev.key.toLowerCase();
+    if (mod) {
+      const actions = { z: () => ev.shiftKey ? redo() : undo(), y: redo, k: openCommands, d: duplicateSelection, g: () => ev.shiftKey ? ungroup() : group(), s: () => exportFile('json'), a: () => select(board().elements.filter(e => !e.hidden && !e.locked).map(e => e.id)), c: () => { if (selected.size) { clipboard = C.clone(selection()); toast('图层已复制，可在其他画板粘贴'); } }, v: () => { if (clipboard) insert(C.duplicate(clipboard)); } };
+      if (actions[key]) { ev.preventDefault(); actions[key](); } return;
+    }
+    if (ev.code === 'Space') { ev.preventDefault(); space = true; viewport.classList.add('hand'); return; }
+    if (key === 'escape') { closeZoom(); if (drag) finishDrag(true); else select([]); return; }
+    if (key === 'delete' || key === 'backspace') { if (selected.size) { ev.preventDefault(); deleteSelection(); } return; }
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(ev.key)) { ev.preventDefault(); const step = ev.shiftKey ? 10 : 1; change(() => editable().forEach(e => { e.x += ev.key === 'ArrowRight' ? step : ev.key === 'ArrowLeft' ? -step : 0; e.y += ev.key === 'ArrowDown' ? step : ev.key === 'ArrowUp' ? -step : 0; })); return; }
+    if (ev.shiftKey && ev.code === 'Digit2') { ev.preventDefault(); focusCurrent(); return; }
+    const actions = { v: () => setTool('select'), h: () => setTool('hand'), t: () => addShape('text'), r: () => addShape('rect'), o: () => addShape('ellipse'), f: fit, '?': () => $('#help').showModal() }; if (actions[key]) { ev.preventDefault(); actions[key](); }
+  });
+  document.addEventListener('keyup', ev => { if (ev.code === 'Space') { space = false; setTool(tool); } });
+  window.addEventListener('blur', () => { space = false; finishDrag(); setTool(tool); }); window.addEventListener('resize', () => { fitPreview(); });
+  let viewportSize = { w: viewport.clientWidth, h: viewport.clientHeight };
+  new ResizeObserver(() => {
+    const next = { w: viewport.clientWidth, h: viewport.clientHeight };
+    pan.x += (next.w - viewportSize.w) / 2; pan.y += (next.h - viewportSize.h) / 2;
+    viewportSize = next; transform();
+  }).observe(viewport);
+  compactQuery.addEventListener('change', () => { applyPanels(); requestAnimationFrame(() => focusBoard()); });
+  render(); focusBoard(); if (bootMessage) toast(bootMessage);
+})();
+</script>
+</body></html>

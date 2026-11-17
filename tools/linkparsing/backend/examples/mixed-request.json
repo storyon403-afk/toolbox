@@ -1,0 +1,9 @@
+{
+  "range": { "start_ms": 500, "end_ms": 1500 },
+  "outputs": [
+    { "kind": "audio", "format": "wav" },
+    { "kind": "frames", "format": "png", "timestamps_ms": [750, 1250] },
+    { "kind": "original" }
+  ]
+}
+

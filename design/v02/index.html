@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="sharp" data-buttons="arrow" data-motion>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Toolbox: a desktop tool manager</title>
+  <meta name="description" content="Browse RD, DesignDoc, LanguageMap and LinkParsing in a desktop application design study.">
+  <meta name="page-type" content="software"><meta name="site-kind" content="software">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website"><meta property="og:title" content="Toolbox desktop design">
+  <meta property="og:description" content="Four independent tools, one desktop library."><meta property="og:image" content="share.jpg">
+  <meta name="twitter:card" content="summary_large_image"><link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Local design study: no canonical public domain. -->
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="assets/system.css">
+  <link rel="stylesheet" href="assets/ui/cards.css">
+  <link rel="stylesheet" href="assets/motion/motion.css">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+</head>
+<body>
+<!-- V02: white-link-blue / bricolage / sharp / arrow / dots. V02.1 removes secondary copy and adds three UI languages.
+     Desktop application adaptation of collage: real full-size app UI, no promotional shell. See PLAN.md. -->
+<div class="app-frame desktop-shell">
+  <aside class="sidebar" aria-label="Workspace navigation" data-i18n-aria="navigation">
+    <a class="skip-link" href="#top" data-i18n="skip">Skip to content</a>
+    <a class="brand" href="#library" aria-label="Toolbox library" data-i18n-aria="library"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>toolbox</span></a>
+    <nav class="app-nav" aria-label="Main navigation" data-i18n-aria="navigation">
+      <a href="#library" data-route="library" aria-label="All tools" data-i18n-aria="all" aria-current="page"><img loading="lazy" decoding="async" src="media/icons/ui-layout-grid.svg" alt="" width="20" height="20"><span data-i18n="all">All tools</span></a>
+      <a href="#installed" data-route="installed" aria-label="Installed tools" data-i18n-aria="installed"><img loading="lazy" decoding="async" src="media/icons/ui-download.svg" alt="" width="20" height="20"><span data-i18n="installed">Installed</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#settings" class="settings-link" data-route="settings" aria-label="Settings" data-i18n-aria="settings"><img loading="lazy" decoding="async" src="media/icons/ui-settings-2.svg" alt="" width="20" height="20"><span data-i18n="settings">Settings</span></a>
+    </div>
+  </aside>
+
+  <main id="top" tabindex="-1">
+    <header class="topbar">
+      <label class="platform-picker"><span data-i18n="platform">Platform</span><select id="platform"><option value="mac">macOS</option><option value="windows">Windows</option></select></label>
+      <label class="language-picker"><span data-i18n="language">Language</span><select id="language"><option value="zh-CN" lang="zh-CN">简体中文</option><option value="ja" lang="ja">日本語</option><option value="en" lang="en">English</option></select></label>
+    </header>
+    <section id="library" class="hero library-view" data-enter aria-labelledby="library-title">
+      <div class="wrap app-content">
+        <div class="view-head hero-text"><div><h1 id="library-title" data-enter-whole data-i18n="library">Tool library</h1></div><label class="search"><img loading="lazy" decoding="async" src="media/icons/ui-search.svg" alt="" width="19" height="19"><span class="sr-only" data-i18n="search">Search tools</span><input id="search" data-i18n-placeholder="search" type="search" placeholder="Find a tool" autocomplete="off"><kbd>/</kbd></label></div>
+        <div id="tool-grid" class="tool-grid" data-enter-media>
+          <article class="card tool-card" data-name="rd document review writing">
+            <div class="tool-heading"><img loading="lazy" decoding="async" class="tool-icon" src="media/rd-icon.svg" width="44" height="44" alt=""><div><h2>RD</h2></div></div>
+            <a class="tool-visual m-zoom" href="#tool/rd" aria-label="View RD" data-tool-link="rd"><img loading="eager" fetchpriority="high" decoding="async" src="media/rd-992.webp" srcset="media/rd-544.webp 544w, media/rd-992.webp 992w" sizes="(max-width: 700px) calc(100vw - 114px), (max-width: 1023px) calc((100vw - 216px) / 2), (max-width: 1200px) calc((100vw - 362px) / 2), calc((100vw - 400px) / 2)" width="1200" height="806" alt="RD document workspace with its document list and writing area" data-tool-preview="rd"></a>
+            <div class="tool-actions"><span class="status"><i></i><span data-i18n="notInstalled">Not installed</span></span><a class="btn btn--secondary" href="#tool/rd" data-i18n="view">View tool</a></div>
+          </article>
+          <article class="card tool-card" data-name="designdoc forma design canvas prototype">
+            <div class="tool-heading"><span class="tool-icon design-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M5.5 8h1M5.5 12h1"/></svg></span><div><h2>DesignDoc</h2></div></div>
+            <a class="tool-visual m-zoom design-visual" href="#tool/designdoc" aria-label="View DesignDoc" data-tool-link="designdoc"><img loading="lazy" decoding="async" src="media/designdoc-992.webp" srcset="media/designdoc-544.webp 544w, media/designdoc-992.webp 992w" sizes="(max-width: 700px) calc(100vw - 114px), (max-width: 1023px) calc((100vw - 216px) / 2), (max-width: 1200px) calc((100vw - 362px) / 2), calc((100vw - 400px) / 2)" width="1200" height="750" alt="DesignDoc canvas with editable artboards and a properties panel" data-tool-preview="designdoc"></a>
+            <div class="tool-actions"><span class="status"><i></i><span data-i18n="notInstalled">Not installed</span></span><a class="btn btn--secondary" href="#tool/designdoc" data-i18n="view">View tool</a></div>
+          </article>
+          <article class="card tool-card" data-name="languagemap language vocabulary words">
+            <div class="tool-heading"><img loading="lazy" decoding="async" class="tool-icon language-icon" src="media/languagemap-icon.svg" width="44" height="44" alt=""><div><h2>LanguageMap</h2></div></div>
+            <a class="tool-visual m-zoom language-visual" href="#tool/languagemap" aria-label="View LanguageMap" data-tool-link="languagemap"><img loading="lazy" decoding="async" src="media/languagemap-992.webp" srcset="media/languagemap-544.webp 544w, media/languagemap-992.webp 992w" sizes="(max-width: 700px) calc(100vw - 114px), (max-width: 1023px) calc((100vw - 216px) / 2), (max-width: 1200px) calc((100vw - 362px) / 2), calc((100vw - 400px) / 2)" width="1200" height="833" alt="LanguageMap timeline showing vocabulary entries organized by date" data-tool-preview="languagemap"></a>
+            <div class="tool-actions"><span class="status"><i></i><span data-i18n="notInstalled">Not installed</span></span><a class="btn btn--secondary" href="#tool/languagemap" data-i18n="view">View tool</a></div>
+          </article>
+          <article class="card tool-card" data-name="linkparsing media video audio extraction">
+            <div class="tool-heading"><img loading="lazy" decoding="async" class="tool-icon" src="media/linkparsing-icon.svg" width="44" height="44" alt=""><div><h2>LinkParsing</h2></div></div>
+            <a class="tool-visual m-zoom media-visual" href="#tool/linkparsing" aria-label="View LinkParsing" data-tool-link="linkparsing"><img loading="lazy" decoding="async" src="media/linkparsing-992.webp" srcset="media/linkparsing-544.webp 544w, media/linkparsing-992.webp 992w" sizes="(max-width: 700px) calc(100vw - 114px), (max-width: 1023px) calc((100vw - 216px) / 2), (max-width: 1200px) calc((100vw - 362px) / 2), calc((100vw - 400px) / 2)" width="1200" height="800" alt="LinkParsing media workspace with video, transcript and export controls" data-tool-preview="linkparsing"></a>
+            <div class="tool-actions"><span class="status" id="linkparsing-status"><i></i><span data-i18n="notInstalled">Not installed</span></span><a class="btn btn--secondary" href="#tool/linkparsing" data-i18n="view">View tool</a></div>
+          </article>
+        </div>
+        <div class="empty-state" id="empty" hidden><img loading="lazy" decoding="async" src="media/icons/ui-search.svg" alt="" width="32" height="32"><h2 data-i18n="noResults">No matching tools</h2><button class="btn btn--secondary" id="clear-search" data-i18n="clear">Clear search</button></div>
+      </div>
+    </section>
+    <section id="detail" class="detail-view" aria-labelledby="detail-name" hidden><div class="app-content">
+      <a href="#library" class="back-link"><img loading="lazy" decoding="async" src="media/icons/ui-arrow-left.svg" width="18" height="18" alt=""><span data-i18n="all">All tools</span></a>
+      <div class="detail-heading"><div><h1 id="detail-name">RD</h1></div><button class="btn btn--primary" id="install" disabled data-i18n="unavailable">Install unavailable</button></div>
+      <div class="detail-layout"><div class="detail-content">
+        <section class="tool-guide" aria-labelledby="guide-purpose-title">
+          <h2 id="guide-purpose-title" data-i18n="purpose">What it does</h2>
+          <p id="guide-purpose"></p>
+          <h2 id="guide-steps-title" data-i18n="howTo">How to use</h2>
+          <ol id="guide-steps" aria-labelledby="guide-steps-title"><li></li><li></li><li></li></ol>
+        </section>
+        <div class="detail-preview"><img loading="lazy" decoding="async" id="detail-image" src="media/rd.webp" alt="RD document workspace" width="1200" height="806"></div></div><aside class="detail-info"><dl><div><dt data-i18n="platform">Platform</dt><dd id="detail-platform"></dd></div><div><dt data-i18n="version">Version</dt><dd id="detail-version"></dd></div><div><dt data-i18n="status">Status</dt><dd id="detail-status" data-i18n="notInstalled">Not installed</dd></div></dl><div class="readiness"><span class="readiness-dot"></span><div><strong id="detail-readiness" data-i18n="pending">Release pending</strong><p id="detail-reason"></p></div></div></aside></div>
+    </div></section>
+    <section id="settings" class="settings-view" aria-labelledby="settings-title" hidden><div class="app-content"><h1 id="settings-title" data-i18n="settings">Settings</h1><p class="preview-notice" data-i18n="preview">Design controls only. Changes last until this page reloads.</p>
+      <div class="settings-group"><h2 data-i18n="updates">Updates</h2><div class="preference"><div><label id="daily-label" for="daily" data-i18n="daily">Check for updates</label></div><button class="m-switch" id="daily" type="button" role="switch" aria-labelledby="daily-label" aria-checked="true"></button></div><div class="preference"><div><label id="downloads-label" for="downloads" data-i18n="downloads">Download automatically</label></div><button class="m-switch" id="downloads" type="button" role="switch" aria-labelledby="downloads-label" aria-checked="false"></button></div><div class="preference"><div><label id="installs-label" for="installs" data-i18n="installs">Install automatically</label><p id="install-hint" data-i18n="installHint">Enable automatic downloads first.</p></div><button class="m-switch" id="installs" type="button" role="switch" aria-labelledby="installs-label" aria-checked="false" disabled></button></div></div>
+      <div class="settings-group"><h2 data-i18n="appearance">Appearance</h2><div class="preference"><div><label id="motion-label" for="motion" data-i18n="motion">Entry animation</label></div><button class="m-switch" id="motion" type="button" role="switch" aria-labelledby="motion-label" aria-checked="true"></button></div></div>
+      
+    </div></section>
+  </main>
+</div>
+<script src="locales.js"></script>
+<script src="app.js"></script>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+</body></html>

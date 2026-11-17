@@ -1,0 +1,9 @@
+{
+  "format": "LanguageMap",
+  "version": 1,
+  "values": {
+    "languagemap-v03-edits": "{\"2024-02-29\":[{\"id\":\"root\",\"word\":\"serenity\",\"x\":720.25,\"y\":-144.5,\"parent\":null,\"zh\":\"宁静\\n保留换行、引号“”与 emoji 🌱\",\"en\":\"A quiet mind.\",\"folded\":false,\"detachedBranches\":[{\"word\":\"peaceful\",\"nodes\":[{\"id\":\"hidden\",\"word\":\"peaceful\",\"x\":960,\"y\":550,\"parent\":\"root\",\"zh\":\"平和な\",\"en\":\"Calm.\",\"folded\":false,\"detachedBranches\":[{\"word\":\"calm\",\"nodes\":[{\"id\":\"nested\",\"word\":\"calm\",\"x\":1100,\"y\":640,\"parent\":\"hidden\",\"zh\":\"安静\",\"en\":\"Quiet.\",\"folded\":false}]}]}]}]},{\"id\":\"quiet\",\"word\":\"quiet\",\"x\":501.125,\"y\":330,\"parent\":\"root\",\"zh\":\"安静\",\"en\":\"Making little noise.\",\"folded\":false}],\"2026-11-05\":[{\"id\":\"jp\",\"word\":\"木漏れ日\",\"x\":123,\"y\":456,\"parent\":null,\"zh\":\"阳光透过树叶\",\"en\":\"Sunlight through leaves.\",\"folded\":false},{\"id\":\"literal\",\"word\":\"<img onerror=x>\",\"x\":-111,\"y\":455,\"parent\":null,\"zh\":\"字面文本，不执行 HTML\",\"en\":\"Literal <text> & \\\"quotes\\\".\",\"folded\":false}],\"2026-11-06\":[]}",
+    "languagemap-ui-language": "ja",
+    "languagemap-theme": "mono"
+  }
+}

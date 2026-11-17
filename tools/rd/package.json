@@ -1,0 +1,11 @@
+{
+  "name": "pangzhu",
+  "private": true,
+  "scripts": {
+    "build:web": "python3 design/build.py",
+    "test:ui": "node design/tests/browser.cjs && node design/tests/direct-open.cjs && node design/tests/pagination.cjs && node design/tests/typography.cjs && node design/tests/placement.cjs && node design/tests/sync.cjs && node design/tests/documents.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

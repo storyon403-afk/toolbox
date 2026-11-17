@@ -1,0 +1,28 @@
+#!/bin/sh
+# 全局包装器调用此入口；资源定位独立于调用方目录，CLI 相对路径保留原语义。
+set -eu
+root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+app="$root/build/LinkParsing.app"
+command=${1:-start}
+case "$command" in
+    start|open)
+        if [ "$#" -gt 1 ]; then printf '%s\n' '启动不接受额外参数。' >&2; exit 2; fi
+        if [ ! -x "$app/Contents/MacOS/LinkParsing" ]; then
+            printf '%s\n' '请先运行 linkparsing build（仓库内使用 ./LP build）。' >&2
+            exit 1
+        fi
+        exec /usr/bin/open "$app" ;;
+    build)
+        if [ "$#" -ne 1 ]; then exit 2; fi
+        exec python3 "$root/scripts/build-app.py" ;;
+    help|--help|-h)
+        printf '%s\n' 'linkparsing              打开 macOS 应用' 'linkparsing build        构建应用、图标与 Rust CLI' 'linkparsing cli --help   后端命令帮助' 'linkparsing doctor      检查后端依赖' '其他后端子命令原样传递；相对路径基于当前目录。'
+        exit 0 ;;
+    cli) shift ;;
+esac
+binary="$app/Contents/MacOS/linkparsing-cli"
+if [ ! -x "$binary" ]; then
+    printf '%s\n' '请先运行 linkparsing build（仓库内使用 ./LP build）。' >&2
+    exit 1
+fi
+exec "$binary" "$@"

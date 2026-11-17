@@ -1,0 +1,2 @@
+# Pin the extractor and its matching bundled YouTube JS solver; no remote solver downloads.
+yt-dlp[default]==2026.10.26

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202226"><title>Forma — 给想法，一点空间。</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button id="homeBtn" class="icon-button" data-icon="layers" title="画板与图层" aria-label="画板与图层" aria-controls="leftPanel" aria-expanded="true"></button>
+  <div class="project"><input id="projectTitle" aria-label="项目名称" maxlength="200"><span class="save-dot" id="saveIndicator" title="已保存到此浏览器"></span><small id="saveState" class="sr-only" role="status">本地工作空间</small></div>
+  <div class="top-actions">
+    <button id="undo" class="icon-button" data-icon="undo" title="撤销 ⌘/Ctrl Z" aria-label="撤销"></button><button id="redo" class="icon-button" data-icon="redo" title="重做 ⌘/Ctrl Shift Z" aria-label="重做"></button>
+    <button id="commandBtn" class="icon-button" data-icon="search" title="搜索操作 ⌘/Ctrl K" aria-label="搜索操作"></button>
+    <button id="importBtn" class="icon-button" data-icon="import" title="导入设计" aria-label="导入设计"></button><button id="exportBtn" class="icon-button" data-icon="export" title="导出设计" aria-label="导出设计"></button>
+    <button class="icon-button primary" id="previewBtn" data-icon="play" title="预览" aria-label="预览"></button>
+    <span class="divider"></span><button id="toggleInspector" class="icon-button" data-icon="inspector" title="属性面板" aria-label="属性面板" aria-controls="rightPanel" aria-expanded="true"></button>
+  </div>
+</header>
+<aside class="left glass" id="leftPanel" aria-label="画板与图层面板">
+  <div class="section-heading"><span>画板 <small id="boardCount"></small></span><div><button id="addBoard" class="icon-button" data-icon="plus" title="新建画板" aria-label="新建画板"></button><button id="collapseLayers" class="icon-button" data-icon="chevronLeft" title="收起图层面板" aria-label="收起图层面板"></button></div></div>
+  <div id="boardList"></div>
+  <div class="left-tabs" role="tablist" aria-label="资源面板"><button id="layersTab" role="tab" aria-selected="true" class="active">图层</button><button id="assetsTab" role="tab" aria-selected="false">组件</button></div>
+  <div class="panel-scroll"><div id="layersPanel"><input id="layerSearch" class="search" placeholder="查找图层" aria-label="查找图层"><div id="layerList"></div></div><div id="assetsPanel" hidden></div></div>
+  <div class="panel-footer"><button id="orbitBtn" class="icon-button" data-icon="component" title="打开 Orbit 设计示例" aria-label="打开 Orbit 设计示例"></button><button id="helpBtn" class="icon-button" data-icon="help" title="使用说明" aria-label="使用说明"></button></div>
+</aside>
+<main id="viewport" tabindex="0" aria-label="设计画布">
+  <div id="world"></div><div id="marquee" hidden></div><span id="selectionStatus" class="sr-only" role="status"></span>
+  <div class="canvas-bottom"><div class="toolbar glass" role="toolbar" aria-label="画布工具">
+    <button id="selectTool" class="active icon-button" data-icon="cursor" title="选择 V" aria-label="选择工具"></button><button id="handTool" class="icon-button" data-icon="hand" title="平移 H / 空格" aria-label="平移工具"></button><i></i><button id="addRect" class="icon-button" data-icon="rect" title="矩形 R" aria-label="添加矩形"></button><button id="addEllipse" class="icon-button" data-icon="ellipse" title="椭圆 O" aria-label="添加椭圆"></button><button id="addText" class="icon-button" data-icon="text" title="文字 T" aria-label="添加文字"></button><button id="addImage" class="icon-button" data-icon="image" title="添加图片" aria-label="添加图片"></button><i></i><button id="snapBtn" class="icon-button snap-active" data-icon="snap" aria-pressed="true" title="智能吸附" aria-label="智能吸附"></button>
+  </div></div>
+  <div class="view-controls glass" role="toolbar" aria-label="视图控制">
+    <button id="focusBtn" class="icon-button" data-icon="focus" title="聚焦当前画板 Shift 2" aria-label="聚焦当前画板"></button><button id="zoomOut" class="icon-button" data-icon="minus" title="缩小" aria-label="缩小"></button><button id="zoomLabel" aria-label="缩放比例" title="缩放比例与适应画板" aria-haspopup="true" aria-expanded="false">100%</button><button id="zoomIn" class="icon-button" data-icon="plus" title="放大" aria-label="放大"></button>
+    <div id="zoomMenu" class="zoom-menu glass" hidden aria-label="缩放选项"><button id="fitBtn">查看全部 <kbd>F</kbd></button><button id="zoomFocus">聚焦当前画板 <kbd>⇧ 2</kbd></button><div class="zoom-presets"><button data-zoom="0.5">50%</button><button data-zoom="1">100%</button><button data-zoom="2">200%</button></div></div>
+  </div>
+</main>
+<aside class="right glass" id="rightPanel" aria-label="属性面板">
+  <div class="inspector-header"><div class="inspector-tabs" role="tablist" aria-label="检查器"><button class="active" data-mode="design" role="tab" aria-selected="true" data-icon="design" aria-label="设计" title="设计"></button><button data-mode="prototype" role="tab" aria-selected="false" data-icon="prototype" aria-label="原型" title="原型"></button><button data-mode="code" role="tab" aria-selected="false" data-icon="code" aria-label="交付" title="交付"></button></div><button id="collapseInspector" class="icon-button" data-icon="chevronRight" title="收起属性面板" aria-label="收起属性面板"></button></div><div id="inspector"></div>
+</aside>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input type="file" id="jsonInput" accept="application/json,.json" hidden>
+<dialog id="commands" aria-label="搜索操作"><div class="command-search"><span>⌕</span><input id="commandSearch" placeholder="想做些什么？搜索操作或画板…" aria-label="搜索操作或画板"><kbd>ESC</kbd></div><div id="commandResults" role="listbox" aria-label="操作结果"></div><div class="command-footer">↑ ↓ 选择 <span>↵ 执行</span></div></dialog>
+<dialog id="exportDialog" aria-labelledby="exportTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="exportTitle">导出</h2><p>保存设计继续编辑，或把原型分享给别人。</p><div class="export-options"><button data-export="json"><b>◈　设计文件</b><span>JSON · 全部画板、组件、颜色与连线</span></button><button data-export="html"><b>↗　交互原型</b><span>HTML · 离线打开，保留页面跳转</span></button><button data-export="svg"><b>◇　矢量画板</b><span>SVG · 当前画板，可用于其他设计工具</span></button><button data-export="png"><b>▧　高清图片</b><span>PNG · 当前画板，最高 2× 分辨率</span></button></div><p class="muted">HTML 为固定画板原型；导出文字使用本机字体。</p></dialog>
+<dialog id="boardDialog" aria-labelledby="newBoardTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="newBoardTitle">新建画板</h2><div class="presets"><button data-preset="1440,900">⌘<b>桌面界面</b><span>1440 × 900</span></button><button data-preset="390,844">▯<b>移动界面</b><span>390 × 844</span></button><button data-preset="768,1024">▭<b>平板界面</b><span>768 × 1024</span></button><button data-preset="800,600">▢<b>自由画板</b><span>800 × 600</span></button></div></dialog>
+<dialog id="help" aria-labelledby="helpTitle"><button class="close" data-close aria-label="关闭">×</button><h2 id="helpTitle">使用说明</h2><p>点击图层编辑，双击文字输入。拖动选择框四角调整尺寸；Shift 拖动等比缩放。组件内单层可用 ⌘/Ctrl 点击选择。</p><dl><dt>V / H</dt><dd>选择 / 平移，空格临时平移</dd><dt>T / R / O</dt><dd>添加文字 / 矩形 / 椭圆</dd><dt>Shift + 点击</dt><dd>多选；空白处拖动可框选</dd><dt>⌘ / Ctrl + G</dt><dd>分组；加 Shift 取消分组</dd><dt>⌘ / Ctrl + D</dt><dd>复制图层或画板</dd><dt>⌘ / Ctrl + Z</dt><dd>撤销；加 Shift 重做</dd><dt>方向键 / Shift + 方向键</dt><dd>移动 1 / 10 像素</dd><dt>F / Shift + 2</dt><dd>查看全部 / 聚焦当前画板</dd><dt>⌘ / Ctrl + K</dt><dd>搜索操作与画板</dd></dl><p>原型：选中图层 → 右侧「原型」→ 选择目标画板 → 预览。组件更新会覆盖各实例的外观；顺排为一次性排列。</p><p class="muted">无需网络或账户。暂不支持 .fig、多人协作、钢笔路径或嵌套自动布局。浏览器清理数据会删除本地保存，请定期导出 JSON。</p></dialog>
+<dialog id="preview" aria-label="交互原型预览"><div class="preview-header"><button id="previewBack" title="返回上一画板">← 返回</button><b id="previewTitle"></b><span id="previewPosition"></span><button id="previewLinks" aria-pressed="false">显示热点</button><button data-close>关闭 ×</button></div><div id="previewViewport"><div id="previewBody"></div></div><div class="preview-footer">点击界面中的热点跳转 · Esc 退出预览</div></dialog>
+<script src="core.js"></script><script src="seed.js"></script><script src="ui.js"></script><script src="app.js"></script>
+</body></html>

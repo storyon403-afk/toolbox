@@ -1,0 +1,49 @@
+{
+  "name": "toolbox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Toolbox desktop tool manager",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "catalog": "node scripts/catalog.mjs",
+    "check": "node scripts/check.mjs",
+    "prepare:desktop": "node scripts/prepare-desktop.mjs",
+    "setup": "node node_modules/electron/install.js",
+    "start": "npm run prepare:desktop && electron build/app",
+    "build": "node scripts/package-desktop.mjs",
+    "build:mac": "node scripts/package-desktop.mjs darwin-arm64 darwin-x64",
+    "build:win": "node scripts/package-desktop.mjs win32-x64 win32-arm64",
+    "test:desktop": "node scripts/verify-desktop.mjs",
+    "verify:design": "node scripts/verify-v02.cjs playwright",
+    "tool:build": "node scripts/build-tool.mjs",
+    "tools:setup": "python3 scripts/setup-tool-dependencies.py",
+    "tools:package-test": "node scripts/build-managed-fixtures.mjs",
+    "test:tools": "node scripts/verify-real-tools.mjs",
+    "release:stage": "node scripts/stage-release.mjs",
+    "verify:packages": "node scripts/verify-packages.mjs",
+    "release:configure": "node scripts/configure-release.mjs",
+    "release:prepare": "node scripts/prepare-release.mjs",
+    "release:verify": "node scripts/verify-public-release.mjs",
+    "source:export": "node scripts/export-source.mjs"
+  },
+  "devDependencies": {
+    "@electron/asar": "4.3.1",
+    "@electron/packager": "20.3.0",
+    "electron": "45.2.3",
+    "playwright": "1.65.0",
+    "yazl": "3.3.1"
+  },
+  "dependencies": {
+    "yauzl": "3.4.0"
+  },
+  "productName": "Toolbox",
+  "main": "desktop/main.mjs",
+  "overrides": {
+    "minimatch": "11.0.5",
+    "glob": "14.0.4"
+  }
+}

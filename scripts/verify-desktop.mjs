@@ -1,0 +1,66 @@
+import { _electron as electron } from 'playwright';
+import { createRequire } from 'node:module';
+import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+const require = createRequire(import.meta.url);
+const root = process.cwd();
+await mkdir(path.join(root, 'documents/evidence'), { recursive: true });
+const packaged = process.argv[2];
+if (!packaged) { const prepared = spawnSync(process.execPath,['scripts/prepare-desktop.mjs'],{stdio:'inherit'}); if (prepared.status) process.exit(prepared.status); }
+const profile = await mkdtemp(path.join(os.tmpdir(),'toolbox-electron-'));
+const env = { ...process.env, TOOLBOX_TEST_DATA_DIR: profile }; delete env.ELECTRON_RUN_AS_NODE;
+const launch = () => electron.launch({ executablePath: packaged || require('electron'), args: packaged ? [] : [path.join(root,'build/app')], env, timeout:30000 });
+const evidence = { date: new Date().toISOString(), platform: `${process.platform}-${process.arch}`, packaged: !!packaged, checks: [], errors: [] };
+let app;
+try {
+  app = await launch(); let page = await app.firstWindow();
+  page.on('pageerror',error=>evidence.errors.push(error.message));
+  await page.waitForFunction(()=>!document.querySelector('#language').disabled);
+  const snapshot = await page.evaluate(()=>window.toolboxDesktop.snapshot()); assert.equal(snapshot.ok,true);assert.equal(snapshot.value.target,`${process.platform}-${process.arch}`);
+  assert.equal(await page.locator('#platform').isDisabled(),true);
+  assert.ok(snapshot.value.tools.every(tool=>!tool.installedVersion));
+  const preferences = await app.evaluate(({BrowserWindow})=>{const p=BrowserWindow.getAllWindows()[0].webContents.getLastWebPreferences();return {sandbox:p.sandbox,contextIsolation:p.contextIsolation,nodeIntegration:p.nodeIntegration};});
+  assert.deepEqual(preferences,{sandbox:true,contextIsolation:true,nodeIntegration:false});
+  assert.equal(await page.evaluate(()=>typeof window.require),'undefined');
+  const blocked = snapshot.value.tools.find(tool => !tool.installable);
+  if (blocked) { const denied=await page.evaluate(id=>window.toolboxDesktop.action(id,'install'),blocked.id);assert.equal(denied.ok,false);assert.equal(denied.error,'unverifiedPackage'); }
+  evidence.checks.push('sandbox and context isolation','no Node API in renderer','real target','fresh profile has no installed tools',...(blocked?['unverified install rejected']:[]));
+  await page.locator('#language').selectOption('ja');
+  await page.locator('[data-route="settings"]').click();await page.locator('#settings').waitFor({state:'visible'});
+  await page.locator('#downloads').click();await page.waitForFunction(()=>!document.querySelector('#installs').disabled);
+  await page.locator('#installs').click();await page.waitForFunction(()=>document.querySelector('#installs').getAttribute('aria-checked')==='true');
+  await page.locator('#check-now').click();await page.waitForFunction(()=>!document.querySelector('#check-now').disabled);
+  const saved = await page.evaluate(()=>window.toolboxDesktop.snapshot());assert.equal(saved.value.settings.language,'ja');assert.equal(saved.value.settings.installs,true);assert.ok(['bundledOnly','checkFailed','upToDate'].includes(saved.value.lastCheck.result));
+  evidence.catalogCheck = saved.value.lastCheck.result;
+  await app.close();app=null;
+  app = await launch(); page=await app.firstWindow();page.on('pageerror',error=>evidence.errors.push(error.message));
+  await page.waitForFunction(()=>!document.querySelector('#language').disabled);
+  assert.equal(await page.locator('#language').inputValue(),'ja');
+  assert.equal((await page.evaluate(()=>window.toolboxDesktop.snapshot())).value.settings.installs,true);
+  evidence.checks.push('native preference persistence across process restart','manual catalog check completes and persists its result');
+  await page.locator('#language').selectOption('zh-CN');
+  await page.locator('[data-tool-link="rd"]').click();await page.locator('#detail').waitFor({state:'visible'});
+  assert.equal(await page.locator('#guide-steps li').count(),3);
+  const current = await page.evaluate(()=>window.toolboxDesktop.snapshot());assert.equal(await page.locator('#install').isDisabled(),!current.value.tools.find(tool=>tool.id==='rd').installable);
+  await page.screenshot({path:path.join(root,'documents/evidence',packaged?'desktop-packaged.png':'desktop-development.png'),fullPage:true});
+  await app.close();app=null;
+  // Pre-existing managed synthetic HTML installation, isolated from the owner's real tools/data.
+  const file=path.join(profile,'tools/rd/versions/99999.0.0/index.html');await mkdir(path.dirname(file),{recursive:true});await writeFile(file,'<!doctype html><title>Fixture</title><h1>Isolated tool</h1>');
+  const stateFile=path.join(profile,'state.json');const state=JSON.parse(await readFile(stateFile,'utf8'));state.installations.rd={version:'99999.0.0',launch:{type:'html',entryPoint:'index.html'},installedAt:new Date().toISOString()};await writeFile(stateFile,JSON.stringify(state));
+  app=await launch();page=await app.firstWindow();await page.waitForFunction(()=>!document.querySelector('#language').disabled);
+  await page.locator('[data-route="installed"]').click();await page.waitForFunction(()=>document.querySelectorAll('.tool-card:not([hidden])').length===1);
+  await page.locator('[data-tool-link="rd"]').click();await page.locator('#detail').waitFor({state:'visible'});
+  const toolOpened=app.waitForEvent('window');await page.locator('#install').click();const tool=await toolOpened;await tool.waitForLoadState();
+  assert.equal(await tool.locator('h1').textContent(),'Isolated tool');assert.equal(await tool.evaluate(()=>typeof window.toolboxDesktop),'undefined');assert.equal(await tool.evaluate(()=>typeof require),'undefined');
+  const nativeTool = await app.browserWindow(tool);
+  await nativeTool.evaluate(window => window.close());
+  await page.waitForFunction(async () => (await window.toolboxDesktop.snapshot()).value.tools.find(tool => tool.id === 'rd').state === 'installed');
+  evidence.checks.push('installed filter uses managed state','HTML tool opens in isolated persistent partition without privileged bridge');
+  assert.deepEqual(evidence.errors,[]);
+  await app.close();app=null;
+  evidence.checks.push('native tool close clears running state and application exits');
+  await writeFile(path.join(root,'documents/evidence',packaged?'desktop-packaged-check.json':'desktop-check.json'),JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence));
+} finally {if(app)await app.close();await rm(profile,{recursive:true,force:true});}

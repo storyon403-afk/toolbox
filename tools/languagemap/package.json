@@ -1,0 +1,9 @@
+{
+  "name": "languagemap",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "bash scripts/test.sh",
+    "test:browser": "node scripts/test-chromium.cjs"
+  }
+}

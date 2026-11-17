@@ -1,0 +1,9 @@
+# Replace the UUID, account folder and hostname with your named tunnel values.
+# Never commit or share the credentials JSON referenced below.
+tunnel: YOUR-TUNNEL-UUID
+credentials-file: C:\Users\YOUR-USER\.cloudflared\YOUR-TUNNEL-UUID.json
+
+ingress:
+  - hostname: review.example.com
+    service: http://127.0.0.1:8765
+  - service: http_status:404

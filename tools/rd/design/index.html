@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>DocsBridge: Feedback Made Easier</title>
+<style id="offlineStyle">:root{--paper:#fdfcf9;--accent:#566851;--ink:#343832;--muted:#8b9086;--line:#e7e8e0;--soft:#f0f1ea;--reading-width:660px;--serif:"Songti SC","STSong","Noto Serif CJK SC",SimSun,serif;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:13px}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;background:none;color:inherit}button:disabled{opacity:.4;cursor:default}input,select,textarea{color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:5px}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}h1,h2,p{margin:0}button{transition:background .15s,color .15s}::selection{background:#dce4ce;color:#23311e}.quiet{font-size:12px;padding:8px 10px;border-radius:5px;color:#767e70;white-space:nowrap}.quiet:hover{background:var(--soft);color:var(--ink)}.primary{font-size:12px;padding:9px 18px;min-height:34px;background:var(--accent);color:white;border-radius:6px;white-space:nowrap}.primary:hover{filter:brightness(1.08)}.meta{font-size:11px;color:var(--muted);line-height:1.7}.appbar{position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px;padding:0 32px;border-bottom:1px solid var(--line);background:var(--paper)}.header-start,.header-end{display:flex;align-items:center;gap:12px}.brand{font-size:16px;letter-spacing:2px;font-weight:500;margin-right:10px}.view-switch{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:7px;margin-left:auto;margin-right:auto}.view-switch button{padding:6px 15px;font-size:11px;color:#8b9183;border-radius:4px}.view-switch button.selected{background:var(--soft);color:#4b5943}.connection{font-size:10px;color:#9a9f91;white-space:nowrap;display:flex;align-items:center;gap:6px}.connection:before{content:"";width:4px;height:4px;border-radius:50%;background:var(--accent)}.connection.disconnected:before{background:#b69471}.count{font:10px var(--mono);margin-left:4px;color:#9ba38d}.count.has-notes{color:var(--accent)}.formatbar{position:sticky;top:64px;z-index:14;height:52px;display:flex;align-items:center;gap:12px;padding:0 max(24px,calc((100vw - 800px)/2));border-bottom:1px solid var(--line);background:var(--paper)}.formatbar select{border:0;background:transparent;padding:6px;font-size:12px}.size-field{display:flex;align-items:center;gap:1px;color:#979f8f;font-size:10px}.size-field input{width:43px;padding:5px 1px 5px 4px;border:0;background:transparent;font:12px var(--mono);text-align:center;-moz-appearance:textfield}.size-field input::-webkit-inner-spin-button{appearance:none}.toolbar-rule{width:1px;height:18px;background:var(--line)}.toolbar-spacer{flex:1}.draft-status{font-size:10px;color:#9aa28f;white-space:nowrap}.article{max-width:var(--reading-width);margin:0 auto;padding-top:78px;padding-bottom:12px}.article-title{font-family:var(--serif);font-weight:600;line-height:1.4;letter-spacing:.04em;margin-bottom:45px;overflow-wrap:anywhere;white-space:pre-wrap}.block-row{position:relative}.block{font-weight:400;line-height:1.95;letter-spacing:.025em;margin:0 0 22px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.95em}.block.heading{line-height:1.5;font-weight:600;margin:39px 0 21px;min-height:1.5em}.block[data-font=serif]{font-family:var(--serif)}.block[data-font=sans]{font-family:var(--sans)}.block[data-font=mono]{font-family:var(--mono)}.document-footer{max-width:var(--reading-width);margin:22px auto 0;padding:0 0 90px;font:10px var(--mono);color:#a4aa9c;display:flex;justify-content:space-between}.article [contenteditable=true],.article [contenteditable=plaintext-only]{outline:none}.editing .block-row:focus-within:before{content:"";position:absolute;left:-19px;top:7px;bottom:7px;width:2px;background:#d4deca}.editing .article-title:focus{outline:none}.editing [contenteditable]:empty:before{content:attr(data-placeholder);color:#c2c6b9;pointer-events:none}.editing .article{padding-top:55px}.annotation-dot{position:absolute;right:-39px;top:8px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:transparent;padding:0}.annotation-dot:after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}.annotation-dot:hover{background:#edf0e4}.annotation-dot.draft:after{background:var(--paper);border:1.5px solid var(--accent);width:7px;height:7px}.annotation-dot.resolved:after{background:#c7cdbc}.annotation-dot.open{background:#e9efdf}.side-panel{position:fixed;top:64px;bottom:0;width:290px;background:var(--paper);z-index:25;display:flex;flex-direction:column;box-shadow:0 15px 45px #2733210c}.left-panel{left:0;border-right:1px solid var(--line);width:260px}.right-panel{right:0;border-left:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:23px 20px 16px;border-bottom:1px solid var(--line)}.panel-head h2{font-size:13px;font-weight:500}.panel-head .quiet{font-size:11px}.version-list{padding:16px 12px;overflow:auto}.version-item{display:flex;flex-direction:column;align-items:stretch;width:100%;padding:14px 12px;text-align:left;border-radius:7px;margin-bottom:5px}.version-item:hover,.version-item.active{background:var(--soft)}.version-item strong{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.version-item small{font-size:10px;color:#9aa28d;margin-top:9px;display:flex;justify-content:space-between}.panel-bottom{margin-top:auto;padding:15px;border-top:1px solid var(--line)}.full{display:block;width:100%;text-align:left}.history-filter{display:flex;gap:8px;padding:16px}.history-filter select{font-size:11px;width:50%;padding:6px;background:transparent}.history-list{overflow:auto;padding:0 18px 25px}.empty{font-size:12px;color:#a6ad9c;padding:40px 0;text-align:center}.commit-item{border-bottom:1px solid var(--line);padding:20px 0 18px;position:relative}.history-note{display:block;width:100%;padding:12px 10px;margin-top:10px;text-align:left;border:1px solid var(--line);border-radius:7px;background:#ffffff25}.history-note:hover{background:var(--soft)}.history-note .note-excerpt{display:block;font-size:10px;color:#a2aa95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}.history-note .note-text{font-size:11px;line-height:1.7;color:#69745c;overflow-wrap:anywhere}.history-note .resolved-label{font-size:9px;color:#98a18c;margin-left:6px}.popover{position:fixed;z-index:28;background:var(--paper);border:1px solid var(--line);border-radius:9px;box-shadow:0 10px 35px #29382012}.appearance{right:24px;top:73px;width:235px;padding:10px 18px 20px}.popover-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;font-size:12px}.popover-head .quiet{font-size:10px;padding:5px 0}.appearance label{display:flex;align-items:center;justify-content:space-between;padding:10px 0;font-size:11px;color:#8d9780}.appearance input[type=color]{width:30px;height:25px;border:0;padding:0;cursor:pointer}.appearance .range-label{display:block;padding-bottom:0}.range-label span{display:flex;justify-content:space-between;margin-bottom:12px}.range-label input{width:100%;height:3px;accent-color:var(--accent)}.version-notice{display:flex;justify-content:center;gap:16px;align-items:center;font-size:11px;color:#8f9a80;background:var(--soft);padding:5px 16px}.version-notice .quiet{font-size:11px}.selection-button{position:fixed;z-index:30;background:var(--accent);color:white;padding:8px 16px;border-radius:6px;font-size:11px;box-shadow:0 4px 15px #263c2120}.floating-window{position:fixed;z-index:40;width:430px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 40px);background:var(--paper);border:1px solid #dde1d4;border-radius:12px;box-shadow:0 20px 90px #2938202b;overflow:hidden;display:flex;flex-direction:column}.window-head{display:flex;align-items:center;justify-content:space-between;padding:13px 21px;border-bottom:1px solid var(--line);cursor:grab;touch-action:none;user-select:none;flex-shrink:0}.window-head:active{cursor:grabbing}.window-head h2{font-size:12px;font-weight:500}.window-head .quiet{font-size:10px;padding:6px 3px}.window-content{padding:22px;overflow:auto;overscroll-behavior:contain;min-height:0}.quote{font-size:12px;color:#929d83;line-height:1.8;border-left:2px solid #cdd7bf;margin:0 0 20px;padding-left:12px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:145px;overflow:auto}.note-input{display:block;flex:1;min-width:0;width:100%;height:24px;min-height:24px;max-height:132px;resize:none;border:0;background:transparent;padding:0 3px;border-radius:0;line-height:24px;font-size:13px;overflow-y:auto}.note-input::placeholder{color:#b1b8a5}.window-actions{display:flex;justify-content:flex-end;gap:12px;align-items:center;margin-top:18px}.window-actions .meta{margin-right:auto}.review-note+.review-note{border-top:1px solid var(--line);margin-top:21px;padding-top:21px}.review-note .note-heading{display:flex;align-items:center;gap:10px;font-size:11px;color:#727f65;margin-bottom:15px}.note-heading code{font-size:9px;color:#adb49f;margin-left:auto}.review-body{white-space:pre-wrap;font-size:13px;line-height:1.9;overflow-wrap:anywhere}.review-actions{display:flex;justify-content:flex-end;margin-top:12px;gap:6px}.review-actions .quiet{font-size:10px}.staging-bar{position:fixed;z-index:22;bottom:26px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:20px;padding:7px 8px 7px 20px;background:var(--paper);border:1px solid #dce2d2;border-radius:10px;box-shadow:0 6px 30px #25371c12}.staging-count{font-size:12px;color:#728166;padding:4px 0}.staging-count span{font:11px var(--mono);padding-left:8px}.form-error{font-size:11px;line-height:1.7;color:#a36d54;margin-top:12px}.copy-row{display:flex;gap:10px}.copy-row input{flex:1;min-width:0;padding:9px;font-size:11px}.share-window .meta{margin-top:14px}.confirm-dialog{padding:26px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);max-width:400px;width:calc(100% - 32px)}.confirm-dialog::backdrop{background:#27332122}.confirm-dialog h2{font-size:15px;font-weight:500;margin-bottom:14px}.confirm-dialog p{font-size:12px;line-height:1.8;color:#909b83}.toast{position:fixed;z-index:100;bottom:95px;left:50%;transform:translateX(-50%);background:#3b4934;color:#f8faf5;padding:12px 20px;border-radius:8px;font-size:12px;max-width:calc(100vw - 32px);box-shadow:0 7px 30px #29382015}.editing .annotation-dot{display:none}.error-page{margin:110px auto;max-width:600px;color:#8b947f;line-height:1.8}.offline .connection:before{background:#b9a087}
+@media(min-width:1400px){.article{padding-top:94px}}
+@media(max-width:950px){.appbar{padding:0 22px;gap:8px}.header-start,.header-end{gap:6px}.connection{display:none}.formatbar{padding:0 24px}.article,.document-footer{max-width:min(var(--reading-width),calc(100% - 112px))}.article{padding-top:65px}}
+@media(max-width:600px){.appbar{height:58px;padding:0 12px;gap:4px}.brand{font-size:14px;letter-spacing:1px;margin-right:3px}.header-start,.header-end{gap:1px}.appbar .quiet{font-size:11px;padding:8px 7px}.view-switch button{font-size:10px;padding:5px 8px}.view-switch{border:0;gap:0;padding:1px}.appbar #appearanceToggle{display:none}.appbar .primary{padding:7px 11px;font-size:11px}.article,.document-footer{max-width:calc(100% - 60px)}.article{padding-top:46px}.article-title{margin-bottom:31px}.block{line-height:1.95}.annotation-dot{right:-26px;width:25px}.document-footer{padding-bottom:100px}.side-panel{top:58px;max-width:calc(100vw - 36px)}.formatbar{top:58px;gap:5px;height:48px;padding:0 12px}.formatbar .quiet{font-size:10px;padding:6px}.formatbar select{font-size:11px;padding:4px}.formatbar #fontFamily{max-width:58px}.draft-status{display:none}.toolbar-rule{display:none}.floating-window{max-height:calc(100dvh - 24px)}.window-content{padding:18px}.editing .article{padding-top:36px}.appearance{top:67px;right:12px}.view-switch:has(#editMode[hidden]){display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Suggestions stay compact before confirmation and remain open afterwards. */
+.note-window{width:410px}.note-window .window-head{padding:11px 18px}.note-window .window-content{padding:18px}.quote-compact{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-height:48px;margin-bottom:17px;font-size:12px;line-height:1.8}.suggestion-composer{display:flex;align-items:flex-end;gap:10px;padding:10px 10px 10px 12px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--paper) 75%,var(--soft));}.suggestion-composer:focus-within{border-color:#a9b59d;box-shadow:0 0 0 1px #a9b59d33}.suggestion-composer .note-input:focus-visible{outline:none}.suggestion-composer .primary{padding:6px 13px;min-height:30px;font-size:11px;border-radius:8px}.review-body{font-size:14px;line-height:1.85}.review-actions{align-items:center;gap:9px;margin-top:19px}.suggestion-status{font-size:10px;color:#8d9b7c;margin-right:auto;display:flex;align-items:center;gap:5px}.suggestion-status:before{content:"";width:4px;height:4px;background:var(--accent);border-radius:50%}.suggestion-status.pending:before{background:transparent;border:1px solid var(--accent);width:5px;height:5px}.note-author{font-size:10px;color:#97a189}.history-note-meta{display:block;color:#a1aa94;font-size:10px;margin-top:8px}.history-note-meta:empty{display:none}.history-note{padding:14px 12px;margin-top:12px}.history-filter select:only-child{width:100%}.note-window[data-view=read] .quote{margin-bottom:14px}
+
+/* A quiet page: all document actions live behind the ellipsis. */
+.menu-toggle{position:fixed;z-index:50;top:19px;right:22px;width:36px;height:36px;display:grid;place-items:center;padding:0;border-radius:50%;font-size:25px;line-height:1;color:#92998a;background:color-mix(in srgb,var(--paper) 65%,transparent);backdrop-filter:blur(10px)}
+.menu-toggle:hover,.menu-toggle[aria-expanded=true]{background:var(--soft);color:var(--ink)}
+.app-menu{position:fixed;top:61px;right:22px;z-index:49;width:178px;padding:8px;background:color-mix(in srgb,var(--paper) 88%,transparent);border:1px solid #e0e4d7b0;border-radius:12px;box-shadow:0 10px 35px #29382012;backdrop-filter:blur(16px)}
+.app-menu>.quiet{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:7px;font-size:12px}.app-menu .count{float:right}.app-menu .connection{display:flex;padding:11px 12px 5px;font-size:9px;border-top:1px solid var(--line);margin-top:6px}.app-menu .selected{background:var(--soft)}
+.formatbar{top:0;min-height:58px;height:auto;flex-wrap:wrap;padding:10px 78px 10px max(18px,calc((100vw - 850px)/2));gap:8px}.formatbar .primary{padding:7px 13px;min-height:32px}.side-panel{top:70px;border-top:1px solid var(--line);border-radius:12px 12px 0 0}.appearance{top:65px}.article{position:relative;padding-top:109px}.article>.block-row{z-index:1}.editing .article{padding-top:55px}.version-notice{margin-top:65px}.version-notice:not([hidden])+.article{padding-top:50px}
+
+/* Markers follow UTF-16 selection endpoints without changing text layout. */
+.annotation-dot{right:auto;position:absolute;width:18px;height:18px;padding:0;background:transparent;z-index:5;border-radius:50%;color:var(--note-color,var(--accent));transition:background .15s,box-shadow .15s}.annotation-dot:after{width:5px;height:5px;background:var(--note-color,var(--accent));box-shadow:0 0 0 2px color-mix(in srgb,var(--paper) 70%,transparent)}.annotation-dot:hover,.annotation-dot.open{background:color-mix(in srgb,var(--note-color,var(--accent)) 17%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,var(--note-color,var(--accent)) 8%,transparent)}.annotation-dot.draft:after{border-color:var(--note-color,var(--accent));background:var(--paper);width:6px;height:6px}.annotation-dot.resolved:after{background:var(--note-color,var(--accent));opacity:.45}
+.anchor-highlights{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible}.brush-stroke{position:absolute;pointer-events:none;transform:rotate(var(--tilt));transform-origin:center;background:linear-gradient(174deg,transparent 0%,color-mix(in srgb,var(--note-color) 15%,transparent) 7%,color-mix(in srgb,var(--note-color) 27%,transparent) 40%,color-mix(in srgb,var(--note-color) 19%,transparent) 85%,transparent 100%);border-radius:18% 5% 24% 8% / 21% 32% 18% 27%;box-shadow:0 1px 2px color-mix(in srgb,var(--note-color) 9%,transparent)}
+
+/* One translucent surface, no nested input card or repeated source excerpt. */
+.note-window{width:280px;min-width:min(250px,calc(100vw - 32px));background:color-mix(in srgb,var(--paper) 63%,transparent);border:1px solid #ffffff95;border-radius:17px;box-shadow:0 12px 44px #35402918,inset 0 1px 0 #ffffff77;backdrop-filter:blur(15px) saturate(1.12);-webkit-backdrop-filter:blur(15px) saturate(1.12)}
+.note-window .window-head{padding:9px 12px 2px 16px;border:0;background:transparent;min-height:31px}.note-window .window-head h2{font-size:10px;font-weight:400;color:#818c75;display:flex;align-items:center;gap:6px}.note-window .window-head h2:before{content:"";width:4px;height:4px;border-radius:50%;background:var(--note-color,var(--accent));opacity:.8}.note-window .glass-close{font:18px/1 var(--sans);padding:2px 5px;color:#8f9883;border-radius:50%}.note-window .window-content{padding:9px 13px 13px 16px;background:transparent}.suggestion-composer{gap:10px;padding:0;align-items:flex-end;background:transparent;border:0;border-radius:0}.suggestion-composer:focus-within{border:0;box-shadow:none}.note-window:has(.note-input:focus-visible){border-color:color-mix(in srgb,var(--note-color,var(--accent)) 32%,#ffffff99);box-shadow:0 12px 44px #35402918,0 0 0 1px #ffffff70}.note-input{padding:2px 0;min-height:28px;font-size:14px;line-height:24px;background:transparent}.suggestion-composer .check-button{flex-shrink:0;width:28px;height:28px;min-height:28px;padding:0;border-radius:50%;font-size:16px;line-height:28px;font-weight:400;background:color-mix(in srgb,var(--note-color,var(--accent)) 20%,transparent);color:color-mix(in srgb,var(--note-color,var(--accent)) 70%,#273020);border:1px solid #ffffff60}.suggestion-composer .check-button:hover{background:color-mix(in srgb,var(--note-color,var(--accent)) 30%,transparent)}.review-actions{margin-top:13px;gap:7px}.review-actions .quiet{padding:4px 3px;font-size:9px}.suggestion-status{font-size:9px}.suggestion-status:before{background:var(--note-color,var(--accent))}.review-body{line-height:1.8}.note-window .form-error{font-size:10px}.review-note{background:transparent}
+@media(max-width:600px){.menu-toggle{top:15px;right:14px}.app-menu{top:56px;right:14px}.article{padding-top:88px}.formatbar{padding:9px 60px 9px 12px;gap:4px}.formatbar .primary{padding:6px 11px;font-size:11px}.side-panel{top:61px}.annotation-dot{width:18px;height:18px;right:auto}.note-window .window-content{padding:8px 12px 12px 15px}.note-window .window-head{padding:9px 10px 2px 15px}}
+
+/* Optional paper layout, with one quiet navigation control. */
+.note-window .window-head{justify-content:flex-end;min-height:25px;padding:5px 10px 0;}
+.reading-options{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:9px}
+.segmented{display:flex;padding:3px;gap:3px;background:color-mix(in srgb,var(--ink) 4%,transparent);border-radius:8px}
+.segmented button{flex:1;min-width:0;padding:7px 4px;font-size:11px;color:var(--muted);border-radius:6px}
+.segmented button[aria-pressed=true]{color:var(--ink);background:var(--paper);box-shadow:0 1px 4px #28331f0d}
+.a4-reading{background:color-mix(in srgb,var(--paper) 92%,#6b7562)}
+.a4-reading .article{max-width:none;width:min(794px,calc(100% - 40px));padding:0;margin:78px auto 28px;scroll-margin-top:24px}
+.paper-page{position:relative;width:100%;height:var(--page-height);padding:var(--page-padding);margin:0 0 24px;background:var(--paper);box-shadow:0 2px 14px #30382b0b;outline:1px solid #5d6c4210}
+.paper-content{height:100%;position:relative;display:flow-root}
+.paper-content>.block-row{z-index:2;display:flow-root}
+.paper-content>.block-row:first-child>.heading,.paper-content>.continued>.heading{margin-top:0}
+.paper-number{position:absolute;bottom:3.5%;left:0;width:100%;text-align:center;font:10px var(--mono);color:#a6ad9e}
+.a4-reading .anchor-highlights{z-index:1}
+.a4-reading .document-footer{display:none}
+.a4-reading .version-notice:not([hidden])+.article{padding-top:0;margin-top:28px}
+.page-controls{position:fixed;z-index:20;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:4px 6px;border:1px solid #e0e4d7b0;border-radius:24px;background:color-mix(in srgb,var(--paper) 88%,transparent);box-shadow:0 4px 22px #2938200e;backdrop-filter:blur(16px)}
+.page-controls button{width:30px;height:30px;border-radius:50%;font-size:23px;color:var(--accent);line-height:1}
+.page-controls button:hover:not(:disabled){background:var(--soft)}
+.page-controls span{min-width:40px;text-align:center;font:10px var(--mono);color:var(--muted)}
+.horizontal-reading .article{margin-bottom:86px}
+@media(max-width:600px){.a4-reading .article{width:calc(100% - 24px);margin-top:66px}.a4-reading .article-title{margin-bottom:28px}.paper-page{margin-bottom:16px}.page-controls{bottom:16px}}
+.horizontal-reading .article{width:min(794px,calc(100% - 32px),calc((100dvh - 138px)*.7070707));margin:64px auto 74px;scroll-margin-top:64px}
+
+/* Reader controls use available space, so every slider step is visible on narrow screens. */
+:root{--reading-width-ratio:.83;--font-scale:1;--reader-line-height:1.95;--paragraph-gap:22px}
+body:not(.a4-reading) .article,body:not(.a4-reading) .document-footer{max-width:none;width:min(calc(800px * var(--reading-width-ratio)),calc((100% - 48px) * var(--reading-width-ratio)))}
+body:not(.editing) .article [data-block]{font-size:calc(var(--source-size) * var(--font-scale))!important}
+body:not(.editing) .article .block:not(.heading){line-height:var(--reader-line-height);min-height:0;margin-bottom:var(--paragraph-gap)}
+body:not(.editing) .article .heading{margin-top:calc(var(--paragraph-gap) * 1.77);margin-bottom:var(--paragraph-gap)}
+body:not(.editing) .article .article-title{margin-bottom:calc(var(--paragraph-gap) * 2)}
+body:not(.editing) .paper-content>.block-row:first-child>.heading,body:not(.editing) .paper-content>.continued>.heading{margin-top:0}
+.paper-page{padding-inline:var(--page-side-padding,var(--page-padding))}
+.appearance{max-height:calc(100dvh - 82px);overflow-y:auto;overscroll-behavior:contain}
+.appearance .range-label{padding-top:16px}.range-label span{margin-bottom:8px}.range-label input{height:16px;display:block;margin:0;cursor:ew-resize}
+
+.history-entry{position:relative}.history-entry:has(.history-resolve) .history-note{padding-right:42px}.history-resolve{position:absolute;right:7px;top:8px;width:28px;height:28px;border-radius:50%;color:var(--muted);font-size:14px}.history-resolve:hover,.history-resolve[aria-pressed=true]{background:var(--soft);color:var(--accent)}
+
+/* When no free rectangle remains, the reader and suggestion occupy separate areas. */
+body.note-docked{overflow:hidden}
+.note-docked #main{position:fixed;left:0;right:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.note-docked .page-controls{bottom:auto;top:12px}
+.note-window[data-placement=docked]{background:color-mix(in srgb,var(--paper) 94%,transparent)}
+
+/* File controls stay outside the reading surface and scroll on short screens. */
+.document-actions{display:flex;gap:8px;padding:10px 12px;flex-shrink:0}
+.document-scroll{min-height:0;overflow:auto;flex:1}
+.document-section{font-size:11px;font-weight:500;color:var(--muted);padding:12px 22px 0}
+.document-hint{font-size:11px;line-height:1.7;color:var(--muted);padding:9px 22px 0}
+.document-scroll .version-list{overflow:visible;padding-block:8px}
+#localDocuments .version-item{font-size:12px;overflow-wrap:anywhere}
+#documentPanel .panel-head,#documentPanel .panel-bottom{flex-shrink:0}
+body.editing #documentPanel,body.editing #pdfPanel{top:calc(var(--formatbar-height, 58px) + 12px)}
+.version-notice{flex-wrap:wrap}
+.app-menu{max-height:calc(100dvh - 80px);overflow:auto}
+/* The export options remain on the right; their preview never changes document text. */
+.menu-brand{padding:10px 12px 13px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.menu-brand strong{display:block;font-size:13px;font-weight:600;color:var(--ink)}
+.menu-brand span{display:block;font-size:9px;color:var(--muted);margin-top:5px}
+#pdfPanel{right:18px;top:66px;bottom:auto;width:316px;max-width:calc(100vw - 28px);max-height:calc(100dvh - 84px);border:1px solid #dfe3d7;border-radius:16px;box-shadow:0 12px 45px #29382014;background:var(--paper);overflow:hidden}
+#pdfPanel .panel-head{padding:17px 20px 9px;border:0;flex-shrink:0}
+#pdfPanel .panel-head h2{font-size:14px;font-weight:500;letter-spacing:.04em}
+.pdf-close{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;padding:0;font-size:20px;line-height:1;color:var(--muted)}
+.pdf-close:hover{background:var(--soft)}
+.pdf-options{padding:8px 20px 0;overflow:auto;min-height:0;flex:0 1 auto;overscroll-behavior:contain}
+.pdf-summary{display:flex;align-items:center;gap:22px;padding:16px 18px;background:var(--soft);border-radius:10px}
+.pdf-summary-copy{display:grid;gap:9px;color:var(--muted)}
+.pdf-summary-copy strong{font-size:12px;font-weight:500;color:var(--ink)}
+.pdf-summary-copy span{font:10px var(--sans)}
+.pdf-summary-copy small{font-size:10px;opacity:.8;white-space:nowrap}
+.pdf-preview{position:relative;flex-shrink:0;width:90px;height:127.286px;background:white;box-shadow:0 2px 8px #2938200e;outline:1px solid #e2e5dc;color:#888;overflow:hidden}
+#pdfWatermarkPreview{position:absolute;top:2%;left:9.52%;width:64.29%;font:2.3px/3px var(--sans);overflow-wrap:anywhere;white-space:normal}
+#pdfDatePreview{position:absolute;top:2%;right:9.52%;font:2.3px/3px var(--sans)}
+.pdf-preview-lines{position:absolute;inset:18% 9.52% 17%;background:repeating-linear-gradient(to bottom,transparent 0,transparent 6px,#e9ebe5 6px,#e9ebe5 7px);opacity:.8}
+#pdfProjectLink{position:absolute;bottom:1.35%;left:9.52%;right:9.52%;text-align:center;font:2.5px/3px var(--sans);color:#888}
+.pdf-preview[data-position$=center] #pdfWatermarkPreview{left:21.43%;width:57.14%;text-align:center}
+.pdf-preview[data-position$=right] #pdfWatermarkPreview{left:auto;right:9.52%;text-align:right}
+.pdf-preview[data-position^=bottom] #pdfWatermarkPreview{top:auto;bottom:3.37%}
+.pdf-preview[data-position=top-right] #pdfDatePreview{right:auto;left:9.52%}
+.without-watermark #pdfWatermarkPreview,.without-watermark #pdfDatePreview,.without-watermark #pdfProjectLink{visibility:hidden}
+.watermark-toggle{display:flex;align-items:center;justify-content:space-between;margin:19px 0 15px;font-size:12px;cursor:pointer}
+.watermark-toggle input{appearance:none;position:relative;width:30px;height:18px;margin:0;border:0;border-radius:12px;background:#cdd2c5;cursor:pointer;transition:background .15s}
+.watermark-toggle input:before{content:"";position:absolute;left:3px;top:3px;width:12px;height:12px;border-radius:50%;background:white;box-shadow:0 1px 3px #0001;transition:transform .15s}
+.watermark-toggle input:checked{background:var(--accent)}
+.watermark-toggle input:checked:before{transform:translateX(12px)}
+.watermark-label{display:block;font-size:10px;margin-bottom:7px;color:var(--muted)}
+#pdfWatermarkText{width:100%;resize:none;height:58px;padding:9px 10px;line-height:1.65;font-size:11px;border:1px solid var(--line);border-radius:7px;background:transparent}
+.watermark-position-heading{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin:15px 0 8px}
+#pdfPositionLabel{color:var(--accent)}
+.watermark-positions{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.watermark-positions button{height:28px;border:1px solid var(--line);border-radius:5px;font-size:10px;color:var(--muted)}
+.watermark-positions button:hover{background:var(--soft)}
+.watermark-positions button[aria-pressed=true]{border-color:color-mix(in srgb,var(--accent) 50%,transparent);background:var(--soft);color:var(--accent)}
+.pdf-caption{font-size:9px;color:var(--muted);line-height:1.6;margin:10px 0 0}
+#pdfPanel .panel-bottom{flex-shrink:0;margin:0;padding:17px 20px 14px;border:0}
+#printPDF{display:flex;align-items:center;justify-content:space-between;width:100%;height:36px;padding:0 12px;border-radius:7px;font-size:11px}
+#printPDF span{font-size:15px;font-weight:400;opacity:.85}
+.pdf-export-hint{font-size:9px;line-height:1.6;text-align:center;color:var(--muted);margin-top:9px}
+body.editing #pdfPanel{max-height:calc(100dvh - var(--formatbar-height, 58px) - 26px)}
+@media(max-width:600px){#pdfPanel{right:14px;top:58px;max-height:calc(100dvh - 72px)}}
+/* Zero printer margins suppress browser-supplied dates, titles and local URLs.
+   Every fixed A4 page reserves its own 20 mm content inset and optional marks. */
+#printDocument{display:block;position:fixed;left:-300vw;top:0;visibility:hidden;width:210mm;pointer-events:none;color:black;background:white}
+.print-page{position:relative;width:210mm;height:297mm;padding:20mm;box-sizing:border-box;background:white;break-after:page;break-inside:avoid}
+.print-page:last-child{break-after:auto}
+.print-body{display:flow-root;height:257mm;width:170mm}
+.print-body h1,.print-body h2,.print-body p{white-space:pre-wrap;overflow-wrap:anywhere;letter-spacing:normal}
+.print-body h1{font-weight:600;line-height:1.4;margin:0 0 24px}
+.print-body h2{font-weight:600;line-height:1.5;margin:28px 0 14px}
+.print-body p{font-weight:400;line-height:1.8;margin:0 0 18px;min-height:1em}
+.print-body>:first-child{margin-top:0}
+.print-body .print-continued{margin-top:0}
+.print-watermark-header{position:absolute;top:4mm;left:20mm;width:135mm;color:#888;font:9px/12px var(--sans)}
+.print-watermark-header span{white-space:normal;overflow-wrap:anywhere}
+.print-watermark-date{position:absolute;top:4mm;right:20mm;color:#888;font:9px/12px var(--sans)}
+.print-page[data-watermark-position$=center] .print-watermark-header{left:45mm;width:120mm;text-align:center}
+.print-page[data-watermark-position$=right] .print-watermark-header{left:auto;right:20mm;text-align:right}
+.print-page[data-watermark-position^=bottom] .print-watermark-header{top:auto;bottom:10mm}
+.print-page[data-watermark-position=top-right] .print-watermark-date{right:auto;left:20mm}
+.print-watermark-footer{position:absolute;bottom:4mm;left:20mm;right:20mm;text-align:center;font:10px/1.5 var(--sans)}
+.print-watermark-footer a{color:#888;text-decoration:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  html,body{margin:0!important;padding:0!important;background:white!important;color:black!important;overflow:visible!important;height:auto!important}
+  body>*{display:none!important}
+  body>#printDocument{display:block!important;position:static;visibility:visible;margin:0;padding:0;width:210mm;max-width:none}
+}
+</style>
+</head>
+<body>
+<button id="menuToggle" class="menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="appMenu">⋯</button>
+<nav id="appMenu" class="app-menu" aria-label="文稿菜单" hidden>
+  <div class="menu-brand"><strong>DocsBridge</strong><span>Feedback Made Easier</span></div>
+  <button id="readMode" class="quiet" aria-pressed="true" hidden>查看已发布文稿</button>
+  <button id="editMode" class="quiet" aria-pressed="false" hidden>编辑</button>
+  <button id="documentToggle" class="quiet" aria-expanded="false" aria-controls="documentPanel" hidden>文稿</button>
+  <button id="historyToggle" class="quiet" aria-expanded="false" aria-controls="historyPanel">建议 <span id="commitCount" class="count">0</span></button>
+  <button id="shareButton" class="quiet">分享</button>
+  <button id="appearanceToggle" class="quiet" aria-expanded="false" aria-controls="appearance">外观</button>
+  <button id="pdfButton" class="quiet" aria-expanded="false" aria-controls="pdfPanel">导出 PDF</button>
+</nav>
+<aside id="pdfPanel" class="side-panel right-panel" aria-label="PDF 导出设置" hidden>
+  <div class="panel-head"><h2>导出</h2><button class="pdf-close" data-close="pdfPanel" aria-label="关闭导出设置">×</button></div>
+  <div class="pdf-options">
+    <div class="pdf-summary">
+      <div class="pdf-preview" aria-label="水印位置预览"><span id="pdfWatermarkPreview"></span><time id="pdfDatePreview"></time><div class="pdf-preview-lines" aria-hidden="true"></div><span id="pdfProjectLink">github.com/storyon403-afk/RD</span></div>
+      <div class="pdf-summary-copy"><strong>PDF 文档</strong><span>A4 · 纵向</span><small>保留正文排版</small></div>
+    </div>
+    <label class="watermark-toggle"><span>水印</span><input id="pdfWatermark" type="checkbox" checked aria-label="保留水印"></label>
+    <div id="pdfWatermarkFields">
+      <label class="watermark-label" for="pdfWatermarkText">文字</label>
+      <textarea id="pdfWatermarkText" rows="2" maxlength="120" placeholder="输入水印文字">DocsBridge: Feedback Made Easier</textarea>
+      <div class="watermark-position-heading"><span>位置</span><span id="pdfPositionLabel">左上</span></div>
+      <div id="pdfWatermarkPosition" class="watermark-positions" role="group" aria-label="水印位置">
+        <button data-watermark-position="top-left" aria-pressed="true">左上</button><button data-watermark-position="top-center" aria-pressed="false">上中</button><button data-watermark-position="top-right" aria-pressed="false">右上</button>
+        <button data-watermark-position="bottom-left" aria-pressed="false">左下</button><button data-watermark-position="bottom-center" aria-pressed="false">下中</button><button data-watermark-position="bottom-right" aria-pressed="false">右下</button>
+      </div>
+      <p class="pdf-caption">日期与项目链接随水印保留</p>
+    </div>
+  </div>
+  <div class="panel-bottom"><button id="printPDF" class="primary full">导出 PDF <span aria-hidden="true">↗</span></button><p class="pdf-export-hint">在打印窗口选择“另存为 PDF”</p></div>
+</aside>
+<div id="formatbar" class="formatbar" hidden>
+  <select id="blockType" aria-label="段落样式"><option value="p">正文</option><option value="h2">标题</option><option value="title">文章标题</option></select>
+  <select id="fontFamily" aria-label="字体"><option value="serif">宋体</option><option value="sans">黑体</option><option value="mono">等宽</option></select>
+  <label class="size-field"><input type="number" id="fontSize" min="12" max="64" value="18" aria-label="字号"><span>px</span></label>
+  <span class="toolbar-rule"></span><button id="addBlock" class="quiet">添加段落</button><button id="removeBlock" class="quiet" aria-label="删除当前段落">删除</button>
+  <span class="toolbar-spacer"></span><span id="draftStatus" class="draft-status" role="status">本地草稿</span><button id="discardDraft" class="quiet">还原</button><button id="publishButton" class="primary" hidden>发布</button>
+</div>
+<aside id="documentPanel" class="side-panel left-panel" aria-label="文稿文件与版本" hidden>
+  <div class="panel-head"><h2>文稿</h2><button class="quiet" data-close="documentPanel">收起</button></div>
+  <div class="document-actions"><button id="newDocument" class="quiet">新建文稿</button><button id="openDocument" class="quiet">打开 .rd</button></div>
+  <input id="documentFile" type="file" accept=".rd,application/json" hidden>
+  <div class="document-scroll">
+    <h3 class="document-section">本地文稿</h3>
+    <p class="document-hint">自动暂存于此浏览器；保存 .rd 可备份或换设备继续编辑。</p>
+    <div id="localDocuments" class="version-list"></div>
+    <h3 class="document-section">已发布版本</h3>
+    <div id="versionList" class="version-list"></div>
+  </div>
+  <div class="panel-bottom"><button id="saveDocument" class="primary full">保存 .rd</button><button id="exportButton" class="quiet full">导出 HTML 副本</button><button id="legacyButton" class="quiet full" hidden>恢复旧稿</button></div>
+</aside>
+<aside id="historyPanel" class="side-panel right-panel" aria-label="全部建议" hidden>
+  <div class="panel-head"><h2>建议</h2><button class="quiet" data-close="historyPanel">收起</button></div>
+  <div class="history-filter"><select id="authorFilter" aria-label="审阅者"><option value="all">所有人</option></select><select id="statusFilter" aria-label="建议状态"><option value="all">全部状态</option><option value="pending">待处理</option><option value="resolved">已处理</option></select></div>
+  <div id="historyList" class="history-list"></div>
+</aside>
+<div id="appearance" class="appearance popover" hidden>
+  <div class="popover-head"><span>外观</span><button class="quiet" data-close="appearance">关闭</button></div>
+  <label><span>纸张</span><input id="paperColor" type="color" value="#fdfcf9" aria-label="纸张颜色"></label>
+  <label><span>强调</span><input id="accentColor" type="color" value="#566851" aria-label="强调色"></label>
+  <label class="range-label"><span>正文宽度 <output id="widthValue">83%</output></span><input id="readingWidth" type="range" min="60" max="100" step="1" value="83" aria-label="阅读宽度"></label>
+  <label class="range-label"><span>字号 <output id="readingSizeValue">18 px</output></span><input id="readingSize" type="range" min="12" max="26" step="1" value="18" aria-label="阅读字号"></label>
+  <label class="range-label"><span>行距 <output id="lineHeightValue">1.95</output></span><input id="readingLineHeight" type="range" min="1.3" max="2.3" step="0.05" value="1.95" aria-label="阅读行距"></label>
+  <label class="range-label"><span>段距 <output id="paragraphGapValue">22 px</output></span><input id="paragraphGap" type="range" min="8" max="40" step="2" value="22" aria-label="阅读段距"></label>
+  <div class="reading-options">
+    <div class="segmented" role="group" aria-label="纸张布局"><button data-layout="flow" aria-pressed="true">连续</button><button data-layout="a4" aria-pressed="false">A4</button></div>
+    <div id="pageDirection" class="segmented" role="group" aria-label="翻页方式" hidden><button data-direction="vertical" aria-pressed="true">上下滚动</button><button data-direction="horizontal" aria-pressed="false">左右翻页</button></div>
+  </div>
+</div>
+<main id="main">
+  <div id="versionNotice" class="version-notice" hidden><span id="versionNoticeText"></span><button id="latestVersion" class="quiet">查看最新</button><button id="publishReplacement" class="quiet" hidden>以此稿发布</button></div>
+  <article id="article" class="article" aria-label="文章"></article>
+  <footer class="document-footer"><span id="versionLabel">v1</span><span id="articleStatus"></span></footer>
+</main>
+<nav id="pageControls" class="page-controls" aria-label="分页导航" hidden><button id="previousPage" aria-label="上一页">‹</button><span id="pageCounter" aria-live="polite">1 / 1</span><button id="nextPage" aria-label="下一页">›</button></nav>
+<button id="selectionButton" class="selection-button" hidden>建议</button>
+<div id="stagingBar" class="staging-bar" hidden><button id="stagedListButton" class="staging-count">待确认 <span id="stagedCount">0</span></button><button id="openCommit" class="primary">确认</button></div>
+<section id="noteWindow" class="floating-window note-window" role="dialog" aria-label="建议" hidden>
+  <header class="window-head" data-drag-handle><button class="quiet glass-close" data-close="noteWindow" aria-label="关闭建议">×</button></header>
+  <div id="noteContents" class="window-content"></div>
+</section>
+<section id="shareWindow" class="floating-window share-window" role="dialog" aria-labelledby="shareTitle" hidden>
+  <header class="window-head" data-drag-handle><h2 id="shareTitle">审阅链接</h2><button class="quiet" data-close="shareWindow">关闭</button></header>
+  <div class="window-content"><div class="copy-row"><input id="shareUrl" readonly aria-label="审阅链接"><button id="copyShare" class="primary">复制</button></div><p id="shareScope" class="meta"></p></div>
+</section>
+<dialog id="confirmDialog" class="confirm-dialog"><form method="dialog"><h2 id="confirmTitle">还原草稿？</h2><p id="confirmBody"></p><div class="window-actions"><button class="quiet" value="cancel">取消</button><button class="primary" value="confirm">确认</button></div></form></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<script>window.__SNAPSHOT__={"versions": [{"version": 1, "title": "留一点空白", "titleSize": 38, "blocks": [{"id": "b1", "type": "p", "size": 18, "font": "serif", "text": "清晨，把手机留在桌上，出门走一小段路。没有目的地，也不急着记录。街角的树换了颜色，面包店刚刚开门，阳光落在还没坐满的长椅上。"}, {"id": "b2", "type": "h2", "size": 25, "font": "serif", "text": "慢一点"}, {"id": "b3", "type": "p", "size": 18, "font": "serif", "text": "平时走过这里，总想着下一件事。今天慢下来，才发现这条路比记忆中安静。那些没有被安排的时间，也可以过得很完整。"}, {"id": "b4", "type": "p", "size": 18, "font": "serif", "text": "回到家，给自己倒一杯水。把刚才想到的一句话写下来，剩下的就让它留在那里。"}, {"id": "b5", "type": "h2", "size": 25, "font": "serif", "text": "留一点空白"}, {"id": "b6", "type": "p", "size": 18, "font": "serif", "text": "一页纸不必写满，一天也不必。空白让新的想法有地方落下。"}], "createdAt": "2026-11-01T00:00:00+00:00"}], "commits": [], "isOwner": true, "sequence": 0};</script>
+<script id="offlineApp">(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const all = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const uid = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const productName = 'DocsBridge: Feedback Made Easier';
+  const projectURL = 'https://github.com/storyon403-afk/RD';
+  const offline = location.protocol === 'file:';
+  const reviewerMode = /^\/review\/?$/.test(location.pathname) || new URLSearchParams(location.search).has('review');
+  const prefix = `pangzhu-v2:${reviewerMode?'/':location.pathname}:`;
+  let storageAvailable = true;
+  function load(key, fallback) { try { return JSON.parse(localStorage.getItem(prefix + key)) ?? fallback; } catch { return fallback; } }
+  function store(key, value) { try { localStorage.setItem(prefix + key, JSON.stringify(value)); } catch { storageAvailable = false; } }
+  const reviewerId=load('reviewer-id',uid());store('reviewer-id',reviewerId);
+  const apiPath=path=>reviewerMode&&!offline?'/review'+path:path;
+  let state = null, draft = load('article-draft', null), staged = load('staged', {notes:[], requestKey:uid()});
+  const savedWorkspace = load('document-workspace', null);
+  let localDocuments = savedWorkspace?.documents || [], activeDocumentId = savedWorkspace?.activeId || null;
+  if (savedWorkspace) draft = savedWorkspace.draft;
+  if (!staged || !Array.isArray(staged.notes)) staged = {notes:[], requestKey:uid()};
+  let mode = 'read', pinnedVersion = null, selectedBlock = 'title', rangeSelection = null;
+  let composing = null, viewingNotes = null, refreshRunning = null, refreshAgain = false;
+  let renderedSignature = '', toastTimer, saveTimer, eventSource, syncTimer, syncStopped = false, busy = false;
+  const watermarkPositions = {'top-left':'左上','top-center':'上中','top-right':'右上','bottom-left':'左下','bottom-center':'下中','bottom-right':'右下'};
+  let pdfOptions = load('pdf-options', {watermark:true, text:productName});
+  if (!pdfOptions || typeof pdfOptions !== 'object') pdfOptions = {};
+  pdfOptions = {position:Object.hasOwn(watermarkPositions,pdfOptions.position) ? pdfOptions.position : 'top-left', watermark:pdfOptions.watermark !== false, text:typeof pdfOptions.text === 'string' ? pdfOptions.text.slice(0,120) : productName};
+  let appearance = load('appearance', {paper:'#fdfcf9', accent:'#566851', width:660});
+  let pageIndex=0, paginationWidth=0, paginationFrame;
+  let notePositionFrame, noteManualPosition = false, noteDocked = false, noteDragging = false;
+  const paged=()=>mode==='read'&&appearance.layout==='a4';
+  let legacy = null;
+  try { legacy = JSON.parse(localStorage.getItem('pangzhu-editable-design:/')); } catch {}
+  const isAuthor = () => !!state?.isOwner && !reviewerMode;
+  const latest = () => state.versions[0];
+  const currentDocument = () => state.versions.find(v => v.version === pinnedVersion) || latest();
+  const notes = () => state.commits.flatMap(c => c.notes.map(n => ({...n, author:c.author, reviewerId:c.reviewerId, commitId:c.id})));
+  const date = value => new Date(value).toLocaleDateString('zh-CN', {month:'numeric', day:'numeric'});
+
+  function toast(message) {
+    $('toast').textContent = message; $('toast').hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').hidden = true, 3500);
+  }
+  function connection(text, disconnected = false) {
+    document.body.dataset.connection = disconnected ? 'disconnected' : (offline ? 'offline' : 'connected');
+  }
+  async function request(path, data) {
+    if (offline) return offlineRequest(path, data);
+    const controller = new AbortController();
+    const timeout = setTimeout(()=>controller.abort(),15000);
+    try {
+      const options = data === undefined ? {cache:'no-store'} : {
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data),
+      };
+      const response = await fetch(apiPath(path), {...options, signal:controller.signal});
+      let result;
+      try { result = await response.json(); } catch { throw new Error('服务暂时不可用，内容已保留。'); }
+      if (!response.ok) { const error = new Error(result.error || '保存失败'); error.status = response.status; throw error; }
+      return result;
+    } finally { clearTimeout(timeout); }
+  }
+  function pollingOnly() {
+    return state?.syncMode==='poll' || location.hostname.endsWith('.trycloudflare.com');
+  }
+  function scheduleSync(delay) {
+    clearTimeout(syncTimer);
+    if (offline || syncStopped) return;
+    syncTimer = setTimeout(async()=>{
+      try {
+        if (!document.hidden) { await refresh(); connection('已同步'); }
+      } catch { connection('重连中',true); }
+      if (pollingOnly()) { eventSource?.close(); eventSource=null; }
+      scheduleSync(pollingOnly() || !eventSource || eventSource.readyState!==EventSource.OPEN ? 3000 : 15000);
+    },delay);
+  }
+  function startSync() {
+    if (offline) return;
+    syncStopped=false;
+    if (!pollingOnly() && typeof EventSource!=='undefined') {
+      eventSource=new EventSource(apiPath('/api/events'));
+      eventSource.onopen=()=>connection('已同步');
+      eventSource.onmessage=()=>refresh().then(()=>connection('已同步')).catch(()=>connection('未连接',true));
+      eventSource.onerror=()=>{connection('重连中',true);scheduleSync(0);};
+    }
+    scheduleSync(pollingOnly()?3000:15000);
+  }
+
+  function offlineRequest(path, data) {
+    if (path === '/api/state') return clone(state || load('snapshot', window.__SNAPSHOT__));
+    if (path === '/api/publish') {
+      if (data.baseVersion !== latest().version) throw new Error('已有新版本，请先查看最新版本。');
+      const doc = {...clone(data), version:latest().version + 1, createdAt:new Date().toISOString()};
+      state.versions.unshift(doc); store('snapshot', state); return {version:doc.version};
+    }
+    if (path === '/api/commits') {
+      const prior = state.commits.find(c => c.requestKey === data.requestKey);
+      if (prior) return {id:prior.id};
+      const commit = {id:uid().replace(/-/g,'').slice(0,12), requestKey:data.requestKey,
+        parentId:state.commits[0]?.id || null, basedOn:data.basedOn, author:data.author, reviewerId:data.reviewerId,
+        message:data.message, createdAt:new Date().toISOString(),
+        notes:data.notes.map(n => ({...n, id:uid(), resolved:false}))};
+      state.commits.unshift(commit); store('snapshot', state); return {id:commit.id};
+    }
+    if (path === '/api/resolve') {
+      for (const commit of state.commits) { const note = commit.notes.find(n => n.id === data.id); if (note) note.resolved = data.resolved; }
+      store('snapshot', state); return {ok:true};
+    }
+  }
+  async function refresh() {
+    if (refreshRunning) { refreshAgain = true; return refreshRunning; }
+    refreshRunning = (async () => {
+      do {
+        refreshAgain = false;
+        state = await request('/api/state');
+        renderShared();
+        if (mode === 'read') renderArticle();
+        if (viewingNotes && !$('noteWindow').hidden) renderNoteViewer();
+      } while (refreshAgain);
+    })();
+    try { await refreshRunning; } finally { refreshRunning = null; }
+  }
+  function renderShared() {
+    $('editMode').hidden = !isAuthor() || mode==='edit';
+    $('documentToggle').hidden = !isAuthor();
+    if(!isAuthor()){$('documentPanel').hidden=true;$('versionList').replaceChildren();}
+    $('readMode').hidden = mode!=='edit';
+    $('commitCount').textContent = notes().length;
+    $('commitCount').classList.toggle('has-notes', notes().length > 0);
+    $('documentPanel').querySelector('.panel-head h2').textContent = '文稿';
+    $('legacyButton').hidden = !legacy?.texts || !isAuthor();
+    renderLocalDocuments();
+    $('versionList').replaceChildren(...(isAuthor()?state.versions:[]).map(doc => {
+      const button = document.createElement('button');
+      button.className = 'version-item' + (currentDocument().version === doc.version ? ' active' : '');
+      button.innerHTML = `<strong>${escape(doc.title)}</strong><small><span>v${doc.version}</span><span>${date(doc.createdAt)}</span></small>`;
+      button.onclick = () => { if (mode === 'edit') setMode('read'); pinnedVersion = doc.version === latest().version ? null : doc.version; renderArticle(); renderShared(); closePanel('documentPanel'); };
+      return button;
+    }));
+    renderHistory(); renderStaging(); updateVersionNotice();
+  }
+  function updateVersionNotice() {
+    const staleDraft = mode === 'edit' && draft && draft.baseVersion !== latest().version;
+    const old = mode === 'read' && currentDocument().version !== latest().version;
+    $('versionNotice').hidden = !(staleDraft || old);
+    $('versionNoticeText').textContent = staleDraft ? `草稿基于 v${draft.baseVersion} · 当前 v${latest().version}` : `正在阅读 v${currentDocument().version}`;
+    $('publishButton').disabled = busy || staleDraft;
+    $('publishReplacement').hidden = !staleDraft || !isAuthor();
+    $('publishReplacement').disabled = busy;
+  }
+  function renderArticle(force = false) {
+    const doc = mode === 'edit' ? draft : currentDocument();
+    const signature = mode + JSON.stringify(doc);
+    document.body.classList.toggle('a4-reading',paged());
+    document.body.classList.toggle('horizontal-reading',paged()&&appearance.direction==='horizontal');
+    if (force || signature !== renderedSignature) {
+      const article = $('article'); article.replaceChildren();
+      const titleRow = document.createElement('div'); titleRow.className = 'block-row'; titleRow.dataset.row = 'title';
+      const title = document.createElement('h1'); title.className = 'article-title'; title.dataset.block = 'title';
+      title.style.fontSize = doc.titleSize + 'px'; title.style.setProperty('--source-size',doc.titleSize+'px');title.textContent = doc.title;
+      titleRow.append(title); article.append(titleRow);
+      for (const block of doc.blocks) article.append(makeBlock(block));
+      if (mode === 'edit') all('[data-block]', article).forEach(bindEditor);
+      if(paged())paginateArticle();
+      renderedSignature = signature;
+    }
+    updatePageControls();
+    if (mode === 'read') renderDots();
+    $('versionLabel').textContent = mode === 'edit' ? `v${draft.baseVersion} · 草稿` : `v${doc.version}`;
+    $('articleStatus').textContent = mode === 'edit' ? '' : (offline ? '本地副本' : '');
+    document.title = productName;
+  }
+  function makeBlock(block) {
+    const row = document.createElement('div'); row.className = 'block-row'; row.dataset.row = block.id;
+    const element = document.createElement(block.type); element.dataset.block = block.id;
+    element.className = 'block' + (block.type === 'h2' ? ' heading' : '');
+    element.dataset.font = block.font; element.style.fontSize = block.size + 'px';
+    element.style.setProperty('--source-size',block.size+'px');
+    element.style.setProperty('--block-size', block.size + 'px'); element.textContent = block.text;
+    row.append(element); return row;
+  }
+  function paginateArticle(){
+    const article=$('article'),originals=all(':scope > .block-row',article);
+    article.replaceChildren();
+    paginationWidth=article.clientWidth;
+    article.style.setProperty('--page-height',paginationWidth*297/210+'px');
+    article.style.setProperty('--page-padding',paginationWidth*.09+'px');
+    article.style.setProperty('--page-side-padding',paginationWidth*(1-.82*appearance.widthPercent/100)/2+'px');
+    let page,content;
+    const newPage=()=>{
+      page=document.createElement('section');page.className='paper-page';
+      content=document.createElement('div');content.className='paper-content';page.append(content);article.append(page);
+    };
+    newPage();
+    for(const original of originals){
+      const model=original.querySelector('[data-block]'),text=model.textContent;
+      let offset=0;
+      do {
+        const row=original.cloneNode(true),el=row.querySelector('[data-block]');
+        el.dataset.start=offset;el.textContent=text.slice(offset);
+        if(offset){row.classList.add('continued');}
+        const wasEmpty=!content.children.length;
+        content.append(row);
+        const limit=content.getBoundingClientRect().bottom;
+        const fits=()=>el.getBoundingClientRect().bottom<=limit+.5;
+        // Keep a section heading with at least two lines of the next paragraph.
+        const headingRoom=model.tagName==='H2'&&el.getBoundingClientRect().bottom+72>limit;
+        if(!wasEmpty&&headingRoom){row.remove();newPage();continue;}
+        if(fits()){offset=text.length;break;}
+        const remaining=text.slice(offset);
+        const boundaries=[0];
+        if(globalThis.Intl?.Segmenter){
+          for(const part of new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(remaining))boundaries.push(part.index+part.segment.length);
+        }else{let end=0;for(const char of remaining){end+=char.length;boundaries.push(end);}}
+        let low=0,high=boundaries.length-1;
+        while(low<high){
+          const middle=Math.ceil((low+high)/2);el.textContent=remaining.slice(0,boundaries[middle]);
+          if(fits())low=middle;else high=middle-1;
+        }
+        if(!low&&!wasEmpty){row.remove();newPage();continue;}
+        let cut=Math.max(1,low);
+        while(cut>1&&(/[，。！？；：、）》」』】…,.!?;:]/.test(remaining[boundaries[cut]]||'')||/[（《「『【(]/.test(remaining[boundaries[cut]-1]||'')))cut--;
+        let take=boundaries[cut]||remaining.length;
+        if(/[a-z]/i.test(remaining[take-1]||'')&&/[a-z]/i.test(remaining[take]||'')){
+          const word=remaining.slice(0,take).match(/[a-z]+$/i);
+          if(word&&word.index>0&&word[0].length<30)take=word.index;
+        }
+        el.textContent=remaining.slice(0,take);offset+=take;
+        if(offset<text.length)newPage();
+      }while(offset<text.length);
+    }
+    const pages=all('.paper-page',article);
+    pages.forEach((el,i)=>{
+      el.dataset.page=i;el.setAttribute('aria-label',`第 ${i+1} 页`);
+      const number=document.createElement('span');number.className='paper-number';number.textContent=String(i+1);number.setAttribute('aria-hidden','true');el.append(number);
+    });
+    pageIndex=Math.min(pageIndex,pages.length-1);
+    updatePageControls();
+  }
+  function updatePageControls(){
+    const pages=all('.paper-page',$('article')),horizontal=paged()&&appearance.direction==='horizontal';
+    pages.forEach((page,index)=>page.hidden=horizontal&&index!==pageIndex);
+    $('pageControls').hidden=!horizontal;
+    $('pageCounter').textContent=`${pageIndex+1} / ${pages.length||1}`;
+    $('previousPage').disabled=pageIndex<=0;$('nextPage').disabled=pageIndex>=pages.length-1;
+  }
+  function turnPage(delta){
+    const count=all('.paper-page',$('article')).length;
+    pageIndex=Math.max(0,Math.min(count-1,pageIndex+delta));
+    window.getSelection()?.removeAllRanges();$('selectionButton').hidden=true;
+    updatePageControls();renderDots();
+    $('article').scrollIntoView({block:'start',behavior:'instant'});
+  }
+  function revealNote(note){
+    if(!paged()||!note)return;
+    const range=anchorRanges(note).at(-1),page=range?.endContainer.parentElement.closest('.paper-page');
+    if(!page)return;
+    if(appearance.direction==='horizontal'){pageIndex=Number(page.dataset.page);updatePageControls();}
+    page.scrollIntoView({block:'nearest',behavior:'instant'});
+  }
+  function schedulePagination(){
+    cancelAnimationFrame(paginationFrame);
+    paginationFrame=requestAnimationFrame(()=>{
+      if(!state||mode!=='read')return;
+      if(paged()&&Math.abs($('article').clientWidth-paginationWidth)>.5)renderArticle(true);
+      else renderDots();
+    });
+  }
+  function renderDots() {
+    all('.annotation-dot', $('article')).forEach(el => el.remove());
+    if (mode !== 'read') return;
+    const version = currentDocument().version;
+    const combined = [...notes(), ...staged.notes.map(n => ({...n, local:true, reviewerId}))].filter(n => n.version === version);
+    for (const row of all('.block-row', $('article'))) {
+      const group = combined.filter(n => n.blockId === row.dataset.row);
+      const occupied=[];
+      for(const note of group){
+        const range=anchorRanges(note).at(-1);if(!range||range.endContainer.parentElement.closest('.block-row')!==row)continue;
+        const rects=[...range.getClientRects()].filter(r=>r.width>0&&r.height>0);
+        const last=rects.at(-1);if(!last)continue;
+        const box=row.getBoundingClientRect();
+        const base=Math.min(last.right-box.left+5,box.width+5);
+        let x=base,y=last.top-box.top-3;
+        for(let attempt=0;occupied.some(p=>Math.abs(p.x-x)<18&&Math.abs(p.y-y)<17)&&attempt<200;attempt++){
+          x+=18;if(x>box.width+8){x=base;y-=18;}
+        }
+        occupied.push({x,y});
+        const dot = document.createElement('button'); dot.className = 'annotation-dot';
+        dot.dataset.noteId=note.id;dot.style.left=(x-9)+'px';dot.style.top=(y-9)+'px';
+        dot.style.setProperty('--note-color',toneFor(note));
+        dot.classList.toggle('draft',!!note.local);dot.classList.toggle('resolved',!!note.resolved);
+        const expanded = !$('noteWindow').hidden && viewingNotes?.noteId===note.id;
+        dot.classList.toggle('open',expanded);dot.setAttribute('aria-expanded',String(expanded));
+        dot.setAttribute('aria-label',`展开建议：${note.author||'我'} · ${note.body.slice(0,24)}`);
+        dot.onclick=()=>openNotes(version,row.dataset.row,note.id);
+        row.append(dot);
+      }
+    }
+    paintActiveAnchor(); scheduleNotePosition();
+  }
+  function anchorRanges(note){
+    if(note.version!==currentDocument().version)return [];
+    const doc=currentDocument(),source=note.blockId==='title'?doc.title:doc.blocks.find(b=>b.id===note.blockId)?.text;
+    if(source?.slice(note.start,note.end)!==note.quote)return [];
+    return all('[data-block]',$('article')).filter(el=>el.dataset.block===note.blockId).flatMap(el=>{
+      const offset=Number(el.dataset.start||0),start=Math.max(0,note.start-offset),end=Math.min(el.textContent.length,note.end-offset);
+      if(start>=end||!el.firstChild)return [];
+      const range=document.createRange();range.setStart(el.firstChild,start);range.setEnd(el.firstChild,end);return [range];
+    });
+  }
+  function toneFor(note){
+    const palette=['#b68a4f','#7c9768','#9682b0','#6f97a6','#bb8275','#989c5b','#8a98b5','#b88b9d'];
+    const key=n=>n.reviewerId||n.author||reviewerId;
+    const people=[...new Set([...state.commits].reverse().map(key))];
+    if(!people.includes(reviewerId))people.push(reviewerId);
+    const index=Math.max(0,people.indexOf(key(note)));
+    return palette[index%palette.length];
+  }
+  function paintActiveAnchor(){
+    let layer=$('anchorHighlights');
+    if(!layer){layer=document.createElement('div');layer.id='anchorHighlights';layer.className='anchor-highlights';layer.setAttribute('aria-hidden','true');$('article').prepend(layer);}
+    layer.replaceChildren();
+    if(mode!=='read'||$('noteWindow').hidden)return;
+    const note=composing?{...composing,reviewerId}:[...notes(),...staged.notes.map(n=>({...n,reviewerId}))].find(n=>n.id===viewingNotes?.noteId);
+    if(!note)return;
+    const ranges=anchorRanges(note);if(!ranges.length)return;
+    const articleBox=$('article').getBoundingClientRect(),color=toneFor(note);
+    $('noteWindow').style.setProperty('--note-color',color);
+    for(const [index,rect] of ranges.flatMap(range=>[...range.getClientRects()]).filter(r=>r.width>0&&r.height>0).entries()){
+      const stroke=document.createElement('span');stroke.className='brush-stroke';
+      stroke.style.left=(rect.left-articleBox.left-2)+'px';stroke.style.top=(rect.top-articleBox.top+rect.height*.12)+'px';
+      stroke.style.width=(rect.width+4)+'px';stroke.style.height=(rect.height*.87)+'px';
+      stroke.style.setProperty('--note-color',color);stroke.style.setProperty('--tilt',(index%2?'.25deg':'-.3deg'));layer.append(stroke);
+    }
+  }
+  function fitSuggestion(text){
+    const panel=$('noteWindow');
+    const canvas=fitSuggestion.canvas ||= document.createElement('canvas');const ctx=canvas.getContext('2d');
+    ctx.font='14px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+    const width=Math.max(250,Math.min(460,Math.max(...String(text||'写下建议…').split('\n').map(line=>ctx.measureText(line).width))+90));
+    panel.style.width=Math.min(width,innerWidth-32)+'px';
+    const input=$('noteInput');if(input){input.style.height='auto';input.style.height=Math.min(Math.max(48,innerHeight-180),240,Math.max(24,input.scrollHeight))+'px';}
+    scheduleNotePosition();
+  }
+  function activeNote() {
+    return composing || [...notes(), ...staged.notes].find(n => n.id === viewingNotes?.noteId);
+  }
+  function noteViewport() {
+    const v = window.visualViewport;
+    return {left:(v?.offsetLeft||0)+12, top:(v?.offsetTop||0)+12,
+      right:(v?.offsetLeft||0)+(v?.width||innerWidth)-12,
+      bottom:(v?.offsetTop||0)+(v?.height||innerHeight)-12};
+  }
+  function scheduleNotePosition() {
+    cancelAnimationFrame(notePositionFrame);
+    notePositionFrame = requestAnimationFrame(positionNote);
+  }
+  function releaseNoteDock() {
+    if (!noteDocked) return;
+    const scroll = $('main').scrollTop;
+    noteDocked = false; document.body.classList.remove('note-docked');
+    $('main').style.removeProperty('height'); $('main').style.removeProperty('top');
+    window.scrollTo({top:scroll, behavior:'instant'});
+  }
+  function positionNote() {
+    const panel = $('noteWindow');
+    if (panel.hidden || !state || noteDragging) return;
+    const v = noteViewport(), gap = 12;
+    panel.style.maxWidth = Math.max(0,v.right-v.left)+'px';
+    panel.style.minWidth = Math.min(250,v.right-v.left)+'px';
+    panel.style.maxHeight = Math.max(0,v.bottom-v.top)+'px';
+    const rects = activeNote() ? anchorRanges(activeNote()).flatMap(r=>[...r.getClientRects()])
+      .filter(r=>r.width>0&&r.height>0&&r.bottom>v.top&&r.top<v.bottom) : [];
+    const box = panel.getBoundingClientRect(), width=box.width, height=box.height;
+    const clampX = x => Math.max(v.left,Math.min(v.right-width,x));
+    const clampY = y => Math.max(v.top,Math.min(v.bottom-height,y));
+    const safe = (x,y,h=height) => x>=v.left&&x+width<=v.right+.5&&y>=v.top&&y+h<=v.bottom+.5&&
+      rects.every(r=>x+width+gap<=r.left||x>=r.right+gap||y+h+gap<=r.top||y>=r.bottom+gap);
+    const place = (x,y,side) => {panel.style.left=x+'px';panel.style.top=y+'px';panel.dataset.placement=side;};
+    if (!noteDocked) {
+      if (noteManualPosition && safe(box.left,box.top)) return;
+      noteManualPosition=false;
+      if (!rects.length) {place(clampX(box.left),clampY(box.top),'viewport');return;}
+      const left=Math.min(...rects.map(r=>r.left)),right=Math.max(...rects.map(r=>r.right));
+      const top=Math.min(...rects.map(r=>r.top)),bottom=Math.max(...rects.map(r=>r.bottom));
+      const candidates=[
+        [clampX(left),bottom+gap,'below'],[clampX(left),top-height-gap,'above'],
+        [right+gap,clampY(top),'right'],[left-width-gap,clampY(top),'left'],
+      ];
+      const candidate=candidates.find(([x,y])=>safe(x,y));
+      if(candidate){place(...candidate);return;}
+      // Reduce the panel before reserving a separate reading viewport.
+      const below=v.bottom-bottom-gap,above=top-v.top-gap;
+      const available=Math.max(below,above);
+      if(available>=100){
+        panel.style.maxHeight=available+'px';
+        place(clampX(left),below>=above?bottom+gap:v.top,below>=above?'below':'above');return;
+      }
+    }
+    // A long selection or the software keyboard can leave no floating space.
+    // The document gets its own scroll area above the panel, never underneath it.
+    panel.style.maxHeight=Math.max(48,Math.min(height,(v.bottom-v.top)*.42))+'px';
+    const dockHeight=panel.getBoundingClientRect().height, dockTop=v.bottom-dockHeight;
+    const previousScroll=noteDocked?$('main').scrollTop:window.scrollY;
+    const entering=!noteDocked;
+    noteDocked=true;document.body.classList.add('note-docked');
+    $('main').style.top=(v.top-12)+'px';
+    $('main').style.height=Math.max(0,dockTop-gap-(v.top-12))+'px';
+    if(entering){$('main').scrollTop=previousScroll;
+      const anchor=activeNote()&&anchorRanges(activeNote()).at(-1);
+      const end=anchor?.getBoundingClientRect();
+      if(end){const reader=$('main').getBoundingClientRect();if(end.bottom>reader.bottom)$('main').scrollTop+=end.bottom-reader.bottom+12;}
+    }
+    place(clampX(box.left),dockTop,'docked');paintActiveAnchor();
+  }
+  function createDraft() {
+    const doc = clone(currentDocument());
+    return {baseVersion:doc.version, title:doc.title, titleSize:doc.titleSize, blocks:doc.blocks};
+  }
+  function setMode(next) {
+    if (next === 'edit' && !isAuthor()) return;
+    closePanel('noteWindow');
+    closePanel('appMenu');
+    mode = next;
+    if (mode === 'edit' && !draft) { draft = createDraft(); saveDraft(); }
+    document.body.classList.toggle('editing', mode === 'edit');
+    $('readMode').classList.toggle('selected', mode === 'read'); $('editMode').classList.toggle('selected', mode === 'edit');
+    $('readMode').setAttribute('aria-pressed', mode === 'read'); $('editMode').setAttribute('aria-pressed', mode === 'edit');
+    $('formatbar').hidden = mode !== 'edit'; $('publishButton').hidden = mode !== 'edit';
+    $('selectionButton').hidden = true; rangeSelection = null;
+    renderArticle(true); renderShared();
+    if (mode === 'edit') { selectedBlock = 'title'; updateFormat(); }
+  }
+  function saveDraft() {
+    if (draft) {
+      activeDocumentId ||= uid();
+      const index = localDocuments.findIndex(item => item.id === activeDocumentId);
+      const baseline = index < 0 ? clone(draft) : localDocuments[index].baseline || clone(localDocuments[index].draft);
+      const entry = {id:activeDocumentId, draft:clone(draft), baseline};
+      if (index < 0) localDocuments.unshift(entry); else localDocuments[index] = entry;
+    }
+    persistWorkspace();
+    $('draftStatus').textContent = storageAvailable ? '已暂存于此浏览器' : '暂存失败，请保存 .rd';
+    clearTimeout(saveTimer);
+    renderLocalDocuments();
+    renderedSignature = mode + JSON.stringify(draft);
+  }
+  function persistWorkspace() {
+    store('document-workspace', {documents:localDocuments, activeId:activeDocumentId, draft});
+    if (!storageAvailable) toast('浏览器暂存失败，请立即保存 .rd 文件，避免关闭页面后丢失。');
+  }
+  function renderLocalDocuments() {
+    $('localDocuments').replaceChildren(...(isAuthor() ? localDocuments : []).map(entry => {
+      const button = document.createElement('button');
+      button.className = 'version-item' + (mode === 'edit' && entry.id === activeDocumentId ? ' active' : '');
+      button.textContent = entry.draft.title || '未命名文稿';
+      button.onclick = () => {
+        if (busy) return;
+        if (draft) saveDraft();
+        activeDocumentId = entry.id; draft = clone(entry.draft);
+        saveDraft(); setMode('edit'); closePanel('documentPanel');
+      };
+      return button;
+    }));
+  }
+  function openLocalDocument(doc) {
+    if (!isAuthor() || busy) return;
+    if (draft) saveDraft();
+    activeDocumentId = uid();
+    draft = {baseVersion:latest().version, ...doc};
+    saveDraft(); setMode('edit'); closePanel('documentPanel'); focusBlock('title');
+  }
+  function blockById(id) { return draft.blocks.find(b => b.id === id); }
+  function bindEditor(element) {
+    element.contentEditable = 'plaintext-only'; element.spellcheck = false;
+    element.dataset.placeholder = element.dataset.block === 'title' ? '标题' : '正文';
+    element.addEventListener('focus', () => { selectedBlock = element.dataset.block; updateFormat(); });
+    element.addEventListener('input', () => {
+      const id = element.dataset.block;
+      if (id === 'title') draft.title = element.innerText.replace(/\n/g,'').slice(0,200);
+      else blockById(id).text = element.innerText;
+      saveDraft();
+    });
+    element.addEventListener('keydown', event => {
+      if (event.isComposing || event.keyCode === 229) return;
+      const id = element.dataset.block;
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        if (id === 'title') { focusBlock(draft.blocks[0].id, 0); return; }
+        const selection = window.getSelection(); if (!selection.rangeCount) return;
+        const range = selection.getRangeAt(0), prefixRange = range.cloneRange();
+        prefixRange.selectNodeContents(element); prefixRange.setEnd(range.startContainer, range.startOffset);
+        const start = prefixRange.toString().length, end = start + range.toString().length;
+        const block = blockById(id), text = element.innerText;
+        block.text = text.slice(0,start);
+        const added = {id:uid(), type:'p', size:18, font:block.font, text:text.slice(end)};
+        draft.blocks.splice(draft.blocks.indexOf(block)+1, 0, added); saveDraft(); renderArticle(true); focusBlock(added.id,0);
+      } else if (event.key === 'Backspace' && id !== 'title' && !element.textContent && draft.blocks.length > 1) {
+        event.preventDefault(); const index = draft.blocks.findIndex(b => b.id === id);
+        draft.blocks.splice(index,1); saveDraft(); renderArticle(true); focusBlock(draft.blocks[Math.max(0,index-1)].id);
+      }
+    });
+    element.addEventListener('paste', event => {
+      event.preventDefault(); const text = event.clipboardData.getData('text/plain');
+      const selected = window.getSelection(); if (!selected.rangeCount) return;
+      const range = selected.getRangeAt(0); range.deleteContents(); const node = document.createTextNode(text);
+      range.insertNode(node); range.setStartAfter(node); range.collapse(true); selected.removeAllRanges(); selected.addRange(range);
+      element.dispatchEvent(new Event('input'));
+    });
+  }
+  function focusBlock(id, offset) {
+    const el = all('[data-block]', $('article')).find(e => e.dataset.block === id); if (!el) return;
+    selectedBlock = id; el.focus();
+    const range = document.createRange(); range.selectNodeContents(el);
+    if (typeof offset === 'number' && el.firstChild) range.setStart(el.firstChild, Math.min(offset,el.firstChild.length));
+    else range.collapse(false);
+    if (typeof offset === 'number') range.collapse(true);
+    const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); updateFormat();
+  }
+  function updateFormat() {
+    if (!draft) return;
+    const title = selectedBlock === 'title', block = blockById(selectedBlock);
+    if (!title && !block) { selectedBlock = 'title'; return updateFormat(); }
+    $('blockType').value = title ? 'title' : block.type; $('blockType').disabled = title;
+    $('fontFamily').value = title ? 'serif' : block.font; $('fontFamily').disabled = title;
+    $('fontSize').value = title ? draft.titleSize : block.size;
+    $('fontSize').min = title ? 20 : 12; $('fontSize').max = title ? 64 : 48;
+    $('removeBlock').disabled = title || draft.blocks.length < 2;
+  }
+  function applyFormat() {
+    if (mode !== 'edit') return;
+    const title = selectedBlock === 'title', size = Number($('fontSize').value);
+    const min = title ? 20 : 12, max = title ? 64 : 48;
+    if (!Number.isFinite(size) || size < min || size > max) { toast(`字号范围：${min}–${max} px`); updateFormat(); return; }
+    if (title) draft.titleSize = Math.round(size);
+    else { const block = blockById(selectedBlock); block.type = $('blockType').value === 'h2' ? 'h2' : 'p'; block.font = $('fontFamily').value; block.size = Math.round(size); }
+    saveDraft();
+    const element = all('[data-block]', $('article')).find(el => el.dataset.block === selectedBlock);
+    if (title) element.style.fontSize = draft.titleSize + 'px';
+    else {
+      const block = blockById(selectedBlock);
+      if (element.tagName.toLowerCase() !== block.type) {
+        const row = makeBlock(block); element.parentElement.replaceWith(row); bindEditor(row.firstChild);
+      } else {
+        element.dataset.font = block.font; element.style.fontSize = block.size + 'px';
+        element.style.setProperty('--block-size',block.size+'px');
+      }
+    }
+    updateFormat();
+  }
+  async function publish() {
+    if (busy || !draft) return;
+    if (!draft.title.trim()) { toast('请填写标题'); focusBlock('title'); return; }
+    const submitted = clone(draft); busy = true; $('publishButton').disabled = true; $('publishButton').textContent = '发布中';
+    try {
+      const result = await request('/api/publish', submitted);
+      const unchanged = JSON.stringify(draft) === JSON.stringify(submitted);
+      if (unchanged) {
+        draft.baseVersion = result.version; saveDraft();
+        localDocuments.find(entry => entry.id === activeDocumentId).baseline = clone(draft);
+        draft = null; persistWorkspace();
+      }
+      pinnedVersion = null; await refresh();
+      if (unchanged) setMode('read');
+      toast(offline ? '新版本已保存到本地副本。' : '新版本已发布。');
+    } catch (error) { toast(error.message); if (error.status === 409) await refresh(); }
+    finally { busy = false; $('publishButton').textContent = '发布'; updateVersionNotice(); }
+  }
+  function captureSelection() {
+    if (mode !== 'read') return;
+    const selected = window.getSelection();
+    if (!selected || selected.isCollapsed || !selected.rangeCount) { $('selectionButton').hidden = true; return; }
+    const range = selected.getRangeAt(0);
+    const a = range.startContainer.nodeType === 3 ? range.startContainer.parentElement : range.startContainer;
+    const b = range.endContainer.nodeType === 3 ? range.endContainer.parentElement : range.endContainer;
+    const startBlock = a.closest('[data-block]'), endBlock = b.closest('[data-block]');
+    if (!startBlock || !endBlock || startBlock.dataset.block !== endBlock.dataset.block || !$('article').contains(startBlock)) { $('selectionButton').hidden = true; return; }
+    const before = range.cloneRange(); before.selectNodeContents(startBlock); before.setEnd(range.startContainer, range.startOffset);
+    const start = Number(startBlock.dataset.start||0)+before.toString().length;
+    const ending=range.cloneRange();ending.selectNodeContents(endBlock);ending.setEnd(range.endContainer,range.endOffset);
+    const end=Number(endBlock.dataset.start||0)+ending.toString().length;
+    const doc=currentDocument(),source=startBlock.dataset.block==='title'?doc.title:doc.blocks.find(b=>b.id===startBlock.dataset.block)?.text;
+    const quote=source?.slice(start,end);
+    if(!quote?.trim()||quote.length>4000){$('selectionButton').hidden=true;return;}
+    rangeSelection = {version:doc.version, blockId:startBlock.dataset.block, quote, start, end};
+    const rect = range.getBoundingClientRect();
+    $('selectionButton').style.left = Math.max(12,Math.min(innerWidth-90,rect.left+rect.width/2-30))+'px';
+    $('selectionButton').style.top = Math.max(12,Math.min(innerHeight-48,rect.top-43))+'px'; $('selectionButton').hidden = false;
+  }
+  function openComposer(selection, existingId = null) {
+    releaseNoteDock(); noteManualPosition=false;
+    composing = {...clone(selection), existingId}; viewingNotes = null;
+    $('noteWindow').dataset.view = 'compose';
+    $('noteContents').innerHTML = `<div class="suggestion-composer"><textarea class="note-input" id="noteInput" rows="1" maxlength="4000" placeholder="写下建议…" aria-label="建议内容"></textarea><button id="saveNote" class="primary check-button" aria-label="确认建议" title="确认">✓</button></div><p id="noteError" class="form-error" role="alert" hidden></p>`;
+    $('noteInput').value = selection.body || '';
+    let noteId = existingId || uid();
+    function sizeInput() { fitSuggestion($('noteInput')?.value||''); }
+    $('noteInput').oninput = sizeInput;
+    $('noteInput').onkeydown = event => { if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing&&event.keyCode!==229){event.preventDefault();$('saveNote').click();} };
+    $('saveNote').onclick = async () => {
+      if(busy)return;
+      const body = $('noteInput').value.trim();
+      if (!body) { $('noteError').textContent = '请写下建议'; $('noteError').hidden = false; return; }
+      const prior=staged.notes.find(n=>n.id===noteId);
+      const note = {...selection, id:noteId, body, requestKey:prior?.body===body&&prior.requestKey?prior.requestKey:uid()};
+      delete note.existingId;
+      const index = staged.notes.findIndex(n => n.id === noteId);
+      if (index < 0) staged.notes.push(note); else staged.notes[index] = note;
+      staged.requestKey = uid(); saveStaged();
+      await confirmSuggestions([clone(note)],note.requestKey);
+    };
+    sizeInput();showWindow('noteWindow'); $('selectionButton').hidden = true; sizeInput(); $('noteInput').focus({preventScroll:true});paintActiveAnchor();scheduleNotePosition();
+  }
+  function openNotes(version, blockId, noteId=null) {
+    releaseNoteDock(); noteManualPosition=false;
+    const alreadyOpen=!$('noteWindow').hidden;
+    const match=notes().find(n=>n.version===version&&n.blockId===blockId)||staged.notes.find(n=>n.version===version&&n.blockId===blockId);
+    viewingNotes = {version, blockId,noteId:noteId||match?.id}; composing = null; renderNoteViewer();
+    revealNote(match&&noteId?notes().find(n=>n.id===noteId)||match:match);
+    if(!alreadyOpen)showWindow('noteWindow');
+    renderDots();
+  }
+  function renderNoteViewer() {
+    if (!viewingNotes) return;
+    const group = [...notes(), ...staged.notes.map(n => ({...n, local:true, author:'我'}))]
+      .filter(n => n.id===viewingNotes.noteId);
+    $('noteWindow').dataset.view = 'read';
+    $('noteContents').innerHTML = group.map(n => `<section class="review-note"><p class="review-body">${escape(n.body)}</p>${n.local?`<div class="review-actions"><button class="quiet" data-edit-note="${escape(n.id)}" aria-label="修改建议">↺</button><button class="quiet" data-delete-note="${escape(n.id)}" aria-label="删除建议">×</button><button class="quiet" data-confirm-note="${escape(n.id)}" aria-label="确认建议">✓</button></div>`:''}</section>`).join('');
+    fitSuggestion(group[0]?.body||'');paintActiveAnchor();
+  }
+  function saveStaged() { store('staged', staged); renderStaging(); }
+  function renderStaging() {
+    $('stagingBar').hidden = staged.notes.length === 0 || mode === 'edit';
+    $('stagedCount').textContent = staged.notes.length;
+  }
+  async function confirmSuggestions(selectedNotes,requestKey) {
+    if (busy || !selectedNotes.length) return;
+    const payload = {requestKey,basedOn:state.commits[0]?.id || null,
+      author:load('reviewer-name','') || (isAuthor()?'作者':'读者'),reviewerId,
+      message:`建议 ${selectedNotes.length} 条`,notes:selectedNotes};
+    busy = true;
+    const saveButton=$('saveNote'),input=$('noteInput');
+    if(saveButton){saveButton.disabled=true;saveButton.textContent='…';saveButton.setAttribute('aria-busy','true');}
+    if(input)input.disabled=true;
+    $('openCommit').disabled=true;
+    if($('noteError'))$('noteError').hidden=true;
+    try {
+      const confirmed=await request('/api/commits',payload);
+      await refresh();
+      const ids = new Set(selectedNotes.map(n => n.id));
+      staged.notes = staged.notes.filter(n => !ids.has(n.id)); staged.requestKey = uid();
+      saveStaged();
+      const last=selectedNotes[selectedNotes.length-1];
+      const saved=notes().find(n=>n.commitId===confirmed.id&&n.blockId===last.blockId&&n.quote===last.quote&&n.body===last.body);
+      openNotes(last.version,last.blockId,saved?.id);
+      $('noteContents').scrollTop=0;
+      return true;
+    } catch (error) {
+      if($('noteError')){$('noteError').textContent='未完成确认，建议已保留。请重试。';$('noteError').hidden=false;}
+      else toast('未完成确认，建议已保留。请重试。');
+      return false;
+    } finally {
+      busy = false; $('openCommit').disabled=false;
+      if($('saveNote')){$('saveNote').disabled=false;$('saveNote').textContent='✓';$('saveNote').removeAttribute('aria-busy');}
+      if($('noteInput'))$('noteInput').disabled=false;
+    }
+  }
+  function renderHistory() {
+    const selected = $('authorFilter').value;
+    const authors = [...new Set(state.commits.map(c => c.author))];
+    $('authorFilter').innerHTML = '<option value="all">所有人</option>' + authors.map(a => `<option value="${escape(a)}">${escape(a)}</option>`).join('');
+    $('authorFilter').value = authors.includes(selected) ? selected : 'all';
+    const author = $('authorFilter').value, status = $('statusFilter').value;
+    const matching = state.commits.filter(c => author === 'all' || c.author === author).map(c => ({...c,
+      notes:c.notes.filter(n => status === 'all' || (status === 'resolved') === n.resolved)})).filter(c => c.notes.length);
+    $('authorFilter').hidden=authors.length<2;
+    $('historyList').innerHTML = matching.flatMap(c => c.notes.map(n => `<div class="history-entry"><button class="history-note" data-show-note="${escape(n.id)}"><span class="note-excerpt">${escape(n.quote)}</span><span class="note-text">${escape(n.body)}</span><span class="history-note-meta">${!['读者','作者'].includes(c.author)?escape(c.author):''}${n.version!==latest().version?` · v${n.version}`:''}${n.resolved?' · 已处理':''}</span></button>${isAuthor()?`<button class="history-resolve" data-resolve="${escape(n.id)}" aria-label="${n.resolved?'重新打开建议':'标记建议已处理'}" aria-pressed="${n.resolved}">✓</button>`:''}</div>`)).join('') || '<p class="empty">暂无建议</p>';
+  }
+  function closePanel(id) {
+    $(id).hidden = true;
+    const toggles = {documentPanel:'documentToggle', historyPanel:'historyToggle', appearance:'appearanceToggle',pdfPanel:'pdfButton',appMenu:'menuToggle'};
+    if (toggles[id]) $(toggles[id]).setAttribute('aria-expanded','false');
+    if (id === 'noteWindow') { releaseNoteDock(); noteManualPosition=false; composing = null; viewingNotes = null; if(state)renderDots(); }
+  }
+  function togglePanel(id, button) {
+    closePanel('appMenu');
+    if(id==='documentPanel'&&!isAuthor())return;
+    const open = $(id).hidden;
+    for (const other of ['documentPanel','historyPanel','appearance','pdfPanel']) if (other !== id) closePanel(other);
+    $(id).hidden = !open; $(button).setAttribute('aria-expanded',open);
+  }
+  function showWindow(id) {
+    for (const other of ['noteWindow','shareWindow']) if (other !== id) closePanel(other);
+    // Closing a sibling must not clear the newly selected note state.
+    const windowEl = $(id); windowEl.hidden = false;
+    if (id === 'noteWindow') { positionNote(); return; }
+    const rect = windowEl.getBoundingClientRect();
+    windowEl.style.left = Math.max(12,(innerWidth-rect.width)/2)+'px';
+    windowEl.style.top = Math.max(12,(innerHeight-rect.height)/2)+'px';
+  }
+  function confirmAction(title, body) {
+    $('confirmTitle').textContent = title; $('confirmBody').textContent = body;
+    const dialog = $('confirmDialog'); dialog.returnValue = ''; dialog.showModal();
+    return new Promise(resolve => dialog.addEventListener('close',()=>resolve(dialog.returnValue === 'confirm'),{once:true}));
+  }
+  function applyAppearance() {
+    if (!/^#[a-f0-9]{6}$/i.test(appearance.paper)) appearance.paper = '#fdfcf9';
+    if (!/^#[a-f0-9]{6}$/i.test(appearance.accent)) appearance.accent = '#566851';
+    appearance.widthPercent = Math.max(60,Math.min(100,Number(appearance.widthPercent)||Math.round((Number(appearance.width)||660)/8)));
+    appearance.readingSize = Math.max(12,Math.min(26,Number(appearance.readingSize)||18));
+    appearance.lineHeight = Math.max(1.3,Math.min(2.3,Number(appearance.lineHeight)||1.95));
+    appearance.paragraphGap = Math.max(8,Math.min(40,Number(appearance.paragraphGap)||22));
+    document.documentElement.style.setProperty('--paper',appearance.paper);
+    document.documentElement.style.setProperty('--accent',appearance.accent);
+    document.documentElement.style.setProperty('--reading-width-ratio',appearance.widthPercent/100);
+    document.documentElement.style.setProperty('--font-scale',appearance.readingSize/18);
+    document.documentElement.style.setProperty('--reader-line-height',appearance.lineHeight);
+    document.documentElement.style.setProperty('--paragraph-gap',appearance.paragraphGap+'px');
+    $('paperColor').value = appearance.paper; $('accentColor').value = appearance.accent;
+    $('readingWidth').value = appearance.widthPercent; $('widthValue').textContent = appearance.widthPercent+'%';
+    $('readingSize').value=appearance.readingSize;$('readingSizeValue').textContent=appearance.readingSize+' px';
+    $('readingLineHeight').value=appearance.lineHeight;$('lineHeightValue').textContent=appearance.lineHeight.toFixed(2);
+    $('paragraphGap').value=appearance.paragraphGap;$('paragraphGapValue').textContent=appearance.paragraphGap+' px';
+    appearance.layout=appearance.layout==='a4'?'a4':'flow';appearance.direction=appearance.direction==='horizontal'?'horizontal':'vertical';
+    all('[data-layout]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.layout===appearance.layout)));
+    all('[data-direction]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.direction===appearance.direction)));
+    $('pageDirection').hidden=appearance.layout!=='a4';
+    if(state&&mode==='read')renderArticle(true);
+  }
+  function download(name, type, content) {
+    const url = URL.createObjectURL(new Blob([content],{type})); const a = document.createElement('a');
+    a.href = url; a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),10000);
+  }
+  const fileDocument = () => mode === 'edit' ? draft : currentDocument();
+  const fileName = doc => (doc.title || '未命名文稿').replace(/[\\/:*?"<>|\x00-\x1f]/g, '_').replace(/[. ]+$/g, '').slice(0,80) || '未命名文稿';
+  function documentContent(doc) {
+    return {title:doc.title, titleSize:doc.titleSize, blocks:doc.blocks.map(({id,type,font,size,text}) => ({id,type,font,size,text}))};
+  }
+  function saveDocument() {
+    if (!isAuthor()) return;
+    const doc = fileDocument();
+    try {
+      const text = JSON.stringify({format:'rd', version:1, document:documentContent(doc)}, null, 2)+'\n';
+      parseDocument(text);
+      if (new Blob([text]).size > 1_000_000) throw new Error('文稿超过 1 MB');
+      download(fileName(doc)+'.rd', 'application/json;charset=utf-8', text);
+      if (mode === 'edit') {
+        const entry = localDocuments.find(item => item.id === activeDocumentId);
+        if (entry) { entry.baseline = clone(draft); persistWorkspace(); }
+      }
+      toast('已下载 .rd 文件，可通过“打开 .rd”继续编辑。');
+    } catch (error) { toast(error.message+' 当前内容已保留，可先导出 HTML 副本。'); }
+  }
+  function parseDocument(text) {
+    const invalid = () => { throw new Error('无效的 .rd 文档：请检查格式、字号和内容长度。'); };
+    let data;
+    try { data = JSON.parse(text.replace(/^\uFEFF/,'')); } catch { invalid(); }
+    if (data?.format !== 'rd' || data.version !== 1) throw new Error('不支持此文件格式或版本，请选择 RD 保存的 .rd 文件。');
+    const doc = data.document;
+    const validText = (value, max) => typeof value === 'string' && Array.from(value).length <= max && !/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/u.test(value);
+    const size = (value,min,max) => Number.isInteger(value) && value >= min && value <= max;
+    if (!doc || !validText(doc.title,200) || !size(doc.titleSize,20,64) || !Array.isArray(doc.blocks) || !doc.blocks.length || doc.blocks.length > 200) invalid();
+    const ids = new Set(['title']);
+    for (const b of doc.blocks) {
+      if (!b || !validText(b.id,100) || !b.id.trim() || ids.has(b.id) || !['p','h2'].includes(b.type) || !['serif','sans','mono'].includes(b.font) || !size(b.size,12,48) || !validText(b.text,20000)) invalid();
+      ids.add(b.id);
+    }
+    const content = documentContent(doc);
+    // Imported identifiers are not trusted CSS selector fragments or source anchors.
+    for (const block of content.blocks) block.id = uid();
+    return content;
+  }
+  const printDate = () => new Date().toLocaleDateString('en-CA', {year:'numeric',month:'2-digit',day:'2-digit'});
+  function renderPDFOptions() {
+    $('pdfWatermark').checked = pdfOptions.watermark;
+    if ($('pdfWatermarkText').value !== pdfOptions.text) $('pdfWatermarkText').value = pdfOptions.text;
+    $('pdfWatermarkFields').hidden = !pdfOptions.watermark;
+    $('pdfPanel').querySelector('.pdf-preview').dataset.position = pdfOptions.position;
+    $('pdfPositionLabel').textContent = watermarkPositions[pdfOptions.position];
+    all('[data-watermark-position]', $('pdfWatermarkPosition')).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.watermarkPosition === pdfOptions.position)));
+    $('pdfWatermarkPreview').textContent = pdfOptions.text;
+    $('pdfDatePreview').textContent = printDate();
+    $('pdfPanel').classList.toggle('without-watermark', !pdfOptions.watermark);
+  }
+  function savePDFOptions(event) {
+    if (event?.isComposing) return;
+    pdfOptions = {position:pdfOptions.position, watermark:$('pdfWatermark').checked, text:$('pdfWatermarkText').value.slice(0,120)};
+    store('pdf-options',pdfOptions); renderPDFOptions();
+  }
+  $('pdfWatermark').onchange = savePDFOptions;
+  $('pdfWatermarkText').oninput = savePDFOptions;
+  $('pdfWatermarkText').oncompositionend = savePDFOptions;
+  all('[data-watermark-position]', $('pdfWatermarkPosition')).forEach(button => { button.onclick = () => {
+    pdfOptions.position = button.dataset.watermarkPosition; savePDFOptions();
+  }; });
+  function preparePrint() {
+    if (!state) return;
+    $('printDocument')?.remove();
+    const doc = fileDocument(), article = document.createElement('article'); article.id = 'printDocument';
+    article.setAttribute('aria-hidden','true');
+    document.body.append(article);
+    let content;
+    const newPage = () => {
+      const page = document.createElement('section'); page.className = 'print-page';
+      page.dataset.watermarkPosition = pdfOptions.position;
+      content = document.createElement('div'); content.className = 'print-body'; page.append(content);
+      if (pdfOptions.watermark) {
+        const header = document.createElement('header'); header.className = 'print-watermark-header';
+        const text = document.createElement('span'); text.textContent = pdfOptions.text;
+        header.append(text);
+        const date = document.createElement('time'); date.className = 'print-watermark-date'; date.textContent = printDate();
+        const footer = document.createElement('footer'); footer.className = 'print-watermark-footer';
+        const link = document.createElement('a'); link.href = projectURL; link.textContent = projectURL; footer.append(link);
+        page.append(header,date,footer);
+      }
+      article.append(page);
+    };
+    newPage();
+    const source = [{type:'h1',font:'serif',size:doc.titleSize,text:doc.title}, ...doc.blocks];
+    for (const block of source) {
+      const characters = globalThis.Intl?.Segmenter ? [...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(block.text)].map(part=>part.segment) : Array.from(block.text);
+      let offset = 0;
+      do {
+        const el = document.createElement(block.type);
+        el.style.fontSize = block.size+'px'; el.style.fontFamily = `var(--${block.font})`;
+        el.textContent = characters.slice(offset).join('');
+        if (offset) el.classList.add('print-continued');
+        const wasEmpty = !content.children.length; content.append(el);
+        const limit = content.getBoundingClientRect().bottom;
+        const fits = () => el.getBoundingClientRect().bottom <= limit + .25;
+        if (!wasEmpty && block.type !== 'p' && el.getBoundingClientRect().bottom + 72 > limit) {
+          el.remove(); newPage(); continue;
+        }
+        if (fits()) break;
+        let low = 0, high = characters.length-offset;
+        while (low < high) {
+          const middle = Math.ceil((low+high)/2); el.textContent = characters.slice(offset,offset+middle).join('');
+          if (fits()) low = middle; else high = middle-1;
+        }
+        if (!low && !wasEmpty) { el.remove(); newPage(); continue; }
+        let take = Math.max(1,low);
+        // Keep punctuation and ordinary Latin words together when a page splits a block.
+        while (take > 1 && (/[，。！？；：、）》」』】…,.!?;:]/.test(characters[offset+take]||'') || /[（《「『【(]/.test(characters[offset+take-1]||''))) take--;
+        const fragment = characters.slice(offset,offset+take).join('');
+        if (/[a-z]$/i.test(fragment) && /^[a-z]/i.test(characters[offset+take]||'')) {
+          const word = fragment.match(/[a-z]+$/i);
+          if (word && word.index > 0 && word[0].length < 30) take -= word[0].length;
+        }
+        el.textContent = characters.slice(offset,offset+take).join(''); offset += take;
+        if (offset < characters.length) newPage();
+      } while (offset < characters.length);
+    }
+  }
+  window.addEventListener('beforeprint', preparePrint);
+  window.addEventListener('afterprint', () => $('printDocument')?.remove());
+  $('pdfButton').onclick = () => { closePanel('noteWindow'); renderPDFOptions(); togglePanel('pdfPanel','pdfButton'); };
+  $('printPDF').onclick = async () => {
+    await document.fonts.ready;
+    preparePrint(); window.print();
+  };
+  $('newDocument').onclick = () => openLocalDocument({title:'', titleSize:38, blocks:[{id:uid(),type:'p',font:'serif',size:18,text:''}]});
+  $('openDocument').onclick = () => { if (isAuthor() && !busy) $('documentFile').click(); };
+  $('documentFile').onchange = async event => {
+    const file = event.target.files[0]; event.target.value = '';
+    if (!file || !isAuthor() || busy) return;
+    try {
+      if (file.size > 1_000_000) throw new Error('文件超过 1 MB，请拆分为较小的文稿。');
+      const doc = parseDocument(await file.text());
+      openLocalDocument(doc);
+      toast('已打开为独立本地文稿；编辑后请保存 .rd。');
+    } catch (error) { toast(error.message); }
+  };
+  $('saveDocument').onclick = saveDocument;
+  $('publishReplacement').onclick = async () => {
+    if (!isAuthor() || busy || !draft) return;
+    const expectedDraft = draft, baseVersion = latest().version;
+    if (!await confirmAction('将此文稿发布为最新版本？', `此稿将替换审阅链接当前显示的 v${baseVersion}。旧版本及其建议会保留，建议不会转移到此稿。`)) return;
+    if (draft !== expectedDraft || busy) return;
+    draft.baseVersion = baseVersion; saveDraft(); await publish();
+  };
+  async function exportCopy() {
+    try {
+      const source = document.documentElement.cloneNode(true);
+      let css, script;
+      if (offline) { css = document.getElementById('offlineStyle').textContent; script = document.getElementById('offlineApp').textContent; }
+      else [css, script] = await Promise.all(['/style.css','/app.js'].map(async path => { const r = await fetch(path); if (!r.ok) throw new Error('资源读取失败'); return r.text(); }));
+      all('script,link[rel=stylesheet],#offlineStyle',source).forEach(n=>n.remove());
+      const style = document.createElement('style'); style.id = 'offlineStyle'; style.textContent = css; source.querySelector('head').append(style);
+      const selected = clone(fileDocument()), snapshot = clone(state); snapshot.isOwner = true;
+      snapshot.versions = [{...selected, version:1, createdAt:new Date().toISOString()}];
+      snapshot.commits = mode === 'edit' ? [] : snapshot.commits.map(c => ({...c, notes:c.notes.filter(n => n.version === selected.version).map(n => ({...n, version:1}))})).filter(c => c.notes.length);
+      delete snapshot.reviewUrl;
+      const exportedDraft = mode === 'edit' ? {...documentContent(selected), baseVersion:1} : null;
+      const bootstrap = document.createElement('script');
+      bootstrap.textContent = 'window.__SNAPSHOT__='+JSON.stringify(snapshot).replace(/</g,'\\u003c')+';window.__LOCAL__='+JSON.stringify({draft:exportedDraft,staged:{notes:[],requestKey:uid()},appearance}).replace(/</g,'\\u003c')+';';
+      const app = document.createElement('script'); app.id = 'offlineApp'; app.textContent = script;
+      source.querySelector('body').append(bootstrap,app);
+      for (const id of ['noteWindow','shareWindow','appearance','documentPanel','historyPanel','pdfPanel','appMenu','selectionButton','toast']) source.querySelector('#'+id).hidden = true;
+      source.querySelector('#confirmDialog').removeAttribute('open');
+      for (const id of ['article','localDocuments','versionList','historyList','noteContents']) source.querySelector('#'+id).replaceChildren();
+      source.querySelector('#printDocument')?.remove();
+      source.querySelector('body').classList.remove('note-docked');
+      source.querySelector('#main').style.removeProperty('height');
+      source.querySelector('#main').style.removeProperty('top');
+      download(fileName(selected)+'.html','text/html;charset=utf-8','<!doctype html>\n'+source.outerHTML);
+      toast('副本已保存；联网协作请继续使用原链接。');
+    } catch (error) { toast('保存失败：'+error.message); }
+  }
+
+  $('menuToggle').onclick = () => {const open=$('appMenu').hidden;if(open)closePanel('appearance');$('appMenu').hidden=!open;$('menuToggle').setAttribute('aria-expanded',String(open));};
+  $('documentToggle').onclick = () => togglePanel('documentPanel','documentToggle');
+  $('historyToggle').onclick = () => togglePanel('historyPanel','historyToggle');
+  $('appearanceToggle').onclick = () => togglePanel('appearance','appearanceToggle');
+  $('readMode').onclick = () => setMode('read'); $('editMode').onclick = () => setMode('edit');
+  $('blockType').onchange = () => { if (selectedBlock !== 'title') $('fontSize').value = $('blockType').value === 'h2' ? 25 : 18; applyFormat(); };
+  $('fontFamily').onchange = applyFormat; $('fontSize').onchange = applyFormat;
+  $('fontSize').onkeydown = event => { if(event.key === 'Enter') { event.preventDefault(); applyFormat(); } };
+  $('addBlock').onclick = () => {
+    const index = draft.blocks.findIndex(b => b.id === selectedBlock);
+    const block = {id:uid(), type:'p', font:'serif', size:18, text:''}; draft.blocks.splice(index+1,0,block);
+    saveDraft(); renderArticle(true); focusBlock(block.id,0);
+  };
+  $('removeBlock').onclick = async () => {
+    const block = blockById(selectedBlock); if (!block || draft.blocks.length < 2) return;
+    if (block.text.trim() && !(await confirmAction('删除这一段？','此操作只影响本地草稿。'))) return;
+    const index = draft.blocks.indexOf(block); draft.blocks.splice(index,1); saveDraft(); renderArticle(true); focusBlock(draft.blocks[Math.max(0,index-1)].id);
+  };
+  $('discardDraft').onclick = async () => {
+    if (busy || !draft) return;
+    const expectedDraft = draft;
+    if(await confirmAction('还原当前文稿？','还原到此文稿最近保存 .rd、打开、新建或发布时的内容。其他文稿不受影响。') && draft === expectedDraft && !busy) {
+      const entry = localDocuments.find(item => item.id === activeDocumentId);
+      draft = clone(entry?.baseline || entry?.draft || createDraft());
+      saveDraft();renderArticle(true);selectedBlock='title';updateFormat();updateVersionNotice();
+    }
+  };
+  $('publishButton').onclick = publish;
+  $('latestVersion').onclick = () => { pinnedVersion=null;if(mode==='edit')setMode('read');renderArticle(true);renderShared(); };
+  $('article').addEventListener('mouseup',()=>setTimeout(captureSelection,10));
+  $('article').addEventListener('keyup',captureSelection);
+  $('article').addEventListener('touchend',()=>setTimeout(captureSelection,100));
+  $('selectionButton').onpointerdown = event => event.preventDefault();
+  $('selectionButton').onclick = () => { if(rangeSelection)openComposer(rangeSelection); };
+  $('openCommit').onclick = async () => {
+    for(const saved of clone(staged.notes)){
+      const note=staged.notes.find(n=>n.id===saved.id);if(!note)continue;
+      note.requestKey ||= uid();store('staged',staged);
+      if(!(await confirmSuggestions([clone(note)],note.requestKey)))break;
+    }
+  };
+  $('stagedListButton').onclick = () => { const first=staged.notes[0];if(first)openNotes(first.version,first.blockId); };
+  $('authorFilter').onchange = renderHistory; $('statusFilter').onchange = renderHistory;
+  $('shareButton').onclick = () => {
+    closePanel('appMenu');
+    if(offline){toast('这是离线副本。请从原来的服务地址分享。');return;}
+    $('shareUrl').value = state.reviewUrl || location.origin + '/review';
+    const local = ['localhost','127.0.0.1','[::1]'].includes(new URL($('shareUrl').value).hostname);
+    $('shareScope').textContent = local ? '本机链接 · 其他设备需使用服务器地址。' : pollingOnly() ? '临时分享 · 下次启动地址会变化，请保持程序运行。' : '可以留下建议，正文只读。';
+    showWindow('shareWindow');
+  };
+  $('copyShare').onclick = async () => {
+    try { await navigator.clipboard.writeText($('shareUrl').value); toast('已复制'); }
+    catch { $('shareUrl').select(); toast('请复制已选中的链接'); }
+  };
+  for(const [id,key] of [['paperColor','paper'],['accentColor','accent'],['readingWidth','widthPercent'],['readingSize','readingSize'],['readingLineHeight','lineHeight'],['paragraphGap','paragraphGap']]) $(id).oninput=e=>{appearance[key]=['paper','accent'].includes(key)?e.target.value:Number(e.target.value);applyAppearance();store('appearance',appearance);};
+  all('[data-layout],[data-direction]').forEach(button=>button.onclick=()=>{
+    if(button.dataset.layout)appearance.layout=button.dataset.layout;
+    if(button.dataset.direction)appearance.direction=button.dataset.direction;
+    pageIndex=0;applyAppearance();store('appearance',appearance);
+  });
+  $('previousPage').onclick=()=>turnPage(-1);$('nextPage').onclick=()=>turnPage(1);
+  let swipeStart=null;
+  $('article').addEventListener('touchstart',event=>{swipeStart=event.touches.length===1?{x:event.touches[0].clientX,y:event.touches[0].clientY}:null;},{passive:true});
+  $('article').addEventListener('touchend',event=>{
+    if(!swipeStart||!paged()||appearance.direction!=='horizontal'||!window.getSelection()?.isCollapsed)return;
+    const touch=event.changedTouches[0],dx=touch.clientX-swipeStart.x,dy=touch.clientY-swipeStart.y;swipeStart=null;
+    if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)turnPage(dx<0?1:-1);
+  },{passive:true});
+  $('exportButton').onclick = exportCopy;
+  $('legacyButton').onclick = async () => {
+    if(!(await confirmAction('恢复旧稿？','旧版文案将放入本地草稿，当前已发布文章不变。')))return;
+    const t=legacy.texts,blocks=[];
+    for(const key of ['heading1','paragraph1','paragraph2','pullquote','heading2','paragraph3','heading3','paragraph4'])if(t[key])blocks.push({id:uid(),type:key.startsWith('heading')?'h2':'p',text:t[key],font:'serif',size:key.startsWith('heading')?25:18});
+    openLocalDocument({title:t.docTitle||'未命名',titleSize:38,blocks:blocks.length?blocks:clone(latest().blocks)});
+  };
+  document.addEventListener('click',async event=>{
+    if(!event.target.closest('#appMenu,#menuToggle'))closePanel('appMenu');
+    const close=event.target.closest('[data-close]');if(close)closePanel(close.dataset.close);
+    const edit=event.target.closest('[data-edit-note]');if(edit){const note=staged.notes.find(n=>n.id===edit.dataset.editNote);if(note)openComposer(note,note.id);}
+    const confirm=event.target.closest('[data-confirm-note]');if(confirm&&!busy){const note=staged.notes.find(n=>n.id===confirm.dataset.confirmNote);if(note){note.requestKey ||= uid();store('staged',staged);await confirmSuggestions([clone(note)],note.requestKey);}}
+    const remove=event.target.closest('[data-delete-note]');if(remove){staged.notes=staged.notes.filter(n=>n.id!==remove.dataset.deleteNote);staged.requestKey=uid();saveStaged();renderDots();if(viewingNotes)renderNoteViewer();}
+    const resolve=event.target.closest('[data-resolve]');if(resolve){const note=notes().find(n=>n.id===resolve.dataset.resolve);if(note){resolve.disabled=true;try{await request('/api/resolve',{id:note.id,resolved:!note.resolved});await refresh();}catch(e){toast(e.message);resolve.disabled=false;}}}
+    const show=event.target.closest('[data-show-note]');if(show){const note=notes().find(n=>n.id===show.dataset.showNote);if(note){if(mode==='edit')setMode('read');pinnedVersion=note.version===latest().version?null:note.version;renderArticle();renderShared();closePanel('historyPanel');openNotes(note.version,note.blockId,note.id);}}
+    const version=event.target.closest('[data-version]');if(version){if(mode==='edit')setMode('read');pinnedVersion=Number(version.dataset.version);renderArticle();renderShared();closePanel('historyPanel');}
+  });
+  all('[data-drag-handle]').forEach(handle=>{
+    let drag=null;
+    handle.addEventListener('pointerdown',event=>{
+      if(event.target.closest('button')||event.button!==0)return;
+      const panel=handle.closest('.floating-window'),rect=panel.getBoundingClientRect();
+      noteDragging=panel===$('noteWindow');
+      drag={panel,x:event.clientX,y:event.clientY,left:rect.left,top:rect.top};handle.setPointerCapture(event.pointerId);
+    });
+    handle.addEventListener('pointermove',event=>{
+      if(!drag)return;const rect=drag.panel.getBoundingClientRect();
+      drag.panel.style.left=Math.max(8,Math.min(innerWidth-rect.width-8,drag.left+event.clientX-drag.x))+'px';
+      drag.panel.style.top=Math.max(8,Math.min(innerHeight-rect.height-8,drag.top+event.clientY-drag.y))+'px';
+    });
+    const endDrag=()=>{if(drag?.panel===$('noteWindow'))noteManualPosition=true;drag=null;noteDragging=false;scheduleNotePosition();};
+    handle.addEventListener('pointerup',endDrag);handle.addEventListener('pointercancel',endDrag);
+  });
+  document.addEventListener('keydown',event=>{
+    if(paged()&&appearance.direction==='horizontal'&&!event.target.closest('input,textarea,select,button,[contenteditable],.floating-window')&&window.getSelection()?.isCollapsed&&['ArrowLeft','ArrowRight'].includes(event.key)){
+      event.preventDefault();turnPage(event.key==='ArrowRight'?1:-1);
+    }
+    if(event.key==='Escape'){for(const id of ['noteWindow','shareWindow','documentPanel','historyPanel','appearance','pdfPanel','appMenu'])closePanel(id);$('selectionButton').hidden=true;}
+    if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='s'&&isAuthor()){event.preventDefault();saveDocument();}
+  });
+  window.addEventListener('scroll',()=>{$('selectionButton').hidden=true;scheduleNotePosition();},{passive:true});
+  $('main').addEventListener('scroll',()=>{$('selectionButton').hidden=true;scheduleNotePosition();},{passive:true});
+  window.visualViewport?.addEventListener('resize',scheduleNotePosition);
+  window.visualViewport?.addEventListener('scroll',scheduleNotePosition);
+  new ResizeObserver(scheduleNotePosition).observe($('noteWindow'));
+  window.addEventListener('resize',()=>{
+    for(const el of all('.floating-window:not([hidden])')){const rect=el.getBoundingClientRect();el.style.left=Math.max(8,Math.min(innerWidth-rect.width-8,rect.left))+'px';el.style.top=Math.max(8,Math.min(innerHeight-rect.height-8,rect.top))+'px';}
+    schedulePagination();
+    if(!$('noteWindow').hidden)fitSuggestion($('noteInput')?.value||$('noteContents').querySelector('.review-body')?.textContent||'');
+  });
+  new ResizeObserver(schedulePagination).observe($('article'));
+  new ResizeObserver(() => document.documentElement.style.setProperty('--formatbar-height', $('formatbar').getBoundingClientRect().height+'px')).observe($('formatbar'));
+  document.fonts?.ready.then(()=>{if(state&&mode==='read'){if(paged())renderArticle(true);else renderDots();}});
+  window.addEventListener('online',()=>{if(!offline)refresh().catch(()=>connection('未连接',true));});
+  window.addEventListener('offline',()=>connection('未连接',true));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!offline)refresh().catch(()=>{});});
+  window.addEventListener('beforeunload',event=>{syncStopped=true;clearTimeout(syncTimer);eventSource?.close();if(!storageAvailable&&draft){event.preventDefault();event.returnValue='';}});
+  async function start(){
+    try{
+      let firstExportOpen = false;
+      if(offline){
+        document.body.classList.add('offline');state=load('snapshot',window.__SNAPSHOT__);
+        if(!state)throw new Error('请通过本地服务打开此页面。');state.isOwner=true;
+        if(window.__LOCAL__&&!load('offline-initialized',false)){
+          firstExportOpen = true;
+          draft=window.__LOCAL__.draft;staged=window.__LOCAL__.staged;appearance=window.__LOCAL__.appearance;
+          localDocuments=[];activeDocumentId=null;
+          store('staged',staged);store('appearance',appearance);store('offline-initialized',true);
+        }
+      }
+      applyAppearance();await refresh();
+      if (isAuthor() && draft) saveDraft();
+      setMode(isAuthor() && draft && !firstExportOpen ? 'edit' : 'read');connection(offline?'离线副本':'已同步');
+      startSync();
+      if(!offline && new URLSearchParams(location.search).has('share') && state.reviewUrl) $('shareButton').click();
+    }catch(error){$('article').innerHTML='<p class="error-page">'+escape(error.message)+'</p>';connection('未连接',true);}
+  }
+  start();
+})();
+</script>
+</body>
+</html>

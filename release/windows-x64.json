@@ -1,0 +1,25 @@
+{
+  "target": "win32-x64",
+  "tools": {
+    "rd": {
+      "version": "0.2.2",
+      "file": "pangzhu-0.2.2-windows-amd64.zip",
+      "launch": {"type":"loopback","entryPoint":"pangzhu-0.2.2-windows-amd64/pangzhu.exe","readiness":"toolbox-v1","args":["--host","127.0.0.1","--port","0","--data-dir","{dataDir}","--updates","off"]}
+    },
+    "designdoc": {
+      "version": "2.1.0",
+      "file": "DesignDoc-2.1.0-standalone.zip",
+      "launch": {"type":"html","entryPoint":"Forma.html"}
+    },
+    "languagemap": {
+      "version": "1.1.0",
+      "file": "LanguageMap-1.1.0-Windows-x64.zip",
+      "launch": {"type":"native","entryPoint":"LanguageMap-1.1.0-Windows-x64/app/LanguageMap.exe","readiness":"toolbox-v1"}
+    },
+    "linkparsing": {
+      "version": "0.1.0",
+      "file": "LinkParse-0.1.0-Windows-x64.zip",
+      "launch": {"type":"native","entryPoint":"resources/app/runtime/node.exe","args":["resources/app/windows/managed.cjs"],"readiness":"toolbox-v1"}
+    }
+  }
+}

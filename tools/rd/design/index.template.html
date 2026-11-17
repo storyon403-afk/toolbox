@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>DocsBridge: Feedback Made Easier</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<button id="menuToggle" class="menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="appMenu">⋯</button>
+<nav id="appMenu" class="app-menu" aria-label="文稿菜单" hidden>
+  <div class="menu-brand"><strong>DocsBridge</strong><span>Feedback Made Easier</span></div>
+  <button id="readMode" class="quiet" aria-pressed="true" hidden>查看已发布文稿</button>
+  <button id="editMode" class="quiet" aria-pressed="false" hidden>编辑</button>
+  <button id="documentToggle" class="quiet" aria-expanded="false" aria-controls="documentPanel" hidden>文稿</button>
+  <button id="historyToggle" class="quiet" aria-expanded="false" aria-controls="historyPanel">建议 <span id="commitCount" class="count">0</span></button>
+  <button id="shareButton" class="quiet">分享</button>
+  <button id="appearanceToggle" class="quiet" aria-expanded="false" aria-controls="appearance">外观</button>
+  <button id="pdfButton" class="quiet" aria-expanded="false" aria-controls="pdfPanel">导出 PDF</button>
+</nav>
+<aside id="pdfPanel" class="side-panel right-panel" aria-label="PDF 导出设置" hidden>
+  <div class="panel-head"><h2>导出</h2><button class="pdf-close" data-close="pdfPanel" aria-label="关闭导出设置">×</button></div>
+  <div class="pdf-options">
+    <div class="pdf-summary">
+      <div class="pdf-preview" aria-label="水印位置预览"><span id="pdfWatermarkPreview"></span><time id="pdfDatePreview"></time><div class="pdf-preview-lines" aria-hidden="true"></div><span id="pdfProjectLink">github.com/storyon403-afk/RD</span></div>
+      <div class="pdf-summary-copy"><strong>PDF 文档</strong><span>A4 · 纵向</span><small>保留正文排版</small></div>
+    </div>
+    <label class="watermark-toggle"><span>水印</span><input id="pdfWatermark" type="checkbox" checked aria-label="保留水印"></label>
+    <div id="pdfWatermarkFields">
+      <label class="watermark-label" for="pdfWatermarkText">文字</label>
+      <textarea id="pdfWatermarkText" rows="2" maxlength="120" placeholder="输入水印文字">DocsBridge: Feedback Made Easier</textarea>
+      <div class="watermark-position-heading"><span>位置</span><span id="pdfPositionLabel">左上</span></div>
+      <div id="pdfWatermarkPosition" class="watermark-positions" role="group" aria-label="水印位置">
+        <button data-watermark-position="top-left" aria-pressed="true">左上</button><button data-watermark-position="top-center" aria-pressed="false">上中</button><button data-watermark-position="top-right" aria-pressed="false">右上</button>
+        <button data-watermark-position="bottom-left" aria-pressed="false">左下</button><button data-watermark-position="bottom-center" aria-pressed="false">下中</button><button data-watermark-position="bottom-right" aria-pressed="false">右下</button>
+      </div>
+      <p class="pdf-caption">日期与项目链接随水印保留</p>
+    </div>
+  </div>
+  <div class="panel-bottom"><button id="printPDF" class="primary full">导出 PDF <span aria-hidden="true">↗</span></button><p class="pdf-export-hint">在打印窗口选择“另存为 PDF”</p></div>
+</aside>
+<div id="formatbar" class="formatbar" hidden>
+  <select id="blockType" aria-label="段落样式"><option value="p">正文</option><option value="h2">标题</option><option value="title">文章标题</option></select>
+  <select id="fontFamily" aria-label="字体"><option value="serif">宋体</option><option value="sans">黑体</option><option value="mono">等宽</option></select>
+  <label class="size-field"><input type="number" id="fontSize" min="12" max="64" value="18" aria-label="字号"><span>px</span></label>
+  <span class="toolbar-rule"></span><button id="addBlock" class="quiet">添加段落</button><button id="removeBlock" class="quiet" aria-label="删除当前段落">删除</button>
+  <span class="toolbar-spacer"></span><span id="draftStatus" class="draft-status" role="status">本地草稿</span><button id="discardDraft" class="quiet">还原</button><button id="publishButton" class="primary" hidden>发布</button>
+</div>
+<aside id="documentPanel" class="side-panel left-panel" aria-label="文稿文件与版本" hidden>
+  <div class="panel-head"><h2>文稿</h2><button class="quiet" data-close="documentPanel">收起</button></div>
+  <div class="document-actions"><button id="newDocument" class="quiet">新建文稿</button><button id="openDocument" class="quiet">打开 .rd</button></div>
+  <input id="documentFile" type="file" accept=".rd,application/json" hidden>
+  <div class="document-scroll">
+    <h3 class="document-section">本地文稿</h3>
+    <p class="document-hint">自动暂存于此浏览器；保存 .rd 可备份或换设备继续编辑。</p>
+    <div id="localDocuments" class="version-list"></div>
+    <h3 class="document-section">已发布版本</h3>
+    <div id="versionList" class="version-list"></div>
+  </div>
+  <div class="panel-bottom"><button id="saveDocument" class="primary full">保存 .rd</button><button id="exportButton" class="quiet full">导出 HTML 副本</button><button id="legacyButton" class="quiet full" hidden>恢复旧稿</button></div>
+</aside>
+<aside id="historyPanel" class="side-panel right-panel" aria-label="全部建议" hidden>
+  <div class="panel-head"><h2>建议</h2><button class="quiet" data-close="historyPanel">收起</button></div>
+  <div class="history-filter"><select id="authorFilter" aria-label="审阅者"><option value="all">所有人</option></select><select id="statusFilter" aria-label="建议状态"><option value="all">全部状态</option><option value="pending">待处理</option><option value="resolved">已处理</option></select></div>
+  <div id="historyList" class="history-list"></div>
+</aside>
+<div id="appearance" class="appearance popover" hidden>
+  <div class="popover-head"><span>外观</span><button class="quiet" data-close="appearance">关闭</button></div>
+  <label><span>纸张</span><input id="paperColor" type="color" value="#fdfcf9" aria-label="纸张颜色"></label>
+  <label><span>强调</span><input id="accentColor" type="color" value="#566851" aria-label="强调色"></label>
+  <label class="range-label"><span>正文宽度 <output id="widthValue">83%</output></span><input id="readingWidth" type="range" min="60" max="100" step="1" value="83" aria-label="阅读宽度"></label>
+  <label class="range-label"><span>字号 <output id="readingSizeValue">18 px</output></span><input id="readingSize" type="range" min="12" max="26" step="1" value="18" aria-label="阅读字号"></label>
+  <label class="range-label"><span>行距 <output id="lineHeightValue">1.95</output></span><input id="readingLineHeight" type="range" min="1.3" max="2.3" step="0.05" value="1.95" aria-label="阅读行距"></label>
+  <label class="range-label"><span>段距 <output id="paragraphGapValue">22 px</output></span><input id="paragraphGap" type="range" min="8" max="40" step="2" value="22" aria-label="阅读段距"></label>
+  <div class="reading-options">
+    <div class="segmented" role="group" aria-label="纸张布局"><button data-layout="flow" aria-pressed="true">连续</button><button data-layout="a4" aria-pressed="false">A4</button></div>
+    <div id="pageDirection" class="segmented" role="group" aria-label="翻页方式" hidden><button data-direction="vertical" aria-pressed="true">上下滚动</button><button data-direction="horizontal" aria-pressed="false">左右翻页</button></div>
+  </div>
+</div>
+<main id="main">
+  <div id="versionNotice" class="version-notice" hidden><span id="versionNoticeText"></span><button id="latestVersion" class="quiet">查看最新</button><button id="publishReplacement" class="quiet" hidden>以此稿发布</button></div>
+  <article id="article" class="article" aria-label="文章"></article>
+  <footer class="document-footer"><span id="versionLabel">v1</span><span id="articleStatus"></span></footer>
+</main>
+<nav id="pageControls" class="page-controls" aria-label="分页导航" hidden><button id="previousPage" aria-label="上一页">‹</button><span id="pageCounter" aria-live="polite">1 / 1</span><button id="nextPage" aria-label="下一页">›</button></nav>
+<button id="selectionButton" class="selection-button" hidden>建议</button>
+<div id="stagingBar" class="staging-bar" hidden><button id="stagedListButton" class="staging-count">待确认 <span id="stagedCount">0</span></button><button id="openCommit" class="primary">确认</button></div>
+<section id="noteWindow" class="floating-window note-window" role="dialog" aria-label="建议" hidden>
+  <header class="window-head" data-drag-handle><button class="quiet glass-close" data-close="noteWindow" aria-label="关闭建议">×</button></header>
+  <div id="noteContents" class="window-content"></div>
+</section>
+<section id="shareWindow" class="floating-window share-window" role="dialog" aria-labelledby="shareTitle" hidden>
+  <header class="window-head" data-drag-handle><h2 id="shareTitle">审阅链接</h2><button class="quiet" data-close="shareWindow">关闭</button></header>
+  <div class="window-content"><div class="copy-row"><input id="shareUrl" readonly aria-label="审阅链接"><button id="copyShare" class="primary">复制</button></div><p id="shareScope" class="meta"></p></div>
+</section>
+<dialog id="confirmDialog" class="confirm-dialog"><form method="dialog"><h2 id="confirmTitle">还原草稿？</h2><p id="confirmBody"></p><div class="window-actions"><button class="quiet" value="cancel">取消</button><button class="primary" value="confirm">确认</button></div></form></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

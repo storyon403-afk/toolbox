@@ -1,0 +1,6 @@
+{
+  "outputs": [
+    { "kind": "frames", "format": "png", "timestamps_ms": [1000] },
+    { "kind": "original" }
+  ]
+}

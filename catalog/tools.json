@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "tools": [
+    {
+      "id": "rd",
+      "name": "RD",
+      "description": "Document review workspace.",
+      "targets": {
+        "darwin-arm64": {
+          "status": "pending",
+          "version": "0.2.2",
+          "package": "pangzhu-0.2.2-darwin-arm64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local macOS arm64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "darwin-x64": {
+          "status": "pending",
+          "version": "0.2.2",
+          "package": "pangzhu-0.2.2-darwin-amd64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Public release availability and managed lifecycle are not verified."
+          ]
+        },
+        "win32-x64": {
+          "status": "pending",
+          "version": "0.2.2",
+          "package": "pangzhu-0.2.2-windows-amd64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local Windows x64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "win32-arm64": {
+          "status": "pending",
+          "version": "0.2.2",
+          "package": "pangzhu-0.2.2-windows-arm64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Public release availability and managed lifecycle are not verified."
+          ]
+        }
+      }
+    },
+    {
+      "id": "designdoc",
+      "name": "DesignDoc",
+      "description": "Local design canvas and prototyping.",
+      "targets": {
+        "darwin-arm64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local macOS arm64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ],
+          "version": "2.1.0",
+          "package": "DesignDoc-2.1.0-standalone.zip"
+        },
+        "darwin-x64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local versioned bundle built; public distribution and managed lifecycle remain unverified."
+          ],
+          "version": "2.1.0",
+          "package": "DesignDoc-2.1.0-standalone.zip"
+        },
+        "win32-x64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local Windows x64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ],
+          "version": "2.1.0",
+          "package": "DesignDoc-2.1.0-standalone.zip"
+        },
+        "win32-arm64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local versioned bundle built; public distribution and managed lifecycle remain unverified."
+          ],
+          "version": "2.1.0",
+          "package": "DesignDoc-2.1.0-standalone.zip"
+        }
+      }
+    },
+    {
+      "id": "languagemap",
+      "name": "LanguageMap",
+      "description": "Offline vocabulary and language connections.",
+      "targets": {
+        "darwin-arm64": {
+          "status": "pending",
+          "version": "1.0.0",
+          "package": "LanguageMap-1.0.0-macOS-arm64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local macOS arm64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "win32-x64": {
+          "status": "pending",
+          "version": "1.1.0",
+          "package": "LanguageMap-1.1.0-Windows-x64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local Windows x64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "win32-arm64": {
+          "status": "pending",
+          "version": "1.1.0",
+          "package": "LanguageMap-1.1.0-Windows-arm64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Public release and managed lifecycle are unverified. Existing standalone data must be preserved."
+          ]
+        },
+        "darwin-x64": {
+          "status": "unsupported",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "No Intel macOS package is documented."
+          ]
+        }
+      }
+    },
+    {
+      "id": "linkparsing",
+      "name": "LinkParsing",
+      "description": "Local media extraction and export.",
+      "targets": {
+        "darwin-arm64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Local macOS arm64 managed lifecycle passed; public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "darwin-x64": {
+          "status": "pending",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Current macOS development app depends on its source tree and external runtimes; portable architecture support is unverified."
+          ]
+        },
+        "win32-x64": {
+          "status": "pending",
+          "version": "0.1.0",
+          "package": "LinkParse-0.1.0-Windows-x64.zip",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "Public release availability and trusted remote catalog delivery remain unverified."
+          ]
+        },
+        "win32-arm64": {
+          "status": "unsupported",
+          "evidence": [
+            "docs/INSTALL.md"
+          ],
+          "blockers": [
+            "The Windows desktop candidate targets x64; no native ARM64 package has been tested."
+          ]
+        }
+      }
+    }
+  ]
+}

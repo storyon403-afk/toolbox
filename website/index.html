@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090a">
+  <meta name="description" content="一些小工具，说不定对你有用。改文档、画界面、记生词，或是把视频里的内容取出来。">
+  <title>Toolbox · 一些小工具，说不定对你有用</title>
+  <link rel="icon" href="media/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#showcase" data-copy="skip">跳至工具展示</a>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Toolbox"><img src="media/mark.svg" width="24" height="24" alt="">Toolbox</a>
+    <nav aria-label="页面导航" data-label="navigation">
+      <a href="#showcase" data-copy="explore">看看工具</a>
+      <label class="language"><span class="sr-only" data-copy="language">语言</span><select id="language"><option value="zh-CN">简体中文</option><option value="en">English</option><option value="ja">日本語</option></select></label>
+    </nav>
+  </header>
+  <main>
+    <section id="top" class="opening" aria-labelledby="brand-title">
+      <div class="identity">
+        <img class="brand-icon" src="media/mark.svg" width="80" height="80" alt="">
+        <h1 id="brand-title">Toolbox</h1>
+        <p data-copy="tagline">一些小工具，说不定对你有用。</p>
+      </div>
+      <a class="discover" href="#showcase"><span data-copy="explore">看看工具</span><span aria-hidden="true">↓</span></a>
+    </section>
+    <section id="showcase" class="showcase" aria-labelledby="showcase-title">
+      <div class="section-heading"><h2 id="showcase-title" data-copy="heading">遇到这些小事时。</h2><span id="counter" aria-hidden="true">01 / 04</span></div>
+      <div id="tabs" class="tabs" role="tablist" aria-label="工具" data-label="tools">
+        <button type="button" id="tab-rd" role="tab" aria-selected="true" aria-controls="tool-panel" data-tool="rd">文档批注</button>
+        <button type="button" id="tab-designdoc" role="tab" aria-selected="false" aria-controls="tool-panel" tabindex="-1" data-tool="designdoc">界面原型</button>
+        <button type="button" id="tab-languagemap" role="tab" aria-selected="false" aria-controls="tool-panel" tabindex="-1" data-tool="languagemap">生词记录</button>
+        <button type="button" id="tab-linkparsing" role="tab" aria-selected="false" aria-controls="tool-panel" tabindex="-1" data-tool="linkparsing">视频提取</button>
+      </div>
+      <div id="tool-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-rd">
+        <div class="tool-copy" aria-live="polite" aria-atomic="true">
+          <span id="tool-name" class="eyebrow">RD · DocsBridge</span>
+          <h3 id="tool-title">修改意见，对得上原文。</h3>
+          <p id="tool-description">把文档发给别人看，让每条批注留在对应的文字旁边。</p>
+        </div>
+        <figure>
+          <div class="preview"><img id="tool-image" src="media/rd.webp" width="1440" height="900" alt="RD 文档阅读与批注界面"></div>
+          <figcaption><span data-copy="preview">界面预览</span><a id="tool-guide" href="../tools/rd/README.zh-CN.md">使用说明 ↗</a></figcaption>
+        </figure>
+      </div>
+      <noscript>
+        <ul class="fallback">
+          <li><a href="../tools/designdoc/design-canvas/README.md">DesignDoc · 画出界面，连成可以点击的原型。</a></li>
+          <li><a href="../tools/languagemap/README.md">LanguageMap · 写下生词和释义，连接相关词语。</a></li>
+          <li><a href="../tools/linkparsing/README.md">LinkParsing · 提取视频里的讲话、画面文字、音频和截图。</a></li>
+        </ul>
+      </noscript>
+    </section>
+    <section class="getting-started" aria-labelledby="start-title">
+      <h2 id="start-title" data-copy="start">需要哪个，就用哪个。</h2>
+      <p data-copy="independent">每个工具都可以单独用，Toolbox 把它们放在一起。</p>
+      <a id="readme-link" class="button" href="../README.zh-CN.md"><span data-copy="readme">查看使用与源码</span><span aria-hidden="true">↗</span></a>
+      <small data-copy="status">本地构建可用，公开下载还在准备中。</small>
+    </section>
+  </main>
+  <footer><a href="#top">Toolbox</a><a href="#top" data-copy="back">返回顶部 ↑</a></footer>
+</body>
+</html>

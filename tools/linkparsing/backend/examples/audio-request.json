@@ -1,0 +1,4 @@
+{
+  "range": { "start_ms": 500, "end_ms": 1500 },
+  "outputs": [{ "kind": "audio", "format": "wav" }]
+}
