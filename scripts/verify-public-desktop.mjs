@@ -1,6 +1,6 @@
 // Native acceptance against the published repository, always with disposable data.
 import { _electron as electron } from 'playwright';
-import { mkdtemp, mkdir, writeFile, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, readFile, rename } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import assert from 'node:assert/strict';
@@ -8,7 +8,7 @@ const executablePath = process.argv[2];
 if (!executablePath || process.platform !== 'win32' || process.arch !== 'x64') throw Error('Run on Windows x64: node scripts/verify-public-desktop.mjs PATH/TO/Toolbox.exe');
 const profile = await mkdtemp(path.join(os.tmpdir(), 'toolbox-public-native-'));
 const env = { ...process.env, TOOLBOX_TEST_DATA_DIR: profile }; delete env.ELECTRON_RUN_AS_NODE;
-const report = { target: 'win32-x64', scope: 'Published GitHub catalog and exact public packages: installation, native launch, restart, retained-data uninstall/reinstall', tools: [], passed: false };
+const report = { target: 'win32-x64', scope: 'Published GitHub catalog and exact public packages: installation, native launch, restart, retained-data uninstall/reinstall, update from a controlled local 0.0.0 record to the real published version; not future-version compatibility', tools: [], passed: false };
 let app;
 async function main(action, id) {
   return app.evaluate(async ({ app }, { action, id }) => {
@@ -44,6 +44,22 @@ try {
     await main('install', tool.id); await main('open', tool.id); await main('stop', tool.id);
     Object.assign(report.tools.find(row => row.id === tool.id), { restart: true, retainedDataReinstall: true });
     console.log(`Reinstalled public ${tool.id} with retained data`);
+  }
+  // The first public release has no previous public version. Exercise the actual
+  // public update path with a deliberately older isolated installation record.
+  await app.close(); app = null;
+  const stateFile = path.join(profile, 'state.json'), state = JSON.parse(await readFile(stateFile, 'utf8'));
+  for (const tool of tools) {
+    await rename(path.join(profile, 'tools', tool.id, 'versions', tool.version), path.join(profile, 'tools', tool.id, 'versions', '0.0.0'));
+    state.installations[tool.id].version = '0.0.0';
+  }
+  await writeFile(stateFile, JSON.stringify(state)); await launch(); await main('check');
+  for (const tool of tools) {
+    assert.equal((await main('snapshot')).tools.find(row => row.id === tool.id).state, 'updateAvailable');
+    await main('install', tool.id); await main('open', tool.id); await main('stop', tool.id);
+    assert.equal(await readFile(path.join(profile, 'tools', tool.id, 'data', 'acceptance-marker.txt'), 'utf8'), 'retain');
+    report.tools.find(row => row.id === tool.id).publicUpdateFromControlledRecord = true;
+    console.log(`Updated ${tool.id} from controlled record to public ${tool.version}`);
   }
   report.passed = true;
 } catch (error) { report.error = error.stack; process.exitCode = 1; }
