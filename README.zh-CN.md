@@ -1,7 +1,7 @@
 <p align="center"><img src="website/media/mark.svg" width="88" alt="Toolbox"></p>
 <h1 align="center">Toolbox</h1>
 <p align="center">一些小工具，说不定对你有用。</p>
-<p align="center"><a href="README.md">English</a> · 简体中文 · <a href="website/index.html?lang=zh-CN">看看工具 ↗</a></p>
+<p align="center"><a href="README.md">English</a> · 简体中文 · <a href="https://storyon403-afk.github.io/toolbox/?lang=zh-CN">看看工具 ↗</a></p>
 
 改文档、画界面、记生词，或是把视频里的内容取出来。遇到这些小事时，也许用得上。
 

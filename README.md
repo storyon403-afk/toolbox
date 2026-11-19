@@ -1,7 +1,7 @@
 <p align="center"><img src="website/media/mark.svg" width="88" alt="Toolbox"></p>
 <h1 align="center">Toolbox</h1>
 <p align="center">A few small tools. Maybe one is useful to you.</p>
-<p align="center">English · <a href="README.zh-CN.md">简体中文</a> · <a href="website/index.html?lang=en">Take a look ↗</a></p>
+<p align="center">English · <a href="README.zh-CN.md">简体中文</a> · <a href="https://storyon403-afk.github.io/toolbox/?lang=en">Take a look ↗</a></p>
 
 Review a document, sketch an interface, remember new words, or take useful content out of a video. Pick what you need.
 
